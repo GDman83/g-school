@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟盟學堂</title>
+    <title>G學園 - 中文啟蒙學堂</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
@@ -67,7 +67,6 @@
         .card-main { background: white; border-radius: 32px; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 25px 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative; }
         .id-badge { background: #EEF2FF; color: #536DFE; padding: 4px 12px; border-radius: 10px; font-weight: 900; font-size: 14px; margin-bottom: 15px; align-self: flex-start; }
         
-        /* 🎯 大字 + 側邊喇叭 */
         .word-row-layout { display: flex; align-items: center; justify-content: center; width: 100%; position: relative; margin-bottom: 10px; padding: 0 60px; }
         .char-main-display { font-size: 82px; font-weight: 900; color: #1E293B; letter-spacing: 2px; text-align: center; word-break: break-all; }
         .side-audio-trigger { position: absolute; right: 0px; width: 60px; height: 60px; background: #EEF2FF; color: #536DFE; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; cursor: pointer; border: none; box-shadow: 0 4px 12px rgba(83,109,254,0.2); }
@@ -82,7 +81,6 @@
         .action-item:active { transform: scale(0.98); }
         .action-content { flex: 1; padding-right: 10px; text-align: left; }
         
-        /* 🎯 中文例句字體顯著放大 */
         .txt-zh { font-size: 32px; color: var(--text-main); font-weight: 900; line-height: 1.4; }
         .txt-vn { font-size: 22px; color: var(--google-green); font-weight: 700; line-height: 1.4; }
         
@@ -173,6 +171,7 @@
     <audio id="globalAudioPlayer" preload="auto"></audio>
 
     <script>
+        // 🎯 自動鎖定校長測試通暢的網址
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycby2tG5G2Guek0yPlBZhpVytTIGdhPMJ1szCV7Dshr5Z6NJhAiYfpnrBfxt_DDF6WKi4/exec";
 
         let vocabularyData = [];
@@ -207,18 +206,25 @@
             player.pause();
             player.src = ttsUrl;
             player.load();
-            player.play().catch(e => console.log("Unblock fail"));
+            player.play().catch(e => console.log("Audio play wait"));
         }
+
+        // 🎯 雙管齊下：同時支援 callback 與大寫 CALLBACK 攔截
+        function handleGasData(data) { processData(data); }
+        function callback(data) { processData(data); }
+        function CALLBACK(data) { processData(data); }
 
         window.addEventListener('DOMContentLoaded', () => {
             const script = document.createElement('script');
-            script.src = `${GAS_API_URL}?callback=handleGasData`;
+            // 強制要求不帶參數，GitHub Pages 會直接執行回傳的 callback(...)
+            script.src = GAS_API_URL; 
             script.onerror = () => { showDataError(); };
             document.body.appendChild(script);
         });
 
-        function handleGasData(data) {
+        function processData(data) {
             if(data && data.length > 0) {
+                // 清理空資料
                 vocabularyData = data.filter(item => item && Object.keys(item).length > 0 && item[Object.keys(item)[0]] !== "");
                 if (vocabularyData.length > 0) {
                     renderCard();
@@ -235,16 +241,22 @@
         function renderCard() {
             const item = vocabularyData[currentIndex];
             const getVal = p => {
-                for(let k of p) if(item[k]) return item[k];
-                for(let k in item) if(p.some(x => k.includes(x))) return item[k];
+                for(let k of p) if(item[k] !== undefined && item[k] !== null) return item[k];
+                for(let k in item) {
+                    let cleanK = k.replace(/\s+/g, '');
+                    if(p.some(x => cleanK.includes(x) || x.includes(cleanK))) return item[k];
+                }
                 return "";
             };
-            document.getElementById('cardWord').innerText = getVal(["核心詞彙", "核心"]);
-            document.getElementById('cardZhuyin').innerText = getVal(["注音"]);
-            document.getElementById('cardPinyin').innerText = getVal(["拼音"]);
+            
+            // 地毯式欄位對齊
+            document.getElementById('cardWord').innerText = getVal(["核心詞彙", "核心", "詞彙", "word"]);
+            document.getElementById('cardZhuyin').innerText = getVal(["注音", "zhuyin"]);
+            document.getElementById('cardPinyin').innerText = getVal(["拼音", "提示", "pinyin"]);
             document.getElementById('cardID').innerText = `No.${currentIndex + 1}`;
-            document.getElementById('cardExample').innerText = getVal(["例句"]);
-            document.getElementById('cardVn').innerText = getVal(["越南", "VN"]);
+            document.getElementById('cardExample').innerText = getVal(["生活應用例句", "例句", "example"]);
+            document.getElementById('cardVn').innerText = getVal(["越南", "VN", "生活語言", "vn"]);
+            
             document.getElementById('progressTxt').innerText = `${currentIndex + 1} / ${vocabularyData.length}`;
             document.getElementById('progressBar').style.width = ((currentIndex + 1) / vocabularyData.length) * 100 + "%";
         }
