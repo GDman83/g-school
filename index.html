@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟蒙學堂</title>
+    <title>G學園 - 中文啟盟學堂</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Poppins:wght=600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
@@ -18,79 +18,45 @@
             --text-muted: #475569;
             --bg-app: #F8FAFC;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            font-family: 'Noto Sans TC', sans-serif; background-color: #CBD5E1;
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
-        }
-
-        .phone-container {
-            width: 100%; max-width: 414px; height: 100vh; max-height: 850px; 
-            background-color: var(--bg-app);
-            display: flex; flex-direction: column; overflow: hidden; position: relative;
-        }
-
-        @media (min-width: 450px) {
-            .phone-container {
-                height: 850px; border: 10px solid #1E293B; border-radius: 50px;
-                box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4);
-            }
-        }
-
-        .start-overlay {
-            position: absolute; inset: 0; background: linear-gradient(135deg, #536DFE 0%, #43a047 100%);
-            z-index: 200; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; color: white;
-        }
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #CBD5E1; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .phone-container { width: 100%; max-width: 414px; height: 100vh; max-height: 850px; background-color: var(--bg-app); display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        @media (min-width: 450px) { .phone-container { height: 850px; border: 10px solid #1E293B; border-radius: 50px; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4); } }
+        .start-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #536DFE 0%, #43a047 100%); z-index: 200; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; color: white; }
         .start-school-icon { font-size: 80px; margin-bottom: 20px; }
-        .start-btn {
-            background: white; color: #536DFE; border: none; padding: 16px 45px; border-radius: 35px;
-            font-size: 22px; font-weight: 900; cursor: pointer; box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            margin-top: 40px; display: flex; align-items: center; gap: 12px;
-        }
+        .start-btn { background: white; color: #536DFE; border: none; padding: 16px 45px; border-radius: 35px; font-size: 22px; font-weight: 900; cursor: pointer; box-shadow: 0 15px 30px rgba(0,0,0,0.2); margin-top: 40px; display: flex; align-items: center; gap: 12px; }
         .start-btn:active { transform: scale(0.95); }
-
         .app-nav { background: white; padding: 15px 20px 10px; flex-shrink: 0; }
         .nav-info { display: flex; justify-content: space-between; align-items: center; }
         .nav-info span { font-weight: 700; color: var(--text-muted); font-size: 14px; }
         .progress-container { width: 100%; height: 6px; background: #E2E8F0; border-radius: 10px; margin-top: 8px; overflow: hidden; }
         .progress-bar { width: 0%; height: 100%; background: var(--google-blue); transition: width 0.3s ease; }
-
         .speed-bar { padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #E2E8F0; flex-shrink: 0; }
         .speed-title { font-size: 14px; font-weight: 700; color: var(--text-muted); }
         .speed-options { display: flex; gap: 8px; }
         .speed-btn { padding: 4px 12px; border-radius: 12px; border: 1px solid #E2E8F0; font-size: 13px; font-weight: 700; cursor: pointer; background: #F8FAFC; color: var(--text-muted); }
         .speed-btn.active { background: #536DFE; color: white; border-color: #536DFE; }
-
         .app-body { flex-grow: 1; padding: 15px; display: flex; flex-direction: column; justify-content: center; overflow-y: auto; }
         .card-main { background: white; border-radius: 32px; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 25px 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative; }
         .id-badge { background: #EEF2FF; color: #536DFE; padding: 4px 12px; border-radius: 10px; font-weight: 900; font-size: 14px; margin-bottom: 15px; align-self: flex-start; }
-        
         .word-row-layout { display: flex; align-items: center; justify-content: center; width: 100%; position: relative; margin-bottom: 10px; padding: 0 60px; }
         .char-main-display { font-size: 82px; font-weight: 900; color: #1E293B; letter-spacing: 2px; text-align: center; word-break: break-all; }
         .side-audio-trigger { position: absolute; right: 0px; width: 60px; height: 60px; background: #EEF2FF; color: #536DFE; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; cursor: pointer; border: none; box-shadow: 0 4px 12px rgba(83,109,254,0.2); }
         .side-audio-trigger:active { transform: scale(0.9); }
-
         .zhuyin-row-display { font-size: 42px; font-weight: 900; color: var(--google-red); letter-spacing: 4px; margin-bottom: 12px; text-align: center; width: 100%; min-height: 50px; }
         .pinyin-row-display { font-size: 24px; color: var(--text-muted); font-family: 'Poppins'; font-weight: 700; margin-bottom: 20px; text-align: center; }
         .divider { width: 100%; height: 2px; background-color: #F1F5F9; margin-bottom: 20px; }
-
         .sentence-group { width: 100%; display: flex; flex-direction: column; gap: 12px; }
         .action-item { background: #F8FAFC; border-radius: 20px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; border: 1px solid #E2E8F0; }
         .action-item:active { transform: scale(0.98); }
         .action-content { flex: 1; padding-right: 10px; text-align: left; }
-        
         .txt-zh { font-size: 32px; color: var(--text-main); font-weight: 900; line-height: 1.4; }
         .txt-vn { font-size: 22px; color: var(--google-green); font-weight: 700; line-height: 1.4; }
-        
         .play-btn { width: 48px; height: 48px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #536DFE; box-shadow: 0 4px 10px rgba(0,0,0,0.08); flex-shrink: 0; font-size: 20px; }
-
         .app-footer { padding: 15px 30px 30px; background: white; border-top: 1px solid #F1F5F9; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
         .nav-arrow-btn { background: #F1F5F9; color: var(--text-main); border: none; padding: 12px 25px; border-radius: 20px; font-size: 16px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
         .nav-arrow-btn.btn-next { background: #536DFE; color: white; }
         .nav-arrow-btn:active { transform: scale(0.95); }
-
         .loader { position: absolute; inset: 0; background: white; z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
         .pulse-icon { font-size: 45px; color: #536DFE; animation: pulseAnimate 1.5s infinite ease-in-out; }
         @keyframes pulseAnimate { 0% { transform: scale(0.9); opacity: 0.6; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(0.9); opacity: 0.6; } }
@@ -171,7 +137,7 @@
     <audio id="globalAudioPlayer" preload="auto"></audio>
 
     <script>
-        // 🎯 自動鎖定校長測試通暢的網址
+        // 🎯 填入您剛才最新複製的 GAS 網址
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycby2tG5G2Guek0yPlBZhpVytTIGdhPMJ1szCV7Dshr5Z6NJhAiYfpnrBfxt_DDF6WKi4/exec";
 
         let vocabularyData = [];
@@ -209,22 +175,38 @@
             player.play().catch(e => console.log("Audio play wait"));
         }
 
-        // 🎯 雙管齊下：同時支援 callback 與大寫 CALLBACK 攔截
+        // 全方位攔截 Google 吐出來的各種類型包裝
         function handleGasData(data) { processData(data); }
         function callback(data) { processData(data); }
-        function CALLBACK(data) { processData(data); }
+        window.handleGasData = handleGasData;
+        window.callback = callback;
 
         window.addEventListener('DOMContentLoaded', () => {
+            // 第一種嘗試：直接請求 JSONP
             const script = document.createElement('script');
-            // 強制要求不帶參數，GitHub Pages 會直接執行回傳的 callback(...)
             script.src = GAS_API_URL; 
-            script.onerror = () => { showDataError(); };
+            script.onerror = () => { tryFetchAlternative(); };
             document.body.appendChild(script);
         });
 
+        function tryFetchAlternative() {
+            // 第二種嘗試：跨網域 fetch 讀取
+            fetch(GAS_API_URL)
+                .then(res => res.text())
+                .then(text => {
+                    // 如果吐出的是帶有包含函數的字串，強行解析它
+                    if(text.includes('callback(') || text.includes('handleGasData(')) {
+                        let cleanJson = text.replace(/^[a-zA-Z]+\(/, '').replace(/\);?$/, '');
+                        processData(JSON.parse(cleanJson));
+                    } else {
+                        processData(JSON.parse(text));
+                    }
+                })
+                .catch(() => showDataError());
+        }
+
         function processData(data) {
             if(data && data.length > 0) {
-                // 清理空資料
                 vocabularyData = data.filter(item => item && Object.keys(item).length > 0 && item[Object.keys(item)[0]] !== "");
                 if (vocabularyData.length > 0) {
                     renderCard();
@@ -249,13 +231,12 @@
                 return "";
             };
             
-            // 地毯式欄位對齊
-            document.getElementById('cardWord').innerText = getVal(["核心詞彙", "核心", "詞彙", "word"]);
+            document.getElementById('cardWord').innerText = getVal(["核心詞彙", "核心", "詞彙", "word", "核心詞"]);
             document.getElementById('cardZhuyin').innerText = getVal(["注音", "zhuyin"]);
             document.getElementById('cardPinyin').innerText = getVal(["拼音", "提示", "pinyin"]);
             document.getElementById('cardID').innerText = `No.${currentIndex + 1}`;
-            document.getElementById('cardExample').innerText = getVal(["生活應用例句", "例句", "example"]);
-            document.getElementById('cardVn').innerText = getVal(["越南", "VN", "生活語言", "vn"]);
+            document.getElementById('cardExample').innerText = getVal(["生活應用例句", "例句", "example", "應用例句"]);
+            document.getElementById('cardVn').innerText = getVal(["越南", "VN", "生活語言", "vn", "越南文"]);
             
             document.getElementById('progressTxt').innerText = `${currentIndex + 1} / ${vocabularyData.length}`;
             document.getElementById('progressBar').style.width = ((currentIndex + 1) / vocabularyData.length) * 100 + "%";
