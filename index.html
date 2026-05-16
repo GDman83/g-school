@@ -83,7 +83,7 @@
         <div class="error-screen" id="errorScreen">
             <i class="fa-solid fa-circle-exclamation" style="font-size: 50px; color: var(--google-red); margin-bottom: 15px;"></i>
             <h3 style="font-size: 20px; font-weight: 900; color: #1E293B; margin-bottom: 10px;">教材庫跨網讀取失敗</h3>
-            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">請確認您的 GAS 部署設定是否為「所有人」。</p>
+            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">正在嘗試極限強載模式...</p>
             <button class="start-btn" onclick="location.reload()" style="background: #536DFE; color: white; margin-top:0;">重新連線</button>
         </div>
 
@@ -137,7 +137,7 @@
     <audio id="globalAudioPlayer" preload="auto"></audio>
 
     <script>
-        // 🎯 填入您剛才最新複製的 GAS 網址
+        // 🎯 綁定校長確定通暢的發電網址
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycby2tG5G2Guek0yPlBZhpVytTIGdhPMJ1szCV7Dshr5Z6NJhAiYfpnrBfxt_DDF6WKi4/exec";
 
         let vocabularyData = [];
@@ -172,39 +172,10 @@
             player.pause();
             player.src = ttsUrl;
             player.load();
-            player.play().catch(e => console.log("Audio play wait"));
+            player.play().catch(e => console.log("Audio waiting"));
         }
 
-        // 全方位攔截 Google 吐出來的各種類型包裝
-        function handleGasData(data) { processData(data); }
-        function callback(data) { processData(data); }
-        window.handleGasData = handleGasData;
-        window.callback = callback;
-
-        window.addEventListener('DOMContentLoaded', () => {
-            // 第一種嘗試：直接請求 JSONP
-            const script = document.createElement('script');
-            script.src = GAS_API_URL; 
-            script.onerror = () => { tryFetchAlternative(); };
-            document.body.appendChild(script);
-        });
-
-        function tryFetchAlternative() {
-            // 第二種嘗試：跨網域 fetch 讀取
-            fetch(GAS_API_URL)
-                .then(res => res.text())
-                .then(text => {
-                    // 如果吐出的是帶有包含函數的字串，強行解析它
-                    if(text.includes('callback(') || text.includes('handleGasData(')) {
-                        let cleanJson = text.replace(/^[a-zA-Z]+\(/, '').replace(/\);?$/, '');
-                        processData(JSON.parse(cleanJson));
-                    } else {
-                        processData(JSON.parse(text));
-                    }
-                })
-                .catch(() => showDataError());
-        }
-
+        // 🎯 萬能強制解碼器：管它什麼名字的 callback，抓到一律強行執行！
         function processData(data) {
             if(data && data.length > 0) {
                 vocabularyData = data.filter(item => item && Object.keys(item).length > 0 && item[Object.keys(item)[0]] !== "");
@@ -215,9 +186,54 @@
             } else { showDataError(); }
         }
 
+        // 註冊所有可能出現的接頭名稱（通殺大寫、小寫、預設名）
+        window.callback = processData;
+        window.handleGasData = processData;
+        window.CALLBACK = processData;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // 第一管道：標準 JSONP 注入
+            const script = document.createElement('script');
+            script.src = GAS_API_URL; 
+            script.onerror = () => { forceFetchJson(); };
+            document.body.appendChild(script);
+            
+            // 雙保險：2.5秒內如果 JSONP 沒反應，直接啟動終極黑科技 fetch 讀取
+            setTimeout(() => {
+                if(vocabularyData.length === 0) { forceFetchJson(); }
+            }, 2500);
+        });
+
+        function forceFetchJson() {
+            fetch(GAS_API_URL)
+                .then(res => res.text())
+                .then(text => {
+                    // 萬能的正則表達式：直接把前後的 函數名() 剝掉，只留下中間的 [ ... ] 陣列
+                    try {
+                        let jsonMatch = text.match(/\[\s*\{.*\}\s*\]/s);
+                        if(jsonMatch) {
+                            processData(JSON.parse(jsonMatch[0]));
+                        } else {
+                            processData(JSON.parse(text));
+                        }
+                    } catch(e) {
+                        showDataError();
+                    }
+                })
+                .catch(() => showDataError());
+        }
+
         function showDataError() {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('errorScreen').style.display = 'flex';
+            // 如果真的不幸報錯，也別顯示失敗，再次嘗試強載
+            fetch(GAS_API_URL)
+                .then(res => res.text())
+                .then(text => {
+                    let jsonMatch = text.match(/\[\s*\{.*\}\s*\]/s);
+                    if(jsonMatch) processData(JSON.parse(jsonMatch[0]));
+                }).catch(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('errorScreen').style.display = 'flex';
+                });
         }
 
         function renderCard() {
@@ -231,12 +247,13 @@
                 return "";
             };
             
+            // 地毯式搜索欄位名稱，相容所有中英文欄位
             document.getElementById('cardWord').innerText = getVal(["核心詞彙", "核心", "詞彙", "word", "核心詞"]);
             document.getElementById('cardZhuyin').innerText = getVal(["注音", "zhuyin"]);
             document.getElementById('cardPinyin').innerText = getVal(["拼音", "提示", "pinyin"]);
             document.getElementById('cardID').innerText = `No.${currentIndex + 1}`;
             document.getElementById('cardExample').innerText = getVal(["生活應用例句", "例句", "example", "應用例句"]);
-            document.getElementById('cardVn').innerText = getVal(["越南", "VN", "生活語言", "vn", "越南文"]);
+            document.getElementById('cardVn').innerText = getVal(["越南", "VN", "生活語言", "vn", "越南文", "越南話"]);
             
             document.getElementById('progressTxt').innerText = `${currentIndex + 1} / ${vocabularyData.length}`;
             document.getElementById('progressBar').style.width = ((currentIndex + 1) / vocabularyData.length) * 100 + "%";
