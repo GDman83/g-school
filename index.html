@@ -137,8 +137,11 @@
     <audio id="globalAudioPlayer" preload="auto"></audio>
 
     <script>
-        // 🎯 綁定校長確定通暢的發電網址
+        // 🎯 您的發電廠網址
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycby2tG5G2Guek0yPlBZhpVytTIGdhPMJ1szCV7Dshr5Z6NJhAiYfpnrBfxt_DDF6WKi4/exec";
+        
+        // 🎯 全球免費的跨網代理伺服器（專門破解瀏覽器攔截）
+        const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 
         let vocabularyData = [];
         let currentIndex = 0;
@@ -175,65 +178,45 @@
             player.play().catch(e => console.log("Audio waiting"));
         }
 
-        // 🎯 萬能強制解碼器：管它什麼名字的 callback，抓到一律強行執行！
+        // 🎯 核心解碼器
         function processData(data) {
             if(data && data.length > 0) {
+                // 過濾空行
                 vocabularyData = data.filter(item => item && Object.keys(item).length > 0 && item[Object.keys(item)[0]] !== "");
                 if (vocabularyData.length > 0) {
                     renderCard();
                     document.getElementById('loader').style.display = 'none'; 
+                    document.getElementById('errorScreen').style.display = 'none';
                 } else { showDataError(); }
             } else { showDataError(); }
         }
 
-        // 註冊所有可能出現的接頭名稱（通殺大寫、小寫、預設名）
-        window.callback = processData;
-        window.handleGasData = processData;
-        window.CALLBACK = processData;
-
+        // 🎯 終極對症下藥：改用 Fetch + 代理伺服器，徹底拆掉安全高牆
         window.addEventListener('DOMContentLoaded', () => {
-            // 第一管道：標準 JSONP 注入
-            const script = document.createElement('script');
-            script.src = GAS_API_URL; 
-            script.onerror = () => { forceFetchJson(); };
-            document.body.appendChild(script);
-            
-            // 雙保險：2.5秒內如果 JSONP 沒反應，直接啟動終極黑科技 fetch 讀取
-            setTimeout(() => {
-                if(vocabularyData.length === 0) { forceFetchJson(); }
-            }, 2500);
+            // 直接用最高級別的代理抓取，繞過 Script 標籤的限制
+            fetch(PROXY_URL + GAS_API_URL)
+                .then(res => res.text())
+                .then(text => {
+                    // 剝除可能存在的 JSONP 包裝
+                    let jsonMatch = text.match(/\[\s*\{.*\}\s*\]/s);
+                    let rawJson = jsonMatch ? jsonMatch[0] : text;
+                    processData(JSON.parse(rawJson));
+                })
+                .catch(() => {
+                    // 如果免費代理塞車，嘗試直接硬闖（備援方案）
+                    fetch(GAS_API_URL)
+                        .then(res => res.text())
+                        .then(t => {
+                            let jMatch = t.match(/\[\s*\{.*\}\s*\]/s);
+                            processData(JSON.parse(jMatch ? jMatch[0] : t));
+                        })
+                        .catch(() => showDataError());
+                });
         });
 
-        function forceFetchJson() {
-            fetch(GAS_API_URL)
-                .then(res => res.text())
-                .then(text => {
-                    // 萬能的正則表達式：直接把前後的 函數名() 剝掉，只留下中間的 [ ... ] 陣列
-                    try {
-                        let jsonMatch = text.match(/\[\s*\{.*\}\s*\]/s);
-                        if(jsonMatch) {
-                            processData(JSON.parse(jsonMatch[0]));
-                        } else {
-                            processData(JSON.parse(text));
-                        }
-                    } catch(e) {
-                        showDataError();
-                    }
-                })
-                .catch(() => showDataError());
-        }
-
         function showDataError() {
-            // 如果真的不幸報錯，也別顯示失敗，再次嘗試強載
-            fetch(GAS_API_URL)
-                .then(res => res.text())
-                .then(text => {
-                    let jsonMatch = text.match(/\[\s*\{.*\}\s*\]/s);
-                    if(jsonMatch) processData(JSON.parse(jsonMatch[0]));
-                }).catch(() => {
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('errorScreen').style.display = 'flex';
-                });
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('errorScreen').style.display = 'flex';
         }
 
         function renderCard() {
@@ -247,7 +230,6 @@
                 return "";
             };
             
-            // 地毯式搜索欄位名稱，相容所有中英文欄位
             document.getElementById('cardWord').innerText = getVal(["核心詞彙", "核心", "詞彙", "word", "核心詞"]);
             document.getElementById('cardZhuyin').innerText = getVal(["注音", "zhuyin"]);
             document.getElementById('cardPinyin').innerText = getVal(["拼音", "提示", "pinyin"]);
@@ -261,6 +243,3 @@
 
         function nextCard() { currentIndex = (currentIndex + 1) % vocabularyData.length; renderCard(); setTimeout(() => { speakGoogleTTS('word'); }, 200); }
         function prevCard() { currentIndex = (currentIndex - 1 + vocabularyData.length) % vocabularyData.length; renderCard(); setTimeout(() => { speakGoogleTTS('word'); }, 200); }
-    </script>
-</body>
-</html>
