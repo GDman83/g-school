@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟盟學堂</title>
+    <title>G學園 - 中文啟蒙學堂</title>
     
     <link rel="manifest" href="/g-school/manifest.json">
     <meta name="theme-color" content="#536DFE">
@@ -433,32 +433,49 @@
                 .catch(err => {
                     console.error('PWA讀取錯誤:', err);
                     document.getElementById('loadingLayer').classList.add('hidden');
-                    document.getElementById('errorLayer').remove('hidden');
+                    document.getElementById('errorLayer').classList.remove('hidden');
                 });
         }
 
-        // 🎯 核心修正：精準對齊校長 data.json 的中文繁體欄位名稱
+        // 🎯 超級修正：不管 TOOL 怎麼把資料變形，直接依據「欄位順序位置」暴力盲讀歸位！
         function renderCard() {
             if (dbData.length === 0) return;
             const item = dbData[currentIndex];
+            
+            // 將變形的物件，轉化為按順序排列的陣列值
+            const values = Object.values(item);
+            const keys = Object.keys(item);
 
-            // 1. 核心詞彙與拼音
-            document.getElementById('mainWord').innerText = item["核心詞彙"] || "--";
-            document.getElementById('pinyinText').innerText = item["拼音 / 提示"] || "";
+            // 1. 動態定位核心字（通常是第二個欄位的內容，或者直接讀取第一個欄位的值）
+            // 根據校長的截圖，keys[1] 是 "你好"，也就是中文單字欄位
+            let word = keys[1] || "--"; 
+            let pinyin = item[keys[1]] || ""; // 拼音/提示
+            let zhuyinRaw = keys[3] || ""; // 注音欄位被擠到第四個
+            let vietnamese = keys[4] || "--"; // 越南文
+            let example = item[keys[4]] || ""; // 例句
+
+            // 如果發現盲讀出來的格式怪異，進行安全降級處理
+            if(values.length >= 5) {
+                word = keys[1];
+                pinyin = values[1]; // 謝謝 / 嘻嘻
+                zhuyinRaw = keys[3]; // 注音
+                vietnamese = keys[4]; // 越南文
+                example = values[4]; // 例句
+            }
+
+            document.getElementById('mainWord').innerText = word;
+            document.getElementById('pinyinText').innerText = pinyin ? `提示: ${pinyin}` : "";
+            document.getElementById('vietnameseTitle').innerText = vietnamese;
+            document.getElementById('exampleSentence').innerText = example;
             
-            // 2. 越南文與生活例句
-            document.getElementById('vietnameseTitle').innerText = item["生活語言(越南-VN)"] || "--";
-            document.getElementById('exampleSentence').innerText = item["生活應用例句 (點擊可朗讀)"] || "";
-            
-            // 3. 卡片計數器
+            // 卡片計數器
             document.getElementById('cardCounter').innerText = `${currentIndex + 1} / ${dbData.length}`;
 
-            // 4. 注音垂直直列解析
-            const zhuyinRaw = item["注音"] || "";
+            // 注音垂直直列解析
             const zhuyinBox = document.getElementById('zhuyinBox');
             zhuyinBox.innerHTML = "";
             
-            if (zhuyinRaw) {
+            if (zhuyinRaw && zhuyinRaw !== "--") {
                 const parts = zhuyinRaw.split(' ');
                 parts.forEach(part => {
                     const div = document.createElement('div');
@@ -482,8 +499,9 @@
 
         function speakCurrentWord() {
             if (dbData.length === 0) return;
-            const word = dbData[currentIndex]["核心詞彙"];
-            if (!word) return;
+            const keys = Object.keys(dbData[currentIndex]);
+            const word = keys[1]; // 精準調用變形後的中文單字欄位發音
+            if (!word || word === "--") return;
 
             const player = document.getElementById('globalAudioPlayer');
             player.src = `https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-TW&client=tw-ob&q=${encodeURIComponent(word)}`;
