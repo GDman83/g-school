@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟蒙學堂</title>
+    <title>G學園 - 中文啟盟學堂</title>
     
     <link rel="manifest" href="/g-school/manifest.json">
     <meta name="theme-color" content="#536DFE">
@@ -261,7 +261,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #EC4899; /* 玫瑰粉紅 */
+            color: #EC4899;
             font-weight: 700;
             font-size: 20px;
             line-height: 1.2;
@@ -289,7 +289,7 @@
         .vietnamese-title {
             font-size: 24px;
             font-weight: 800;
-            color: #059669; /* 翡翠綠 */
+            color: #059669;
             margin-bottom: 10px;
         }
 
@@ -366,15 +366,15 @@
 
         <div id="loadingLayer" class="status-overlay">
             <div class="spinner"></div>
-            <h2 class="status-title">正在跨網連接教材庫...</h2>
-            <p class="status-desc">請確保您的 Google 試算表已開啟共用設定。</p>
+            <h2 class="status-title">正在讀取校內教材庫...</h2>
+            <p class="status-desc">本機模式啟動，資料秒速加載中。</p>
         </div>
 
         <div id="errorLayer" class="status-overlay hidden">
             <div class="error-icon"><i class="fas fa-exclamation-circle"></i></div>
-            <h2 class="status-title">教材庫跨網讀取失敗</h2>
-            <p class="status-desc">請確認您的 GAS 部署設定是否為「所有人」，<br>並確認手機網路連線正常。</p>
-            <button class="retry-btn" onclick="fetchLibraryData()">重新連線</button>
+            <h2 class="status-title">本地教材讀取失敗</h2>
+            <p class="status-desc">請確認您的倉庫內是否存在正確格式的 data.json 檔案。</p>
+            <button class="retry-btn" onclick="fetchLibraryData()">重新讀取</button>
         </div>
 
         <div class="app-header">
@@ -391,8 +391,7 @@
                     
                     <div class="word-combo-box">
                         <div id="mainWord" class="main-word">--</div>
-                        <div id="zhuyinBox" class="zhuyin-box">
-                            </div>
+                        <div id="zhuyinBox" class="zhuyin-box"></div>
                     </div>
                     
                     <div id="pinyinText" class="pinyin-text">--</div>
@@ -415,32 +414,103 @@
     <audio id="globalAudioPlayer" preload="auto"></audio>
 
     <script>
-        // 🎯 請校長將下方網址更換為您最新部署的 Google GAS 網址 (末尾必須是 /exec)
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbz2tG5G2Guek0yP1BZHpVytTIGdhPMJ1szCV7Dshr5Z6NJhAiYfpnrBfxt_DDF6WKi4/exec";
-
         let dbData = [];
         let currentIndex = 0;
 
-        // 1. 點擊開課按鈕
         function openSchool() {
             document.getElementById('startOverlay').classList.add('fade-out');
             fetchLibraryData();
         }
 
-        // 2. 極限跨網抓取資料 (雙重相容暗號版)
+        // 🎯【極速本機加載】徹底捨棄 GAS 網址，直接讀取 GitHub 同目錄下的 data.json
         function fetchLibraryData() {
             document.getElementById('loadingLayer').classList.remove('hidden');
             document.getElementById('errorLayer').classList.add('hidden');
 
-            // 清除可能殘留的舊腳本標籤
-            const oldScript = document.getElementById('gas-script-transport');
-            if (oldScript) oldScript.remove();
+            // 加上時間戳記強制刷新防快取
+            fetch('./data.json?t=' + new Date().getTime())
+                .then(response => {
+                    if (!response.ok) throw new Error('data.json 讀取失敗');
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && data.length > 0) {
+                        dbData = data;
+                        currentIndex = 0;
+                        renderCard();
+                        document.getElementById('loadingLayer').classList.add('hidden');
+                    } else {
+                        throw new Error('教材資料為空');
+                    }
+                })
+                .catch(err => {
+                    console.error('PWA讀取錯誤:', err);
+                    document.getElementById('loadingLayer').classList.add('hidden');
+                    document.getElementById('errorLayer').classList.remove('hidden');
+                });
+        }
 
-            // 建立標準 JSONP 傳輸管線
-            const script = document.createElement('script');
-            script.id = 'gas-script-transport';
-            // 同時附帶參數，防止 Google 轉址漏掉暗號
-            script.src = `${GAS_URL}?callback=handleGasData&t=${new Date().getTime()}`;
+        function renderCard() {
+            if (dbData.length === 0) return;
+            const item = dbData[currentIndex];
+
+            document.getElementById('mainWord').innerText = item["核心詞彙"] || "--";
+            document.getElementById('pinyinText').innerText = item["拼音 / 提示"] || "";
+            document.getElementById('vietnameseTitle').innerText = item["生活語言(越南-VN)"] || "--";
+            document.getElementById('exampleSentence').innerText = item["生活應用例句 (點擊可朗讀)"] || "";
             
-            // 安全防護超時天線：8秒內沒通電就判定失敗
-            const timeoutTrigger = setTimeout(() => {
+            document.getElementById('cardCounter').innerText = `${currentIndex + 1} / ${dbData.length}`;
+
+            // 處理注音符號垂直排列
+            const zhuyinRaw = item["注音"] || "";
+            const zhuyinBox = document.getElementById('zhuyinBox');
+            zhuyinBox.innerHTML = "";
+            
+            if (zhuyinRaw) {
+                const parts = zhuyinRaw.split(' ');
+                parts.forEach(part => {
+                    const div = document.createElement('div');
+                    div.innerText = part;
+                    zhuyinBox.appendChild(div);
+                });
+            }
+        }
+
+        function nextCard() {
+            if (dbData.length === 0) return;
+            currentIndex = (currentIndex + 1) % dbData.length;
+            renderCard();
+        }
+
+        function prevCard() {
+            if (dbData.length === 0) return;
+            currentIndex = (currentIndex - 1 + dbData.length) % dbData.length;
+            renderCard();
+        }
+
+        function speakCurrentWord() {
+            if (dbData.length === 0) return;
+            const word = dbData[currentIndex]["核心詞彙"];
+            if (!word) return;
+
+            const player = document.getElementById('globalAudioPlayer');
+            player.src = `https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-TW&client=tw-ob&q=${encodeURIComponent(word)}`;
+            
+            const speaker = document.getElementById('speakerIcon');
+            speaker.style.color = '#EA4335';
+            player.play();
+            
+            player.onended = () => { speaker.style.color = '#536DFE'; };
+        }
+
+        // 註冊 PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/g-school/sw.js')
+                    .then(reg => console.log('G學園 PWA 註冊成功！', reg.scope))
+                    .catch(err => console.log('PWA 註冊失敗:', err));
+            });
+        }
+    </script>
+</body>
+</html>
