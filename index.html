@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟蒙學堂</title>
+    <title>G學園 - 中文啟盟學堂</title>
     
     <link rel="manifest" href="/g-school/manifest.json">
     <meta name="theme-color" content="#536DFE">
@@ -433,21 +433,27 @@
                 .catch(err => {
                     console.error('PWA讀取錯誤:', err);
                     document.getElementById('loadingLayer').classList.add('hidden');
-                    document.getElementById('errorLayer').classList.remove('hidden');
+                    document.getElementById('errorLayer').remove('hidden');
                 });
         }
 
+        // 🎯 核心修正：精準對齊校長 data.json 的中文繁體欄位名稱
         function renderCard() {
             if (dbData.length === 0) return;
             const item = dbData[currentIndex];
 
+            // 1. 核心詞彙與拼音
             document.getElementById('mainWord').innerText = item["核心詞彙"] || "--";
             document.getElementById('pinyinText').innerText = item["拼音 / 提示"] || "";
+            
+            // 2. 越南文與生活例句
             document.getElementById('vietnameseTitle').innerText = item["生活語言(越南-VN)"] || "--";
             document.getElementById('exampleSentence').innerText = item["生活應用例句 (點擊可朗讀)"] || "";
             
+            // 3. 卡片計數器
             document.getElementById('cardCounter').innerText = `${currentIndex + 1} / ${dbData.length}`;
 
+            // 4. 注音垂直直列解析
             const zhuyinRaw = item["注音"] || "";
             const zhuyinBox = document.getElementById('zhuyinBox');
             zhuyinBox.innerHTML = "";
