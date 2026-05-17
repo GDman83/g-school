@@ -30,46 +30,52 @@
         .welcome-title { font-size: 28px; font-weight: 900; margin-bottom: 8px; letter-spacing: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
         .welcome-subtitle { font-size: 14px; opacity: 0.9; margin-bottom: 40px; }
         .enter-btn { background: #FFFFFF; color: var(--google-blue); padding: 16px 40px; border-radius: 30px; font-size: 18px; font-weight: 700; border: none; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transition: transform 0.2s; }
-        .enter-btn:active { transform: scale(0.95); }
-
+        
         .app-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; border-bottom: 1px solid #E2E8F0; height: 65px; }
         .app-title { font-weight: 900; color: var(--google-blue); font-size: 20px; }
         .counter { background: #EEF2F6; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; color: var(--google-blue); font-family: 'Poppins', sans-serif; }
         
-        /* 卡片與骨架鎖死 - 防止任何跳動 */
+        /* 卡片區域固定高度 - 絕不跳動 */
         .card-area { flex: 1; padding: 16px 20px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
         .study-card { background: white; border-radius: 32px; padding: 20px; box-shadow: 0 10px 30px rgba(15,23,42,0.04); display: flex; flex-direction: column; position: relative; height: 480px; box-sizing: border-box; }
         
-        /* 右上角獨立朗讀單詞小喇叭 */
-        .audio-trigger-btn { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: #EEF2F6; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--google-blue); font-size: 15px; z-index: 10; }
+        /* 雙喇叭直列操控面板區 */
+        .audio-control-panel { position: absolute; top: 20px; right: 20px; display: flex; flex-direction: column; gap: 12px; z-index: 10; }
+        .audio-btn { width: 42px; height: 42px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.1s; }
+        .audio-btn:active { transform: scale(0.9); }
         
-        /* 左上角縮小挪開的序號 */
+        /* 黑喇叭放單詞 */
+        .btn-audio-word { background: #0F172A; color: #FFFFFF; }
+        /* 藍喇叭放例句 */
+        .btn-audio-sentence { background: var(--google-blue); color: #FFFFFF; }
+        
+        /* 左上角數字編號 */
         .card-id { position: absolute; top: 16px; left: 24px; font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #94A3B8; }
         
-        /* 核心單詞與拼音區：高度固定 */
-        .word-main-zone { height: 160px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 25px; text-align: center; }
+        /* 單詞核心區 */
+        .word-main-zone { height: 170px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 25px; text-align: center; }
         .pinyin-text { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 600; color: var(--google-red); margin-bottom: 4px; }
         
-        /* 支援4個字成語，超過3字自動縮小字體防止擠壓換行 */
-        .main-word { font-size: 48px; font-weight: 900; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; max-width: 100%; display: block; white-space: nowrap; }
+        /* 支援成語不跳動 */
+        .main-word { font-size: 48px; font-weight: 900; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; max-width: 100%; white-space: nowrap; }
         .main-word.long-word { font-size: 36px; } 
-        
-        /* 綠色注音完美移到單詞正下方 */
         .zhuyin-text { font-size: 15px; font-weight: 700; color: var(--google-green); margin-top: 6px; min-height: 22px; text-align: center; }
         
-        .hint-badge { display: flex; justify-content: center; margin-bottom: 12px; height: 32px; align-items: center; }
-        .hint-tag { background: #F1F5F9; color: var(--text-muted); padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; }
-        .divider { height: 1px; background: #F1F5F9; margin-bottom: 16px; }
+        .divider { height: 1px; background: #F1F5F9; margin-top: 15px; margin-bottom: 20px; }
         
-        /* 例句顯示區域：高度鎖死 */
-        .sentence-section { display: flex; flex-direction: column; gap: 10px; height: 160px; justify-content: center; }
-        .target-sentence { font-size: 20px; font-weight: 700; color: var(--google-blue); text-align: center; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .translation-box { background: #F8FAFC; border-radius: 16px; padding: 10px 14px; border: 1px solid #F1F5F9; height: 68px; display: flex; align-items: center; justify-content: center; }
+        /* 例句區 */
+        .sentence-section { display: flex; flex-direction: column; gap: 12px; height: 170px; justify-content: center; }
+        .target-sentence { font-size: 20px; font-weight: 700; color: var(--text-main); text-align: center; line-height: 1.5; padding: 0 10px; }
+        
+        /* 智慧反紅加粗專用樣式 */
+        .highlight-keyword { color: var(--google-red) !important; font-weight: 900 !important; }
+        
+        .translation-box { background: #F8FAFC; border-radius: 16px; padding: 12px 14px; border: 1px solid #F1F5F9; height: 72px; display: flex; align-items: center; justify-content: center; }
         .translation-sentence { font-size: 14px; color: var(--text-muted); text-align: center; line-height: 1.4; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         
-        /* 底部導航欄高度固定，消除跳動 */
+        /* 底部按鈕高度鎖死 */
         .nav-bar { padding: 15px 24px 25px; display: flex; gap: 16px; background: white; border-top: 1px solid #E2E8F0; height: 95px; box-sizing: border-box; }
-        .nav-btn { flex: 1; height: 54px; border-radius: 24px; font-size: 16px; font-weight: 700; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s; }
+        .nav-btn { flex: 1; height: 54px; border-radius: 24px; font-size: 16px; font-weight: 700; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-prev { background: #F1F5F9; color: var(--text-main); }
         .btn-next { background: var(--google-blue); color: white; box-shadow: 0 8px 20px rgba(66, 133, 244, 0.3); }
 
@@ -93,7 +99,11 @@
 
         <div class="card-area">
             <div class="study-card">
-                <button class="audio-trigger-btn" onclick="playWordAudio()"><i class="fas fa-volume-up"></i></button>
+                
+                <div class="audio-control-panel">
+                    <button class="audio-btn btn-audio-word" onclick="playWordAudio()" title="朗讀單詞"><i class="fas fa-volume-up"></i></button>
+                    <button class="audio-btn btn-audio-sentence" onclick="playSentenceAudio()" title="朗讀例句"><i class="fas fa-bullhorn"></i></button>
+                </div>
                 
                 <span id="lbl-id" class="card-id">--</span>
 
@@ -103,7 +113,6 @@
                     <div id="lbl-zhuyin" class="zhuyin-text">--</div>
                 </div>
                 
-                <div class="hint-badge"><div id="lbl-hint" class="hint-tag">提示: --</div></div>
                 <div class="divider"></div>
                 
                 <div class="sentence-section">
@@ -126,20 +135,18 @@
         let currentIndex = 0;
         let audioCtx = null;
 
-        // 儀式感：進入學堂並敲鐘
         function enterSchool() {
             document.getElementById("welcome-overlay").style.opacity = "0";
             setTimeout(() => {
                 document.getElementById("welcome-overlay").style.display = "none";
             }, 500);
             
-            // 播放模擬實體學校上課打鐘聲
             playSchoolBell();
-            // 延時朗讀第一首例句
+            // 進入學門後，默認直接播放清脆的例句音
             setTimeout(() => { playSentenceAudio(); }, 1200);
         }
 
-        // 用 Web Audio API 純代碼合成清脆的學校電子鐘聲 (不需加載音檔)
+        // 經典四音節電子鐘聲
         function playSchoolBell() {
             try {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -148,21 +155,19 @@
                     let gain = audioCtx.createGain();
                     osc.type = 'sine';
                     osc.frequency.setValueAtTime(frequency, startTime);
-                    gain.gain.setValueAtTime(0.3, startTime);
+                    gain.gain.setValueAtTime(0.25, startTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
                     osc.start(startTime);
                     osc.stop(startTime + duration);
                 };
-                
-                // 經典學校上課四音節鐘聲 (噹～噹～噹～噹～)
                 let now = audioCtx.currentTime;
-                playTone(now, 523.25, 1.0);       // C5
-                playTone(now + 0.6, 659.25, 1.0); // E5
-                playTone(now + 1.2, 587.33, 1.0); // D5
-                playTone(now + 1.8, 392.00, 1.4); // G4
-            } catch(e) { console.log("音訊環境啟動失敗", e); }
+                playTone(now, 523.25, 0.9);       
+                playTone(now + 0.5, 659.25, 0.9); 
+                playTone(now + 1.0, 587.33, 0.9); 
+                playTone(now + 1.5, 392.00, 1.3); 
+            } catch(e) { console.log(e); }
         }
 
         async function loadCardsFromMD() {
@@ -184,7 +189,7 @@
                 });
 
                 if(tempDb.length > 0) { db = tempDb; renderCard(); }
-            } catch (error) { console.error("讀取失敗：", error); }
+            } catch (error) { console.error(error); }
         }
 
         function renderCard() {
@@ -193,10 +198,11 @@
             
             document.getElementById("lbl-id").textContent = current.id || "";
             
-            // 處理成語等長單詞的字體大小彈性縮放，避免擠壓換行
+            // 處理成語長度
             const wordEl = document.getElementById("lbl-word");
-            wordEl.textContent = current.word || "--";
-            if (current.word && current.word.length >= 4) {
+            const keyword = current.word || "";
+            wordEl.textContent = keyword;
+            if (keyword.length >= 4) {
                 wordEl.classList.add("long-word");
             } else {
                 wordEl.classList.remove("long-word");
@@ -204,17 +210,27 @@
 
             document.getElementById("lbl-pinyin").textContent = current.pinyin || "";
             document.getElementById("lbl-zhuyin").textContent = current.zhuyin || "--";
-            document.getElementById("lbl-hint").textContent = `提示: ${current.word || "--"}`;
-            document.getElementById("lbl-sentence-zh").textContent = current.sentence_zh || "--";
-            document.getElementById("lbl-sentence-vi").textContent = current.sentence_vi || "--";
             
+            // 【核心智慧優化】：在例句中自動尋找單詞，並反紅加粗
+            const rawSentence = current.sentence_zh || "--";
+            if (keyword && rawSentence.includes(keyword)) {
+                const decoratedSentence = rawSentence.replace(
+                    new RegExp(keyword, 'g'), 
+                    `<span class="highlight-keyword">${keyword}</span>`
+                );
+                document.getElementById("lbl-sentence-zh").innerHTML = decoratedSentence;
+            } else {
+                document.getElementById("lbl-sentence-zh").textContent = rawSentence;
+            }
+            
+            document.getElementById("lbl-sentence-vi").textContent = current.sentence_vi || "--";
             document.getElementById("card-counter").textContent = `${currentIndex + 1} / ${db.length}`;
         }
 
         function nextCard() { if (currentIndex < db.length - 1) { currentIndex++; renderCard(); playSentenceAudio(); } }
         function prevCard() { if (currentIndex > 0) { currentIndex--; renderCard(); playSentenceAudio(); } }
 
-        // 應用分開 1：按按鈕或切換時，只朗讀「中文例句」
+        // 藍喇叭（或換字時）：專門朗讀例句
         function playSentenceAudio() {
             if(db.length === 0 || !('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
@@ -227,15 +243,16 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        // 應用分開 2：點右上角小喇叭時，單獨精準朗讀「單詞」
+        // 黑喇叭：單獨精準慢速朗讀單詞
         function playWordAudio() {
             if(db.length === 0 || !('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
             const current = db[currentIndex];
+            if (!current.word) return;
             
             const utterance = new SpeechSynthesisUtterance(current.word);
             utterance.lang = 'zh-TW';
-            utterance.rate = 0.75; // 單詞稍微慢一點讓學生聽得更準
+            utterance.rate = 0.75; 
             window.speechSynthesis.speak(utterance);
         }
 
