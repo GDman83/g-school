@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟盟學堂</title>
+    <title>G學園 - 中文啟蒙學堂</title>
+    
+    <link rel="manifest" href="/g-school/manifest.json">
+    <meta name="theme-color" content="#536DFE">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="G學園">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2240/2240632.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Poppins:wght=600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
         :root {
             --google-blue: #4285F4;
@@ -18,228 +27,420 @@
             --text-muted: #475569;
             --bg-app: #F8FAFC;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #CBD5E1; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .phone-container { width: 100%; max-width: 414px; height: 100vh; max-height: 850px; background-color: var(--bg-app); display: flex; flex-direction: column; overflow: hidden; position: relative; }
-        @media (min-width: 450px) { .phone-container { height: 850px; border: 10px solid #1E293B; border-radius: 50px; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4); } }
-        .start-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #536DFE 0%, #43a047 100%); z-index: 200; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; color: white; }
-        .start-school-icon { font-size: 80px; margin-bottom: 20px; }
-        .start-btn { background: white; color: #536DFE; border: none; padding: 16px 45px; border-radius: 35px; font-size: 22px; font-weight: 900; cursor: pointer; box-shadow: 0 15px 30px rgba(0,0,0,0.2); margin-top: 40px; display: flex; align-items: center; gap: 12px; }
-        .start-btn:active { transform: scale(0.95); }
-        .app-nav { background: white; padding: 15px 20px 10px; flex-shrink: 0; }
-        .nav-info { display: flex; justify-content: space-between; align-items: center; }
-        .nav-info span { font-weight: 700; color: var(--text-muted); font-size: 14px; }
-        .progress-container { width: 100%; height: 6px; background: #E2E8F0; border-radius: 10px; margin-top: 8px; overflow: hidden; }
-        .progress-bar { width: 0%; height: 100%; background: var(--google-blue); transition: width 0.3s ease; }
-        .speed-bar { padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #E2E8F0; flex-shrink: 0; }
-        .speed-title { font-size: 14px; font-weight: 700; color: var(--text-muted); }
-        .speed-options { display: flex; gap: 8px; }
-        .speed-btn { padding: 4px 12px; border-radius: 12px; border: 1px solid #E2E8F0; font-size: 13px; font-weight: 700; cursor: pointer; background: #F8FAFC; color: var(--text-muted); }
-        .speed-btn.active { background: #536DFE; color: white; border-color: #536DFE; }
-        .app-body { flex-grow: 1; padding: 15px; display: flex; flex-direction: column; justify-content: center; overflow-y: auto; }
-        .card-main { background: white; border-radius: 32px; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 25px 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative; }
-        .id-badge { background: #EEF2FF; color: #536DFE; padding: 4px 12px; border-radius: 10px; font-weight: 900; font-size: 14px; margin-bottom: 15px; align-self: flex-start; }
-        .word-row-layout { display: flex; align-items: center; justify-content: center; width: 100%; position: relative; margin-bottom: 10px; padding: 0 60px; }
-        .char-main-display { font-size: 82px; font-weight: 900; color: #1E293B; letter-spacing: 2px; text-align: center; word-break: break-all; }
-        .side-audio-trigger { position: absolute; right: 0px; width: 60px; height: 60px; background: #EEF2FF; color: #536DFE; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; cursor: pointer; border: none; box-shadow: 0 4px 12px rgba(83,109,254,0.2); }
-        .side-audio-trigger:active { transform: scale(0.9); }
-        .zhuyin-row-display { font-size: 42px; font-weight: 900; color: var(--google-red); letter-spacing: 4px; margin-bottom: 12px; text-align: center; width: 100%; min-height: 50px; }
-        .pinyin-row-display { font-size: 24px; color: var(--text-muted); font-family: 'Poppins'; font-weight: 700; margin-bottom: 20px; text-align: center; }
-        .divider { width: 100%; height: 2px; background-color: #F1F5F9; margin-bottom: 20px; }
-        .sentence-group { width: 100%; display: flex; flex-direction: column; gap: 12px; }
-        .action-item { background: #F8FAFC; border-radius: 20px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; border: 1px solid #E2E8F0; }
-        .action-item:active { transform: scale(0.98); }
-        .action-content { flex: 1; padding-right: 10px; text-align: left; }
-        .txt-zh { font-size: 32px; color: var(--text-main); font-weight: 900; line-height: 1.4; }
-        .txt-vn { font-size: 22px; color: var(--google-green); font-weight: 700; line-height: 1.4; }
-        .play-btn { width: 48px; height: 48px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #536DFE; box-shadow: 0 4px 10px rgba(0,0,0,0.08); flex-shrink: 0; font-size: 20px; }
-        .app-footer { padding: 15px 30px 30px; background: white; border-top: 1px solid #F1F5F9; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-        .nav-arrow-btn { background: #F1F5F9; color: var(--text-main); border: none; padding: 12px 25px; border-radius: 20px; font-size: 16px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-        .nav-arrow-btn.btn-next { background: #536DFE; color: white; }
-        .nav-arrow-btn:active { transform: scale(0.95); }
-        .loader { position: absolute; inset: 0; background: white; z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
-        .pulse-icon { font-size: 45px; color: #536DFE; animation: pulseAnimate 1.5s infinite ease-in-out; }
-        @keyframes pulseAnimate { 0% { transform: scale(0.9); opacity: 0.6; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(0.9); opacity: 0.6; } }
-        .error-screen { display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px; background: white; position: absolute; inset: 0; z-index: 150; }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #CBD5E1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 手機模擬器外殼（PWA 打開時會全螢幕填滿） */
+        .phone-container {
+            width: 100%;
+            max-width: 414px;
+            height: 100vh;
+            max-height: 850px;
+            background-color: var(--bg-app);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 450px) {
+            .phone-container {
+                height: 850px;
+                border: 10px solid #1E293B;
+                border-radius: 50px;
+                box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4);
+            }
+        }
+
+        /* 歡迎首頁（敲鐘開課） */
+        .start-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #536DFE 0%, #43A047 100%);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .start-overlay.fade-out {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+
+        .start-school-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .start-title {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .start-subtitle {
+            font-size: 15px;
+            opacity: 0.85;
+            margin-bottom: 40px;
+        }
+
+        .start-btn {
+            background-color: white;
+            color: #536DFE;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
+        }
+
+        .start-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* 讀取與錯誤蓋板 */
+        .status-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: var(--bg-app);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .hidden { display: none !important; }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #E2E8F0;
+            border-top-color: var(--google-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .error-icon {
+            font-size: 64px;
+            color: var(--google-red);
+            margin-bottom: 20px;
+        }
+
+        .status-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .status-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .retry-btn {
+            background-color: #536DFE;
+            color: white;
+            padding: 14px 50px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(83,109,254,0.3);
+        }
+
+        /* 核心內容區域 */
+        .app-header {
+            padding: 20px;
+            background-color: white;
+            border-bottom: 1px solid #E2E8F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 900;
+            color: #536DFE;
+        }
+
+        .counter-badge {
+            background-color: #EDF2FE;
+            color: #536DFE;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .card-zone {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* 霸氣字卡本體 */
+        .vocab-card {
+            background-color: white;
+            width: 100%;
+            height: 100%;
+            max-height: 480px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(15,23,42,0.08);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .audio-trigger-zone {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        /* 核心大字與注音組合 */
+        .word-combo-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .main-word {
+            font-size: 76px;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -2px;
+        }
+
+        .zhuyin-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #EC4899; /* 玫瑰粉紅 */
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 1.2;
+            border-left: 2px dashed #F472B6;
+            padding-left: 8px;
+        }
+
+        .pinyin-text {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 600;
+            background-color: #F1F5F9;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* 越南文與例句區 */
+        .translation-box {
+            border-top: 1px solid #F1F5F9;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .vietnamese-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #059669; /* 翡翠綠 */
+            margin-bottom: 10px;
+        }
+
+        .example-sentence {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            background-color: #F8FAFC;
+            padding: 12px;
+            border-radius: 16px;
+            font-weight: 500;
+        }
+
+        /* 喇叭絕對定位懸浮按鈕 */
+        .speaker-floating-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background-color: #EEF2F6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #536DFE;
+            font-size: 16px;
+        }
+
+        /* 底部控制導航欄 */
+        .bottom-nav {
+            padding: 20px;
+            background-color: white;
+            border-top: 1px solid #E2E8F0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 16px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-prev { background-color: #F1F5F9; color: var(--text-main); }
+        .btn-next { background-color: #536DFE; color: white; box-shadow: 0 8px 20px rgba(83,109,254,0.25); }
+        .nav-btn:active { transform: scale(0.98); }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
     </style>
 </head>
 <body>
 
     <div class="phone-container">
-        <div class="start-overlay" id="startOverlay">
+        
+        <div id="startOverlay" class="start-overlay">
             <div class="start-school-icon">🏫</div>
-            <h2 style="font-size: 28px; font-weight: 900; letter-spacing: 1px;">G 學園啟盟學堂</h2>
-            <p style="font-size: 15px; margin-top: 8px; color: rgba(255,255,255,0.9);">歡迎校長蒞臨，點擊下方按鈕開課</p>
-            <button class="start-btn" onclick="enterAcademy()">
-                <i class="fa-solid fa-bell"></i> 敲鐘開課
+            <h1 class="start-title">G學園啟盟學堂</h1>
+            <p class="start-subtitle">校長專屬 · 中越雙語卡片系統</p>
+            <button class="start-btn" onclick="openSchool()">
+                <i class="fas fa-bell"></i> 敲鐘開課
             </button>
         </div>
 
-        <div class="loader" id="loader">
-            <div class="pulse-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-            <p style="margin-top: 20px; font-weight: 700; color: var(--text-muted); font-size: 15px;">正在跨網連接教材庫...</p>
+        <div id="loadingLayer" class="status-overlay">
+            <div class="spinner"></div>
+            <h2 class="status-title">正在跨網連接教材庫...</h2>
+            <p class="status-desc">請確保您的 Google 試算表已開啟共用設定。</p>
         </div>
 
-        <div class="error-screen" id="errorScreen">
-            <i class="fa-solid fa-circle-exclamation" style="font-size: 50px; color: var(--google-red); margin-bottom: 15px;"></i>
-            <h3 style="font-size: 20px; font-weight: 900; color: #1E293B; margin-bottom: 10px;">教材庫跨網讀取失敗</h3>
-            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">正在嘗試極限強載模式...</p>
-            <button class="start-btn" onclick="location.reload()" style="background: #536DFE; color: white; margin-top:0;">重新連線</button>
+        <div id="errorLayer" class="status-overlay hidden">
+            <div class="error-icon"><i class="fas fa-exclamation-circle"></i></div>
+            <h2 class="status-title">教材庫跨網讀取失敗</h2>
+            <p class="status-desc">請確認您的 GAS 部署設定是否為「所有人」，<br>並確認手機網路連線正常。</p>
+            <button class="retry-btn" onclick="fetchLibraryData()">重新連線</button>
         </div>
 
-        <div class="app-nav">
-            <div class="nav-info"><span id="progressTxt">0 / 0</span><span>學習進度</span></div>
-            <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="app-header">
+            <div class="logo-text"><i class="fas fa-graduation-cap"></i> G-School</div>
+            <div id="cardCounter" class="counter-badge">0 / 0</div>
         </div>
 
-        <div class="speed-bar">
-            <span class="speed-title"><i class="fa-solid fa-gauge-high"></i> 朗讀速度</span>
-            <div class="speed-options">
-                <button class="speed-btn" id="speedSlow" onclick="setSpeed(true)">慢速</button>
-                <button class="speed-btn active" id="speedNormal" onclick="setSpeed(false)">正常</button>
-            </div>
-        </div>
-
-        <div class="app-body">
-            <div class="card-main">
-                <div class="id-badge" id="cardID">No.1</div>
-                
-                <div class="word-row-layout">
-                    <div class="char-main-display" id="cardWord">載入中</div>
-                    <button class="side-audio-trigger" onclick="speakGoogleTTS('word')" id="btnMainAudio">
-                        <i class="fa-solid fa-volume-high"></i>
-                    </button>
+        <div class="card-zone">
+            <div class="vocab-card">
+                <div class="audio-trigger-zone" onclick="speakCurrentWord()">
+                    <div class="speaker-floating-icon" id="speakerIcon">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    
+                    <div class="word-combo-box">
+                        <div id="mainWord" class="main-word">--</div>
+                        <div id="zhuyinBox" class="zhuyin-box">
+                            </div>
+                    </div>
+                    
+                    <div id="pinyinText" class="pinyin-text">--</div>
                 </div>
 
-                <div class="zhuyin-row-display" id="cardZhuyin">...</div>
-                <div class="pinyin-row-display" id="cardPinyin">-</div>
-                <div class="divider"></div>
-                
-                <div class="sentence-group">
-                    <div class="action-item" onclick="speakGoogleTTS('example')">
-                        <div class="action-content"><div class="txt-zh" id="cardExample">載入中...</div></div>
-                        <div class="play-btn"><i class="fa-solid fa-play"></i></div>
-                    </div>
-                    <div class="action-item" onclick="speakGoogleTTS('vn')" style="border-left: 5px solid var(--google-green);">
-                        <div class="action-content"><div class="txt-vn" id="cardVn">Loading...</div></div>
-                        <div class="play-btn" style="color: var(--google-green);"><i class="fa-solid fa-headphones"></i></div>
-                    </div>
+                <div class="translation-box">
+                    <div id="vietnameseTitle" class="vietnamese-title">--</div>
+                    <div id="exampleSentence" class="example-sentence">--</div>
                 </div>
             </div>
         </div>
 
-        <div class="app-footer">
-            <button class="nav-arrow-btn" onclick="prevCard()"><i class="fa-solid fa-arrow-left"></i> 上一個</button>
-            <button class="nav-arrow-btn btn-next" onclick="nextCard()">下一個 <i class="fa-solid fa-arrow-right"></i></button>
+        <div class="bottom-nav">
+            <button class="nav-btn btn-prev" onclick="prevCard()"><i class="fas fa-arrow-left"></i> 上一字</button>
+            <button class="nav-btn btn-next" onclick="nextCard()">下一字 <i class="fas fa-arrow-right"></i></button>
         </div>
+
     </div>
 
     <audio id="globalAudioPlayer" preload="auto"></audio>
 
     <script>
-        // 🎯 您的發電廠網址
-        const GAS_API_URL = "https://script.google.com/macros/s/AKfycby2tG5G2Guek0yPlBZhpVytTIGdhPMJ1szCV7Dshr5Z6NJhAiYfpnrBfxt_DDF6WKi4/exec";
-        
-        // 🎯 全球免費的跨網代理伺服器（專門破解瀏覽器攔截）
-        const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+        // 🎯 請校長將下方網址更換為您最新部署的 Google GAS 網址 (末尾必須是 /exec)
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbz2tG5G2Guek0yP1BZHpVytTIGdhPMJ1szCV7Dshr5Z6NJhAiYfpnrBfxt_DDF6WKi4/exec";
 
-        let vocabularyData = [];
+        let dbData = [];
         let currentIndex = 0;
-        let isSlowSpeed = false;
 
-        function enterAcademy() {
-            document.getElementById('startOverlay').style.display = 'none';
-            setTimeout(() => { speakGoogleTTS('word'); }, 300);
+        // 1. 點擊開課按鈕
+        function openSchool() {
+            document.getElementById('startOverlay').classList.add('fade-out');
+            fetchLibraryData();
         }
 
-        function setSpeed(isSlow) {
-            isSlowSpeed = isSlow;
-            document.getElementById('speedSlow').classList.toggle('active', isSlow);
-            document.getElementById('speedNormal').classList.toggle('active', !isSlow);
-            speakGoogleTTS('word');
-        }
+        // 2. 極限跨網抓取資料 (雙重相容暗號版)
+        function fetchLibraryData() {
+            document.getElementById('loadingLayer').classList.remove('hidden');
+            document.getElementById('errorLayer').classList.add('hidden');
 
-        function speakGoogleTTS(type) {
-            let text = "";
-            let locale = "zh-TW";
-            if(type === 'word') text = document.getElementById('cardWord').innerText;
-            if(type === 'example') text = document.getElementById('cardExample').innerText;
-            if(type === 'vn') { text = document.getElementById('cardVn').innerText; locale = "vi-VN"; }
+            // 清除可能殘留的舊腳本標籤
+            const oldScript = document.getElementById('gas-script-transport');
+            if (oldScript) oldScript.remove();
 
-            if(!text || text.startsWith("載入中") || text === "...") return;
-
-            let speedParam = (locale === "zh-TW" && isSlowSpeed) ? "&speed=0.24" : "";
-            const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${locale}&client=tw-ob&q=${encodeURIComponent(text)}${speedParam}`;
+            // 建立標準 JSONP 傳輸管線
+            const script = document.createElement('script');
+            script.id = 'gas-script-transport';
+            // 同時附帶參數，防止 Google 轉址漏掉暗號
+            script.src = `${GAS_URL}?callback=handleGasData&t=${new Date().getTime()}`;
             
-            const player = document.getElementById('globalAudioPlayer');
-            player.pause();
-            player.src = ttsUrl;
-            player.load();
-            player.play().catch(e => console.log("Audio waiting"));
-        }
-
-        // 🎯 核心解碼器
-        function processData(data) {
-            if(data && data.length > 0) {
-                // 過濾空行
-                vocabularyData = data.filter(item => item && Object.keys(item).length > 0 && item[Object.keys(item)[0]] !== "");
-                if (vocabularyData.length > 0) {
-                    renderCard();
-                    document.getElementById('loader').style.display = 'none'; 
-                    document.getElementById('errorScreen').style.display = 'none';
-                } else { showDataError(); }
-            } else { showDataError(); }
-        }
-
-        // 🎯 終極對症下藥：改用 Fetch + 代理伺服器，徹底拆掉安全高牆
-        window.addEventListener('DOMContentLoaded', () => {
-            // 直接用最高級別的代理抓取，繞過 Script 標籤的限制
-            fetch(PROXY_URL + GAS_API_URL)
-                .then(res => res.text())
-                .then(text => {
-                    // 剝除可能存在的 JSONP 包裝
-                    let jsonMatch = text.match(/\[\s*\{.*\}\s*\]/s);
-                    let rawJson = jsonMatch ? jsonMatch[0] : text;
-                    processData(JSON.parse(rawJson));
-                })
-                .catch(() => {
-                    // 如果免費代理塞車，嘗試直接硬闖（備援方案）
-                    fetch(GAS_API_URL)
-                        .then(res => res.text())
-                        .then(t => {
-                            let jMatch = t.match(/\[\s*\{.*\}\s*\]/s);
-                            processData(JSON.parse(jMatch ? jMatch[0] : t));
-                        })
-                        .catch(() => showDataError());
-                });
-        });
-
-        function showDataError() {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('errorScreen').style.display = 'flex';
-        }
-
-        function renderCard() {
-            const item = vocabularyData[currentIndex];
-            const getVal = p => {
-                for(let k of p) if(item[k] !== undefined && item[k] !== null) return item[k];
-                for(let k in item) {
-                    let cleanK = k.replace(/\s+/g, '');
-                    if(p.some(x => cleanK.includes(x) || x.includes(cleanK))) return item[k];
-                }
-                return "";
-            };
-            
-            document.getElementById('cardWord').innerText = getVal(["核心詞彙", "核心", "詞彙", "word", "核心詞"]);
-            document.getElementById('cardZhuyin').innerText = getVal(["注音", "zhuyin"]);
-            document.getElementById('cardPinyin').innerText = getVal(["拼音", "提示", "pinyin"]);
-            document.getElementById('cardID').innerText = `No.${currentIndex + 1}`;
-            document.getElementById('cardExample').innerText = getVal(["生活應用例句", "例句", "example", "應用例句"]);
-            document.getElementById('cardVn').innerText = getVal(["越南", "VN", "生活語言", "vn", "越南文", "越南話"]);
-            
-            document.getElementById('progressTxt').innerText = `${currentIndex + 1} / ${vocabularyData.length}`;
-            document.getElementById('progressBar').style.width = ((currentIndex + 1) / vocabularyData.length) * 100 + "%";
-        }
-
-        function nextCard() { currentIndex = (currentIndex + 1) % vocabularyData.length; renderCard(); setTimeout(() => { speakGoogleTTS('word'); }, 200); }
-        function prevCard() { currentIndex = (currentIndex - 1 + vocabularyData.length) % vocabularyData.length; renderCard(); setTimeout(() => { speakGoogleTTS('word'); }, 200); }
+            // 安全防護超時天線：8秒內沒通電就判定失敗
+            const timeoutTrigger = setTimeout(() => {
