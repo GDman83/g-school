@@ -1,349 +1,337 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>G學園 - 中文啟盟學堂</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="manifest" href="./manifest.json">
-  
-  <style>
-    :root {
-      --google-blue: #4285F4;
-      --google-red: #EA4335;
-      --google-yellow: #FBBC05;
-      --google-green: #34A853;
-      --text-main: #0F172A;
-      --text-muted: #475569;
-      --bg-app: #F8FAFC;
-      --accent-blue: #536DFE;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GD 語言學習面板</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --border-color: #e0e0e0;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    
-    body { 
-      font-family: 'Noto Sans TC', sans-serif; 
-      background-color: #CBD5E1; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      min-height: 100vh; 
-    }
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+        }
 
-    .phone-container { 
-      width: 100%; 
-      max-width: 414px; 
-      height: 100vh; 
-      max-height: 850px; 
-      background-color: var(--bg-app); 
-      display: flex; 
-      flex-direction: column; 
-      position: relative;
-      overflow: hidden;
-    }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    @media (min-width: 450px) {
-      .phone-container { 
-        height: 850px; 
-        border: 10px solid #1E293B; 
-        border-radius: 50px; 
-        box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4); 
-      }
-    }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
 
-    /* 啟動遮罩頁面 */
-    .start-overlay { 
-      position: absolute; 
-      inset: 0; 
-      background: linear-gradient(135deg, #536DFE 0%, #43a047 100%); 
-      z-index: 200; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-      align-items: center;
-      color: white;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .start-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(1.05);
-    }
-    .start-school-icon { font-size: 80px; margin-bottom: 20px; }
-    .start-title { font-size: 32px; font-weight: 900; margin-bottom: 8px; letter-spacing: 1px; }
-    .start-subtitle { font-size: 16px; opacity: 0.9; margin-bottom: 40px; }
-    .start-btn {
-      background: white;
-      color: var(--accent-blue);
-      border: none;
-      padding: 16px 40px;
-      border-radius: 30px;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: transform 0.2s;
-    }
-    .start-btn:active { transform: scale(0.95); }
+        /* 隱藏原始的 Markdown 容器，僅用於資料抓取 */
+        #data-source {
+            display: none;
+        }
 
-    /* 頂部導覽列 */
-    .header {
-      padding: 20px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: white;
-      border-bottom: 1px solid #E2E8F0;
-    }
-    .brand { display: flex; align-items: center; gap: 8px; color: var(--accent-blue); font-size: 20px; font-weight: 900; }
-    .progress-badge { background: #EEF2F6; color: var(--accent-blue); padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; font-family: 'Poppins', sans-serif; }
+        /* 學習卡片網格 */
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
 
-    /* 主要內容區 */
-    .content-area { flex: 1; padding: 24px; display: flex; flex-direction: column; justify-content: center; }
+        .word-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
 
-    /* 字卡主體 */
-    .flashcard {
-      background: white;
-      border-radius: 32px;
-      padding: 30px 24px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      min-height: 420px;
-    }
+        .word-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
 
-    /* 藍色音訊按鈕 */
-    .audio-btn {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #EEF2F6;
-      color: var(--accent-blue);
-      border: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .audio-btn:active { background: #E2E8F0; }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
 
-    /* 單字與注音區塊：修正為呼吸感並排排版 */
-    .word-section {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      margin-top: 50px;
-      margin-bottom: 16px;
-    }
-    .main-word { font-size: 64px; font-weight: 900; color: var(--text-main); }
-    .zhuyin-box {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--google-red);
-      line-height: 1.3;
-      border-left: 2px dashed #FED7D7;
-      padding-left: 12px;
-      white-space: pre-line;
-    }
+        .word-title {
+            font-size: 24pt;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
 
-    /* 提示詞區塊 */
-    .hint-container { display: flex; justify-content: center; margin-bottom: 40px; }
-    .hint-tag { background: #F1F5F9; color: var(--text-muted); padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 500; }
+        .phonetic-box {
+            text-align: right;
+        }
 
-    .divider { height: 1px; background: #F1F5F9; margin-bottom: 30px; }
+        .pinyin {
+            font-size: 11pt;
+            color: #7f8c8d;
+        }
 
-    /* 例句與翻譯區塊 */
-    .sentence-section { display: flex; flex-direction: column; gap: 12px; flex: 1; justify-content: center; }
-    .sentence-zh { font-size: 22px; font-weight: 700; color: var(--google-green); text-align: center; line-height: 1.4; }
-    .sentence-vi-box { background: #F8FAFC; border-radius: 16px; padding: 12px 16px; margin: 0 10px; }
-    .sentence-vi { font-size: 14px; color: var(--text-muted); text-align: center; line-height: 1.5; font-weight: 500; }
+        .zhuyin {
+            font-size: 11pt;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
 
-    /* 底部導覽按鈕 */
-    .bottom-nav { padding: 20px 24px 30px; display: flex; gap: 16px; background: white; border-top: 1px solid #E2E8F0; }
-    .nav-btn {
-      flex: 1;
-      padding: 16px;
-      border-radius: 24px;
-      font-size: 16px;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-    .btn-secondary { background: #F1F5F9; color: var(--text-muted); }
-    .btn-secondary:active { background: #E2E8F0; }
-    .btn-primary { background: var(--accent-blue); color: white; box-shadow: 0 8px 20px rgba(83, 109, 254, 0.3); }
-    .btn-primary:active { transform: translateY(2px); box-shadow: 0 4px 10px rgba(83, 109, 254, 0.2); }
-  </style>
+        .hint-text {
+            font-size: 12pt;
+            color: #e67e22;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .sentence-box {
+            background: #fdfefe;
+            border-left: 4px solid var(--accent-color);
+            padding: 8px 12px;
+            margin-top: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .sentence-zh {
+            font-size: 12pt;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .sentence-vi {
+            font-size: 11pt;
+            color: #95a5a6;
+            font-style: italic;
+        }
+
+        /* 語音按鈕樣式 */
+        .audio-btn {
+            background: #ecf0f1;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .audio-btn:hover {
+            background: var(--accent-color);
+        }
+
+        .audio-btn:hover svg {
+            fill: #ffffff;
+        }
+
+        .audio-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--primary-color);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="phone-container">
-    
-    <div id="start-overlay" class="start-overlay">
-      <div class="start-school-icon">🏫</div>
-      <div class="start-title">G學園啟盟學堂</div>
-      <div class="start-subtitle">校長專屬 ・ 中越雙語卡片系統</div>
-      <button class="start-btn" onclick="startLesson()">
-        <i class="fas fa-bell"></i> 敲鐘開課
-      </button>
-    </div>
-
-    <div class="header">
-      <div class="brand"><i class="fas fa-graduation-cap"></i> G-School</div>
-      <div id="progress" class="progress-badge">0 / 0</div>
-    </div>
-
-    <div class="content-area">
-      <div class="flashcard">
-        <button class="audio-btn" onclick="playTTS()" title="播放語音">
-          <i class="fas fa-volume-up"></i>
-        </button>
+    <div class="container">
+        <h1>GD 語言學習面板</h1>
         
-        <div class="word-section">
-          <div id="card-word" class="main-word">--</div>
-          <div id="card-zhuyin" class="zhuyin-box">--</div>
+        <div id="data-source">
+            <table>
+                <thead>
+                    <tr>
+                        <th>單詞</th>
+                        <th>拼音</th>
+                        <th>注音</th>
+                        <th>中文例句</th>
+                        <th>越南文翻譯</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>你好</td>
+                        <td>nǐ hǎo</td>
+                        <td>ㄋㄧˇ ㄏㄠˇ</td>
+                        <td>你好！很高興見到你。</td>
+                        <td>Xin chào! Rất vui được gặp bạn.</td>
+                    </tr>
+                    <tr>
+                        <td>謝謝</td>
+                        <td>xiè xie</td>
+                        <td>ㄒㄧㄝˋ ㄒㄧㄝ˙</td>
+                        <td>謝謝爸爸，謝謝媽媽。</td>
+                        <td>Cảm ơn bố, cảm ơn mẹ.</td>
+                    </tr>
+                    <tr>
+                        <td>再見</td>
+                        <td>zài jiàn</td>
+                        <td>ㄗㄞˋ ㄐㄧㄢˋ</td>
+                        <td>老師再見，明日見。</td>
+                        <td>Tạm biệt thầy cô, hẹn gặp lại ngày mai.</td>
+                    </tr>
+                    <tr>
+                        <td>早安</td>
+                        <td>zǎo ān</td>
+                        <td>ㄗㄠˇ ㄢ</td>
+                        <td>早安，太陽公公起床了。</td>
+                        <td>Chào buổi sáng, ông mặt trời thức dậy rồi.</td>
+                    </tr>
+                    <tr>
+                        <td>晚安</td>
+                        <td>wǎn ān</td>
+                        <td>ㄨㄢˇ ㄢ</td>
+                        <td>晚安，祝你有個好夢。</td>
+                        <td>Chào ngủ ngon, chúc con có một giấc mơ đẹp.</td>
+                    </tr>
+                    <tr>
+                        <td>請</td>
+                        <td>qǐng</td>
+                        <td>ㄑㄧㄥˇ</td>
+                        <td>請喝水，請坐下。</td>
+                        <td>Mời uống nước, mời ngồi xuống.</td>
+                    </tr>
+                    <tr>
+                        <td>對不起</td>
+                        <td>duì bù qǐ</td>
+                        <td>ㄉㄨㄟˋ ㄅㄨˋ ㄑㄧˇ</td>
+                        <td>對不起，我不是故意的。</td>
+                        <td>Xin lỗi, con không cố ý.</td>
+                    </tr>
+                    <tr>
+                        <td>沒關係</td>
+                        <td>méi guān xi</td>
+                        <td>ㄇㄟˊ ㄍㄨㄢ ㄒㄧ˙</td>
+                        <td>沒關係，下次注意就好。</td>
+                        <td>Không sao đâu, lần sau chú ý là được.</td>
+                    </tr>
+                    <tr>
+                        <td>高興</td>
+                        <td>gāo xìng</td>
+                        <td>ㄍㄠ ㄒㄧㄥˋ</td>
+                        <td>今天去公園玩，很高興。</td>
+                        <td>Hôm nay đi công viên chơi, con rất vui.</td>
+                    </tr>
+                    <tr>
+                        <td>喜歡</td>
+                        <td>xǐ huan</td>
+                        <td>ㄒㄧˇ ㄏㄨㄢ˙</td>
+                        <td>我喜歡吃蘋果，也喜歡看書。</td>
+                        <td>Con thích ăn táo, cũng thích đọc sách.</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div class="hint-container">
-          <div id="card-hint" class="hint-tag">提示: --</div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="sentence-section">
-          <div id="card-sentence-zh" class="sentence-zh">--</div>
-          <div class="sentence-vi-box">
-            <div id="card-sentence-vi" class="sentence-vi">--</div>
-          </div>
-        </div>
-      </div>
+        <div id="word-container" class="word-grid"></div>
     </div>
 
-    <div class="bottom-nav">
-      <button id="prev-btn" class="nav-btn btn-secondary" onclick="prevCard()">
-        <i class="fas fa-arrow-left"></i> 上一字
-      </button>
-      <button id="next-btn" class="nav-btn btn-primary" onclick="nextCard()">
-        下一字 <i class="fas fa-arrow-right"></i>
-      </button>
-    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            parseAndRenderData();
+        });
 
-  </div>
+        // 1. 動態解析 HTML 表格資料並進行卡片渲染
+        function parseAndRenderData() {
+            const container = document.getElementById("word-container");
+            const rows = document.querySelectorAll("#data-source tbody tr");
+            
+            container.innerHTML = ""; // 清空舊容器
 
-  <script>
-    let cardData = [];
-    let currentIndex = 0;
+            if (rows.length === 0) {
+                container.innerHTML = "<p style='text-align:center; color:#95a5a6;'>未偵測到有效的單詞表格資料。</p>";
+                return;
+            }
 
-    // 敲鐘開課關閉遮罩
-    function startLesson() {
-      document.getElementById('start-overlay').classList.add('hidden');
-      // 自動朗讀第一課單字
-      setTimeout(playTTS, 600);
-    }
+            rows.forEach((row, index) => {
+                const cells = row.querySelectorAll("td");
+                if (cells.length >= 5) {
+                    const wordData = {
+                        word: cells[0].textContent.trim(),
+                        pinyin: cells[1].textContent.trim(),
+                        zhuyin: cells[2].textContent.trim(),
+                        sentence_zh: cells[3].textContent.trim(),
+                        sentence_vi: cells[4].textContent.trim(),
+                        // 自動將中文句子前兩個字或表格首個字串提取作為提示
+                        hint: cells[4].textContent.split('!')[0].split('.')[0].trim()
+                    };
 
-    // 從外部 data.json 讀取資料
-    async function loadCards() {
-      try {
-        const response = await fetch('./data.json');
-        cardData = await response.json();
-        if (cardData.length > 0) {
-          renderCard();
+                    const card = createWordCard(wordData, index);
+                    container.appendChild(card);
+                }
+            });
         }
-      } catch (error) {
-        console.error("載入字卡資料失敗:", error);
-      }
-    }
 
-    // 渲染目前的字卡資料到介面上
-    function renderCard() {
-      const item = cardData[currentIndex];
-      document.getElementById('card-word').innerText = item.word;
-      document.getElementById('card-zhuyin').innerText = item.zhuyin;
-      document.getElementById('card-hint').innerText = `提示: ${item.hint}`;
-      document.getElementById('card-sentence-zh').innerText = item.sentence_zh;
-      document.getElementById('card-sentence-vi').innerText = item.sentence_vi;
-      
-      // 更新計數進度顯示 (例如: 1 / 4)
-      document.getElementById('progress').innerText = `${currentIndex + 1} / ${cardData.length}`;
-    }
+        // 2. 建立卡片 DOM 結構
+        function createWordCard(data, index) {
+            const card = document.createElement("div");
+            card.className = "word-card";
 
-    // 下一字邏輯
-    function nextCard() {
-      if (currentIndex < cardData.length - 1) {
-        currentIndex++;
-        renderCard();
-        playTTS();
-      }
-    }
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="word-title">${data.word}</div>
+                    <div class="phonetic-box">
+                        <div class="pinyin">${data.pinyin}</div>
+                        <div class="zhuyin">${data.zhuyin}</div>
+                    </div>
+                </div>
+                <div class="hint-text">💡 義：${data.hint}</div>
+                <div class="sentence-box">
+                    <div class="sentence-zh">${data.sentence_zh}</div>
+                    <div class="sentence-vi">${data.sentence_vi}</div>
+                </div>
+                <div class="controls">
+                    <span>單詞發音：</span>
+                    <button class="audio-btn" onclick="speakText('${data.word}', 'zh-TW')" title="播放單詞語音">
+                        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    </button>
+                    <span>例句發音：</span>
+                    <button class="audio-btn" onclick="speakText('${data.sentence_zh.replace(/'/g, "\\'")}', 'zh-TW')" title="播放例句語音">
+                        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    </button>
+                </div>
+            `;
+            return card;
+        }
 
-    // 上一字邏輯
-    function prevCard() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        renderCard();
-        playTTS();
-      }
-    }
-
-    // TTS 語音朗讀邏輯 (精確指配中文臺灣語音)
-    function playTTS() {
-      if (cardData.length === 0) return;
-      const currentItem = cardData[currentIndex];
-      
-      // 先停止目前可能正在播放的語音
-      window.speechSynthesis.cancel();
-      
-      // 建立朗讀物件 (優先朗讀單字，隔 0.5 秒後朗讀例句)
-      const textToSpeak = `${currentItem.word}。 ${currentItem.sentence_zh}`;
-      const utterance = new SpeechSynthesisUtterance(textToSpeak);
-      
-      // 尋找最佳的台灣繁體中文字型庫
-      const voices = window.speechSynthesis.getVoices();
-      const twVoice = voices.find(voice => voice.lang === 'zh-TW' || voice.lang.includes('zh-Hant'));
-      
-      if (twVoice) {
-        utterance.voice = twVoice;
-      } else {
-        utterance.lang = 'zh-TW'; // 備用方案設定語系
-      }
-      
-      utterance.rate = 0.85; // 稍微調慢語速，方便學生聽得更清晰
-      window.speechSynthesis.speak(utterance);
-    }
-
-    // 註冊 Service Worker (PWA 支援)
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('Service Worker 註冊成功'))
-          .catch(err => console.log('Service Worker 註冊失敗', err));
-      });
-    }
-
-    // 初始化載入
-    window.addEventListener('DOMContentLoaded', loadCards);
-    // 確保語音清單異步載入完成
-    if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = loadCards;
-    }
-  </script>
+        // 3. 語音發音核心邏輯（Web Speech API）
+        function speakText(text, lang) {
+            if ('speechSynthesis' in window) {
+                // 先停止當前正在播放的語音
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.85; // 微調語速，使其更清晰、更適合學習
+                utterance.pitch = 1.0;
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("很抱歉，您的瀏覽器不支援內建語音播放功能。建議使用 Chrome 瀏覽器。");
+            }
+        }
+    </script>
 </body>
 </html>
