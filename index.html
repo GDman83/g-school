@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟盟學堂</title>
+    <title>G學園 - 中文啟蒙學堂</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
         .svg-container { width: 85px; height: 85px; display: flex; justify-content: center; align-items: center; }
         .svg-container svg { width: 100%; height: 100%; object-fit: contain; }
 
-        /* 🔴 單詞核心區（整合專屬單詞大喇叭） */
+        /* 🔴 單詞核心區 */
         .word-main-zone { height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
         .pinyin-text { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 600; color: var(--google-red); }
         
@@ -55,7 +55,6 @@
         .main-word { font-size: 48px; font-weight: 900; color: var(--text-main); letter-spacing: -1px; line-height: 1.1; }
         .main-word.long-word { font-size: 34px; } 
         
-        /* 單詞專用紅色亮眼喇叭 */
         .word-audio-btn { width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; background: var(--google-red); color: #FFFFFF; box-shadow: 0 4px 10px rgba(234, 67, 53, 0.25); transition: transform 0.1s; }
         .word-audio-btn:active { transform: scale(0.9); }
         
@@ -63,14 +62,13 @@
         
         .divider { height: 1px; background: #F1F5F9; margin-top: 5px; margin-bottom: 10px; }
         
-        /* 🔵 例句區（側邊整合例句藍色喇叭） */
+        /* 🔵 例句區 */
         .sentence-section { display: flex; flex-direction: column; gap: 8px; height: 160px; justify-content: center; }
         
         .sentence-speaker-row { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0 4px; }
         .target-sentence { font-size: 19px; font-weight: 700; color: var(--text-main); text-align: center; line-height: 1.4; flex: 1; }
         .highlight-keyword { color: var(--google-red) !important; font-weight: 900 !important; }
         
-        /* 例句專用藍色喇叭 */
         .sentence-audio-btn { width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; background: var(--google-blue); color: #FFFFFF; box-shadow: 0 4px 10px rgba(66, 133, 244, 0.2); flex-shrink: 0; }
         .sentence-audio-btn:active { transform: scale(0.9); }
 
@@ -103,7 +101,6 @@
 
         <div class="card-area">
             <div class="study-card">
-                
                 <span id="lbl-id" class="card-id">--</span>
 
                 <div id="graphic-zone" class="graphic-display-zone"></div>
@@ -112,7 +109,7 @@
                     <span id="lbl-pinyin" class="pinyin-text">--</span>
                     <div class="word-speaker-row">
                         <div id="lbl-word" class="main-word">--</div>
-                        <button class="word-audio-btn" onclick="playWordAudioOnly()" title="唯獨朗讀單詞"><i class="fas fa-volume-up"></i></button>
+                        <button class="word-audio-btn" onclick="playWordAudioOnly()"><i class="fas fa-volume-up"></i></button>
                     </div>
                     <div id="lbl-zhuyin" class="zhuyin-text">--</div>
                 </div>
@@ -122,7 +119,7 @@
                 <div class="sentence-section">
                     <div class="sentence-speaker-row">
                         <div id="lbl-sentence-zh" class="target-sentence">--</div>
-                        <button class="sentence-audio-btn" onclick="playSentenceAudioOnly()" title="朗讀生活例句"><i class="fas fa-volume-up"></i></button>
+                        <button class="sentence-audio-btn" onclick="playSentenceAudioOnly()"><i class="fas fa-volume-up"></i></button>
                     </div>
                     <div class="translation-box">
                         <div id="lbl-sentence-vi" class="translation-sentence">--</div>
@@ -140,6 +137,21 @@
     <audio id="local-audio-player" preload="auto"></audio>
 
     <script>
+        // 🎯 【智慧對應 Tool 字典庫】校長可以在這裡隨時擴充高頻詞！
+        const emojiDictionary = {
+            "車": "🚑", "汽車": "🚗", "飛機": "✈️", "火車": "🚂", "蘋果": "🍎", 
+            "香蕉": "🍌", "蔬菜": "🥦", "西瓜": "🍉", "貓": "🐱", "狗": "🐶", 
+            "鳥": "🐦", "魚": "🐟", "大象": "🐘", "太陽": "☀️", "月亮": "🌙", 
+            "星星": "⭐", "下雨": "🌧️", "房子": "🏠", "學校": "🏫", "書本": "📖", 
+            "老師": "🧑‍🏫", "醫生": "👨‍⚕️", "警察": "👮", "飛機師": "🧑‍✈️", "蛋糕": "🎂",
+            "牛奶": "🥛", "麵包": "🍞", "水": "💧", "氣球": "🎈", "衣服": "👕",
+            "鞋子": "👟", "球": "⚽", "鋼琴": "🎹", "時鐘": "Clock", "電話": "📱",
+            "樹": "🌳", "花": "🌸", "草": "🌱", "眼睛": "👀", "耳朵": "👂",
+            "嘴巴": "👄", "手": "✋", "腳": "🦶", "跑步": "🏃‍♂️", "游泳": "🏊",
+            "睡覺": "😴", "高興": "😀", "生氣": "😡", "哭泣": "😭", "害怕": "😨",
+            "多": "📈", "大": "🐘", "小": "🐭", "上": "👆", "下": "👇"
+        };
+
         let db = [];
         let currentIndex = 0;
         let audioCtx = null;
@@ -151,7 +163,6 @@
             document.getElementById("welcome-overlay").style.opacity = "0";
             setTimeout(() => { document.getElementById("welcome-overlay").style.display = "none"; }, 500);
             playSchoolBell();
-            // 🎯 進校門預設直接自動播放第一個「核心單詞」
             setTimeout(() => { playWordAudioOnly(); }, 1200);
         }
 
@@ -192,8 +203,8 @@
                                 sentence_zh: cols[5], 
                                 sentence_vi: cols[6],
                                 graphic: cols[7],       
-                                word_audio: cols[8],     // 單詞音檔 (第 8 欄)
-                                sentence_audio: cols[9]  // 例句音檔 (第 9 欄)
+                                word_audio: cols[8],     
+                                sentence_audio: cols[9]  
                             });
                         }
                     }
@@ -208,20 +219,28 @@
             
             document.getElementById("lbl-id").textContent = current.id || "";
             
+            // 🎯 【大腦升級：字典對應 + SVG 雙軌偵測流】
             const graphicZone = document.getElementById("graphic-zone");
             graphicZone.innerHTML = ""; 
             
+            const keyword = current.word || "";
             let rawGraphic = current.graphic || "";
-            if (rawGraphic) {
-                if (rawGraphic.includes("<svg")) {
-                    graphicZone.innerHTML = `<div class="svg-container">${rawGraphic}</div>`;
-                } else {
-                    graphicZone.innerHTML = `<span class="emoji-style">${rawGraphic}</span>`;
-                }
+            
+            // 1. 優先權：如果試算表 H 欄貼了 SVG，直接用 SVG 畫出來
+            if (rawGraphic && rawGraphic.includes("<svg")) {
+                graphicZone.innerHTML = `<div class="svg-container">${rawGraphic}</div>`;
+            } 
+            // 2. 次優先權：如果試算表 H 欄填了手動 Emoji，直接秀它
+            else if (rawGraphic) {
+                graphicZone.innerHTML = `<span class="emoji-style">${rawGraphic}</span>`;
+            } 
+            // 3. 智慧權：如果試算表留白，全自動去查我們內建的「高頻字典對應表」！
+            else if (emojiDictionary[keyword]) {
+                graphicZone.innerHTML = `<span class="emoji-style">${emojiDictionary[keyword]}</span>`;
             }
+            // 4. 終極留白：如果都找不到，保持乾淨不破格
 
             const wordEl = document.getElementById("lbl-word");
-            const keyword = current.word || "";
             wordEl.textContent = keyword;
             if (keyword.length >= 4) { wordEl.classList.add("long-word"); } else { wordEl.classList.remove("long-word"); }
 
@@ -239,7 +258,6 @@
             document.getElementById("card-counter").textContent = `${currentIndex + 1} / ${db.length}`;
         }
 
-        // 🎯 按下下一字或上一字，切換卡片時「預設全自動只讀單詞」，建立第一體感
         function nextCard() { if (currentIndex < db.length - 1) { currentIndex++; renderCard(); playWordAudioOnly(); } }
         function prevCard() { if (currentIndex > 0) { currentIndex--; renderCard(); playWordAudioOnly(); } }
 
@@ -252,14 +270,12 @@
             } catch(e) {}
         }
 
-        // 🎯 🔴 專屬單詞朗讀（點擊紅色大單詞旁邊的喇叭）
         function playWordAudioOnly() {
             if(db.length > 0 && db[currentIndex].word_audio) {
                 playPackagedAudio(db[currentIndex].word_audio);
             }
         }
 
-        // 🎯 🔵 專屬例句朗讀（點擊下方藍色例句旁邊的喇叭）
         function playSentenceAudioOnly() {
             if(db.length > 0 && db[currentIndex].sentence_audio) {
                 playPackagedAudio(db[currentIndex].sentence_audio);
