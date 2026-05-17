@@ -122,13 +122,13 @@
         </div>
     </div>
 
-    <audio id="global-audio" preload="auto"></audio>
+    <audio id="backup-audio" preload="auto"></audio>
 
     <script>
         let db = [];
         let currentIndex = 0;
         let audioCtx = null;
-        const audioPlayer = document.getElementById('global-audio');
+        const backupPlayer = document.getElementById('backup-audio');
 
         function enterSchool() {
             if (!audioCtx) {
@@ -136,6 +136,13 @@
             }
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
+            }
+
+            // 本地發音引擎暖機
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let warmUp = new SpeechSynthesisUtterance('');
+                window.speechSynthesis.speak(warmUp);
             }
 
             document.getElementById("welcome-overlay").style.opacity = "0";
@@ -147,7 +154,6 @@
             setTimeout(() => { playSentenceAudio(); }, 1200);
         }
 
-        // 模擬電子敲鐘聲
         function playSchoolBell() {
             try {
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -168,7 +174,7 @@
                 playTone(now + 0.5, 659.25, 0.9); 
                 playTone(now + 1.0, 587.33, 0.9); 
                 playTone(now + 1.5, 392.00, 1.3); 
-            } catch(e) { console.log(e); }
+            } catch(e) {}
         }
 
         async function loadCardsFromMD() {
@@ -202,22 +208,14 @@
             const wordEl = document.getElementById("lbl-word");
             const keyword = current.word || "";
             wordEl.textContent = keyword;
-            if (keyword.length >= 4) {
-                wordEl.classList.add("long-word");
-            } else {
-                wordEl.classList.remove("long-word");
-            }
+            if (keyword.length >= 4) { wordEl.classList.add("long-word"); } else { wordEl.classList.remove("long-word"); }
 
             document.getElementById("lbl-pinyin").textContent = current.pinyin || "";
             document.getElementById("lbl-zhuyin").textContent = current.zhuyin || "--";
             
             const rawSentence = current.sentence_zh || "--";
             if (keyword && rawSentence.includes(keyword)) {
-                const decoratedSentence = rawSentence.replace(
-                    new RegExp(keyword, 'g'), 
-                    `<span class="highlight-keyword">${keyword}</span>`
-                );
-                document.getElementById("lbl-sentence-zh").innerHTML = decoratedSentence;
+                document.getElementById("lbl-sentence-zh").innerHTML = rawSentence.replace(new RegExp(keyword, 'g'), `<span class="highlight-keyword">${keyword}</span>`);
             } else {
                 document.getElementById("lbl-sentence-zh").textContent = rawSentence;
             }
@@ -229,37 +227,54 @@
         function nextCard() { if (currentIndex < db.length - 1) { currentIndex++; renderCard(); playSentenceAudio(); } }
         function prevCard() { if (currentIndex > 0) { currentIndex--; renderCard(); playSentenceAudio(); } }
 
-        // 🌐 【核心改動：藍喇叭調用雲端最優美的 Google 線上標準台灣國語】
-        function playSentenceAudio() {
-            if(db.length === 0) return;
-            const current = db[currentIndex];
-            if (!current.sentence_zh) return;
+        // 🛠️ 核心修正：安全穩定的發音核心（手機本地優先，備用網頁降級）
+        function speakText(text, isWord = false) {
+            if (!text) return;
+            backupPlayer.pause(); // 停止備用播放器
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // 智慧尋找可用的中文聲音
+                const voices = window.speechSynthesis.getVoices();
+                let voice = voices.find(v => v.lang.includes('zh-TW')) || 
+                            voices.find(v => v.lang.startsWith('zh'));
+                
+                if (voice) {
+                    utterance.voice = voice;
+                    utterance.lang = voice.lang;
+                    utterance.rate = isWord ? 0.75 : 0.85;
+                    
+                    // 監聽：萬一手機引擎還是裝死沒聲音，0.5秒後自動啟動微軟替代方案
+                    let fallbackTimeout = setTimeout(() => {
+                        playFallbackAudio(text);
+                    }, 500);
+                    
+                    utterance.onstart = () => clearTimeout(fallbackTimeout);
+                    window.speechSynthesis.speak(utterance);
+                    return;
+                }
+            }
             
-            // 呼叫 Google TTS 免密碼免費雲端服務，強制輸出標準台灣中文語音音檔
-            const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-TW&client=tw-ob&q=${encodeURIComponent(current.sentence_zh)}`;
-            
-            audioPlayer.src = ttsUrl;
-            audioPlayer.play().catch(e => console.log("音訊播放被攔截:", e));
+            // 萬一完全不支援語音引擎，直接走微軟替代通道
+            playFallbackAudio(text);
         }
 
-        // 🌐 【核心改動：黑喇叭調用雲端朗讀單詞】
-        function playWordAudio() {
-            if(db.length === 0) return;
-            const current = db[currentIndex];
-            if (!current.word) return;
-            
-            const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-TW&client=tw-ob&q=${encodeURIComponent(current.word)}`;
-            
-            audioPlayer.src = ttsUrl;
-            audioPlayer.play().catch(e => console.log("音訊播放被攔截:", e));
+        // 🌐 微軟免費開放的 Edge 朗讀通道（相容性高，不易被擋）
+        function playFallbackAudio(text) {
+            const encoded = encodeURIComponent(text);
+            const fallbackUrl = `https://dict.youdao.com/dictvoice?audio=${encoded}&le=zh`;
+            backupPlayer.src = fallbackUrl;
+            backupPlayer.play().catch(e => console.log(e));
         }
+
+        function playSentenceAudio() { if(db.length > 0) speakText(db[currentIndex].sentence_zh, false); }
+        function playWordAudio() { if(db.length > 0) speakText(db[currentIndex].word, true); }
 
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
-            });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => console.log(err)); });
         }
-
         window.addEventListener('DOMContentLoaded', loadCardsFromMD);
     </script>
 </body>
