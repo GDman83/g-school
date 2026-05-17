@@ -29,51 +29,47 @@
         .school-gate-icon { font-size: 80px; margin-bottom: 20px; animation: bounce 2s infinite; }
         .welcome-title { font-size: 28px; font-weight: 900; margin-bottom: 8px; letter-spacing: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
         .welcome-subtitle { font-size: 14px; opacity: 0.9; margin-bottom: 40px; }
-        .enter-btn { background: #FFFFFF; color: var(--google-blue); padding: 16px 40px; border-radius: 30px; font-size: 18px; font-weight: 700; border: none; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transition: transform 0.2s; }
+        .enter-btn { background: #FFFFFF; color: var(--google-blue); padding: 16px 40px; border-radius: 30px; font-size: 18px; font-weight: 700; border: none; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
         
         .app-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; border-bottom: 1px solid #E2E8F0; height: 65px; }
         .app-title { font-weight: 900; color: var(--google-blue); font-size: 20px; }
         .counter { background: #EEF2F6; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; color: var(--google-blue); font-family: 'Poppins', sans-serif; }
         
-        /* 卡片區域固定高度 - 絕不跳動 */
-        .card-area { flex: 1; padding: 16px 20px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
-        .study-card { background: white; border-radius: 32px; padding: 20px; box-shadow: 0 10px 30px rgba(15,23,42,0.04); display: flex; flex-direction: column; position: relative; height: 480px; box-sizing: border-box; }
+        /* 卡片骨架鎖死 */
+        .card-area { flex: 1; padding: 12px 20px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+        .study-card { background: white; border-radius: 32px; padding: 16px 20px; box-shadow: 0 10px 30px rgba(15,23,42,0.04); display: flex; flex-direction: column; position: relative; height: 520px; box-sizing: border-box; }
         
-        /* 雙喇叭直列操控面板區 */
-        .audio-control-panel { position: absolute; top: 20px; right: 20px; display: flex; flex-direction: column; gap: 12px; z-index: 10; }
-        .audio-btn { width: 42px; height: 42px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.1s; }
-        .audio-btn:active { transform: scale(0.9); }
-        
-        /* 黑喇叭放單詞 */
+        /* 右上角雙色喇叭 */
+        .audio-control-panel { position: absolute; top: 16px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 10; }
+        .audio-btn { width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .btn-audio-word { background: #0F172A; color: #FFFFFF; }
-        /* 藍喇叭放例句 */
         .btn-audio-sentence { background: var(--google-blue); color: #FFFFFF; }
         
-        /* 左上角數字編號 */
-        .card-id { position: absolute; top: 16px; left: 24px; font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #94A3B8; }
+        /* 左上角數字 */
+        .card-id { position: absolute; top: 16px; left: 24px; font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 900; color: #94A3B8; }
         
-        /* 單詞核心區 */
-        .word-main-zone { height: 170px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 25px; text-align: center; }
-        .pinyin-text { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 600; color: var(--google-red); margin-bottom: 4px; }
+        /* 單詞核心區縮小一點，騰出空間給圖片 */
+        .word-main-zone { height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px; text-align: center; }
+        .pinyin-text { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: var(--google-red); margin-bottom: 2px; }
+        .main-word { font-size: 42px; font-weight: 900; color: var(--text-main); letter-spacing: -1px; line-height: 1.1; white-space: nowrap; }
+        .main-word.long-word { font-size: 32px; } 
+        .zhuyin-text { font-size: 14px; font-weight: 700; color: var(--google-green); margin-top: 4px; min-height: 20px; }
         
-        /* 支援成語不跳動 */
-        .main-word { font-size: 48px; font-weight: 900; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; max-width: 100%; white-space: nowrap; }
-        .main-word.long-word { font-size: 36px; } 
-        .zhuyin-text { font-size: 15px; font-weight: 700; color: var(--google-green); margin-top: 6px; min-height: 22px; text-align: center; }
-        
-        .divider { height: 1px; background: #F1F5F9; margin-top: 15px; margin-bottom: 20px; }
+        /* 📸 新增：智慧實物圖片顯示區（高度死鎖，絕不跳動） */
+        .word-image-container { width: 100%; height: 130px; margin: 8px 0; border-radius: 16px; overflow: hidden; display: flex; justify-content: center; align-items: center; background: #F8FAFC; border: 1px solid #F1F5F9; position: relative; }
+        .word-image-container img { width: 100%; height: 100%; object-fit: cover; display: none; transition: opacity 0.3s ease; }
+        .word-image-placeholder { position: absolute; color: #CBD5E1; font-size: 24px; }
+
+        .divider { height: 1px; background: #F1F5F9; margin-top: 5px; margin-bottom: 12px; }
         
         /* 例句區 */
-        .sentence-section { display: flex; flex-direction: column; gap: 12px; height: 170px; justify-content: center; }
-        .target-sentence { font-size: 20px; font-weight: 700; color: var(--text-main); text-align: center; line-height: 1.5; padding: 0 10px; }
-        
-        /* 智慧反紅加粗專用樣式 */
+        .sentence-section { display: flex; flex-direction: column; gap: 10px; height: 150px; justify-content: center; }
+        .target-sentence { font-size: 19px; font-weight: 700; color: var(--text-main); text-align: center; line-height: 1.4; padding: 0 5px; }
         .highlight-keyword { color: var(--google-red) !important; font-weight: 900 !important; }
+        .translation-box { background: #F8FAFC; border-radius: 16px; padding: 10px 14px; border: 1px solid #F1F5F9; height: 68px; display: flex; align-items: center; justify-content: center; }
+        .translation-sentence { font-size: 13.5px; color: var(--text-muted); text-align: center; line-height: 1.4; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         
-        .translation-box { background: #F8FAFC; border-radius: 16px; padding: 12px 14px; border: 1px solid #F1F5F9; height: 72px; display: flex; align-items: center; justify-content: center; }
-        .translation-sentence { font-size: 14px; color: var(--text-muted); text-align: center; line-height: 1.4; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        
-        /* 底部按鈕高度鎖死 */
+        /* 底部導航 */
         .nav-bar { padding: 15px 24px 25px; display: flex; gap: 16px; background: white; border-top: 1px solid #E2E8F0; height: 95px; box-sizing: border-box; }
         .nav-btn { flex: 1; height: 54px; border-radius: 24px; font-size: 16px; font-weight: 700; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-prev { background: #F1F5F9; color: var(--text-main); }
@@ -88,7 +84,7 @@
         <div id="welcome-overlay">
             <div class="school-gate-icon">🏛️</div>
             <div class="welcome-title">G學園啟盟學堂</div>
-            <div class="welcome-subtitle">歡迎校長蒞臨視導</div>
+            <div class="welcome-subtitle">歡迎校長與寶貝蒞臨</div>
             <button class="enter-btn" onclick="enterSchool()">開啟學堂大門</button>
         </div>
 
@@ -111,6 +107,11 @@
                     <span id="lbl-pinyin" class="pinyin-text">--</span>
                     <div id="lbl-word" class="main-word">--</div>
                     <div id="lbl-zhuyin" class="zhuyin-text">--</div>
+                </div>
+                
+                <div class="word-image-container">
+                    <i class="fas fa-images word-image-placeholder" id="img-placeholder"></i>
+                    <img id="card-img" alt="單詞實物圖" onload="this.style.display='block'; document.getElementById('img-placeholder').style.display='none';">
                 </div>
                 
                 <div class="divider"></div>
@@ -137,37 +138,24 @@
 
         function enterSchool() {
             document.getElementById("welcome-overlay").style.opacity = "0";
-            setTimeout(() => {
-                document.getElementById("welcome-overlay").style.display = "none";
-            }, 500);
-            
+            setTimeout(() => { document.getElementById("welcome-overlay").style.display = "none"; }, 500);
             playSchoolBell();
-            // 進入學門後，默認直接播放清脆的例句音
             setTimeout(() => { playSentenceAudio(); }, 1200);
         }
 
-        // 經典四音節電子鐘聲
         function playSchoolBell() {
             try {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const playTone = (startTime, frequency, duration) => {
-                    let osc = audioCtx.createOscillator();
-                    let gain = audioCtx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(frequency, startTime);
-                    gain.gain.setValueAtTime(0.25, startTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start(startTime);
-                    osc.stop(startTime + duration);
+                    let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(frequency, startTime);
+                    gain.gain.setValueAtTime(0.25, startTime); gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+                    osc.connect(gain); gain.connect(audioCtx.destination);
+                    osc.start(startTime); osc.stop(startTime + duration);
                 };
                 let now = audioCtx.currentTime;
-                playTone(now, 523.25, 0.9);       
-                playTone(now + 0.5, 659.25, 0.9); 
-                playTone(now + 1.0, 587.33, 0.9); 
-                playTone(now + 1.5, 392.00, 1.3); 
-            } catch(e) { console.log(e); }
+                playTone(now, 523.25, 0.9); playTone(now + 0.5, 659.25, 0.9); playTone(now + 1.0, 587.33, 0.9); playTone(now + 1.5, 392.00, 1.3);
+            } catch(e) {}
         }
 
         async function loadCardsFromMD() {
@@ -187,7 +175,6 @@
                         }
                     }
                 });
-
                 if(tempDb.length > 0) { db = tempDb; renderCard(); }
             } catch (error) { console.error(error); }
         }
@@ -195,30 +182,32 @@
         function renderCard() {
             if(db.length === 0) return;
             const current = db[currentIndex];
+            const keyword = current.word || "";
             
             document.getElementById("lbl-id").textContent = current.id || "";
             
-            // 處理成語長度
+            // 處理單詞字體
             const wordEl = document.getElementById("lbl-word");
-            const keyword = current.word || "";
             wordEl.textContent = keyword;
-            if (keyword.length >= 4) {
-                wordEl.classList.add("long-word");
-            } else {
-                wordEl.classList.remove("long-word");
-            }
+            if (keyword.length >= 4) { wordEl.classList.add("long-word"); } else { wordEl.classList.remove("long-word"); }
 
             document.getElementById("lbl-pinyin").textContent = current.pinyin || "";
             document.getElementById("lbl-zhuyin").textContent = current.zhuyin || "--";
             
-            // 【核心智慧優化】：在例句中自動尋找單詞，並反紅加粗
+            // 📸 【智慧配圖核心】：全自動精準調用高品質真實實物圖片
+            const imgEl = document.getElementById("card-img");
+            const placeholderEl = document.getElementById("img-placeholder");
+            imgEl.style.display = 'none';
+            placeholderEl.style.display = 'block';
+            // 使用免版權、無廣告的高清自然/物件真實圖庫 API
+            imgEl.src = `https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&w=400&q=80&sig=${currentIndex}`; 
+            // 智慧優化：直接根據單詞的關鍵字去 Unsplash 抓取最真實的實物圖
+            imgEl.src = `https://source.unsplash.com/featured/400x300/?${encodeURIComponent(keyword)},real,object`;
+
+            // 例句智慧反紅
             const rawSentence = current.sentence_zh || "--";
             if (keyword && rawSentence.includes(keyword)) {
-                const decoratedSentence = rawSentence.replace(
-                    new RegExp(keyword, 'g'), 
-                    `<span class="highlight-keyword">${keyword}</span>`
-                );
-                document.getElementById("lbl-sentence-zh").innerHTML = decoratedSentence;
+                document.getElementById("lbl-sentence-zh").innerHTML = rawSentence.replace(new RegExp(keyword, 'g'), `<span class="highlight-keyword">${keyword}</span>`);
             } else {
                 document.getElementById("lbl-sentence-zh").textContent = rawSentence;
             }
@@ -230,38 +219,25 @@
         function nextCard() { if (currentIndex < db.length - 1) { currentIndex++; renderCard(); playSentenceAudio(); } }
         function prevCard() { if (currentIndex > 0) { currentIndex--; renderCard(); playSentenceAudio(); } }
 
-        // 藍喇叭（或換字時）：專門朗讀例句
         function playSentenceAudio() {
             if(db.length === 0 || !('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
-            const current = db[currentIndex];
-            if (!current.sentence_zh) return;
-            
+            const current = db[currentIndex]; if (!current.sentence_zh) return;
             const utterance = new SpeechSynthesisUtterance(current.sentence_zh);
-            utterance.lang = 'zh-TW';
-            utterance.rate = 0.85;
-            window.speechSynthesis.speak(utterance);
+            utterance.lang = 'zh-TW'; utterance.rate = 0.85; window.speechSynthesis.speak(utterance);
         }
 
-        // 黑喇叭：單獨精準慢速朗讀單詞
         function playWordAudio() {
             if(db.length === 0 || !('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
-            const current = db[currentIndex];
-            if (!current.word) return;
-            
+            const current = db[currentIndex]; if (!current.word) return;
             const utterance = new SpeechSynthesisUtterance(current.word);
-            utterance.lang = 'zh-TW';
-            utterance.rate = 0.75; 
-            window.speechSynthesis.speak(utterance);
+            utterance.lang = 'zh-TW'; utterance.rate = 0.75; window.speechSynthesis.speak(utterance);
         }
 
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
-            });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => console.log(err)); });
         }
-
         window.addEventListener('DOMContentLoaded', loadCardsFromMD);
     </script>
 </body>
