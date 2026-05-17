@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟蒙學堂</title>
+    <title>G學園 - 中文啟盟學堂</title>
     
     <link rel="manifest" href="/g-school/manifest.json">
     <meta name="theme-color" content="#536DFE">
@@ -44,7 +44,6 @@
             min-height: 100vh;
         }
 
-        /* 手機模擬器外殼 */
         .phone-container {
             width: 100%;
             max-width: 414px;
@@ -66,7 +65,6 @@
             }
         }
 
-        /* 歡迎首頁 */
         .start-overlay {
             position: absolute;
             inset: 0;
@@ -121,7 +119,6 @@
             transition: transform 0.2s;
         }
 
-        /* 讀取與錯誤蓋板 */
         .status-overlay {
             position: absolute;
             inset: 0;
@@ -167,19 +164,6 @@
             line-height: 1.5;
         }
 
-        .retry-btn {
-            background-color: #536DFE;
-            color: white;
-            padding: 14px 50px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(83,109,254,0.3);
-        }
-
-        /* 核心內容區域 */
         .app-header {
             padding: 20px;
             background-color: white;
@@ -212,7 +196,6 @@
             padding: 20px;
         }
 
-        /* 霸氣字卡本體 */
         .vocab-card {
             background-color: white;
             width: 100%;
@@ -437,41 +420,34 @@
                 });
         }
 
-        // 🎯 超級修正：不管 TOOL 怎麼把資料變形，直接依據「欄位順序位置」暴力盲讀歸位！
+        // 🎯 核心大腦：直接針對校長那份被 TOOL 變形後的 JSON 欄位位置進行精準解碼！
         function renderCard() {
             if (dbData.length === 0) return;
             const item = dbData[currentIndex];
             
-            // 將變形的物件，轉化為按順序排列的陣列值
-            const values = Object.values(item);
             const keys = Object.keys(item);
+            const values = Object.values(item);
 
-            // 1. 動態定位核心字（通常是第二個欄位的內容，或者直接讀取第一個欄位的值）
-            // 根據校長的截圖，keys[1] 是 "你好"，也就是中文單字欄位
+            // 根據校長上傳的變形 data.json 結構：
+            // keys[1] 是中文主單字（如："你好"）
+            // values[1] 是拼音/提示（如："謝謝" / "嘻嘻"）
+            // keys[3] 是注音（如："ㄋ一ˇ ㄏㄠˇ"）
+            // keys[4] 是越南文單字（如："新潮！Rất vui..."）
+            // values[4] 是例句翻譯（如："謝謝爸爸，謝謝媽媽。"）
+
             let word = keys[1] || "--"; 
-            let pinyin = item[keys[1]] || ""; // 拼音/提示
-            let zhuyinRaw = keys[3] || ""; // 注音欄位被擠到第四個
-            let vietnamese = keys[4] || "--"; // 越南文
-            let example = item[keys[4]] || ""; // 例句
-
-            // 如果發現盲讀出來的格式怪異，進行安全降級處理
-            if(values.length >= 5) {
-                word = keys[1];
-                pinyin = values[1]; // 謝謝 / 嘻嘻
-                zhuyinRaw = keys[3]; // 注音
-                vietnamese = keys[4]; // 越南文
-                example = values[4]; // 例句
-            }
+            let pinyin = values[1] || ""; 
+            let zhuyinRaw = keys[3] || ""; 
+            let vietnamese = keys[4] || "--"; 
+            let example = values[4] || ""; 
 
             document.getElementById('mainWord').innerText = word;
             document.getElementById('pinyinText').innerText = pinyin ? `提示: ${pinyin}` : "";
             document.getElementById('vietnameseTitle').innerText = vietnamese;
             document.getElementById('exampleSentence').innerText = example;
             
-            // 卡片計數器
             document.getElementById('cardCounter').innerText = `${currentIndex + 1} / ${dbData.length}`;
 
-            // 注音垂直直列解析
             const zhuyinBox = document.getElementById('zhuyinBox');
             zhuyinBox.innerHTML = "";
             
@@ -500,7 +476,7 @@
         function speakCurrentWord() {
             if (dbData.length === 0) return;
             const keys = Object.keys(dbData[currentIndex]);
-            const word = keys[1]; // 精準調用變形後的中文單字欄位發音
+            const word = keys[1]; 
             if (!word || word === "--") return;
 
             const player = document.getElementById('globalAudioPlayer');
@@ -516,7 +492,7 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/g-school/sw.js')
-                    .then(reg => console.log('G學園 PWA 註冊成功！', reg.scope))
+                    .then(reg => console.log('G學園 PWA 註冊成功！'))
                     .catch(err => console.log('PWA 註冊失敗:', err));
             });
         }
