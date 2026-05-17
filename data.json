@@ -1,6 +1,15 @@
 [
     {
         "id": 1,
+        "word": "編號",
+        "pinyin": "核心詞彙",
+        "zhuyin": "拼音 / 提示",
+        "hint": "生活應用例句（點擊可朗讀）",
+        "sentence_zh": "注音",
+        "sentence_vi": "生活應用例句（點擊可朗讀）"
+    },
+    {
+        "id": 2,
         "word": "1",
         "pinyin": "你好",
         "zhuyin": "nǐ hǎo",
@@ -9,7 +18,7 @@
         "sentence_vi": "你好！很高興見到你。"
     },
     {
-        "id": 2,
+        "id": 3,
         "word": "2",
         "pinyin": "謝謝",
         "zhuyin": "xiè xie",
@@ -18,7 +27,7 @@
         "sentence_vi": "謝謝爸爸，謝謝媽媽。"
     },
     {
-        "id": 3,
+        "id": 4,
         "word": "3",
         "pinyin": "再見",
         "zhuyin": "zài jiàn",
@@ -27,7 +36,7 @@
         "sentence_vi": "老師再見，明天見。"
     },
     {
-        "id": 4,
+        "id": 5,
         "word": "4",
         "pinyin": "早安",
         "zhuyin": "zǎo ān",
@@ -36,7 +45,7 @@
         "sentence_vi": "早安，太陽公公起床了。"
     },
     {
-        "id": 5,
+        "id": 6,
         "word": "5",
         "pinyin": "晚安",
         "zhuyin": "wǎn ān",
@@ -45,7 +54,7 @@
         "sentence_vi": "晚安，祝你有個好夢。"
     },
     {
-        "id": 6,
+        "id": 7,
         "word": "6",
         "pinyin": "請",
         "zhuyin": "qǐng",
@@ -54,7 +63,7 @@
         "sentence_vi": "請喝水，請坐下。"
     },
     {
-        "id": 7,
+        "id": 8,
         "word": "7",
         "pinyin": "對不起",
         "zhuyin": "duì bù qǐ",
@@ -63,7 +72,7 @@
         "sentence_vi": "對不起，我不是故意的。"
     },
     {
-        "id": 8,
+        "id": 9,
         "word": "8",
         "pinyin": "沒關係",
         "zhuyin": "méi guān xi",
@@ -72,7 +81,7 @@
         "sentence_vi": "沒關係，下次注意就好。"
     },
     {
-        "id": 9,
+        "id": 10,
         "word": "9",
         "pinyin": "高興",
         "zhuyin": "gāo xìng",
@@ -81,7 +90,7 @@
         "sentence_vi": "今天去公園玩，我很高興。"
     },
     {
-        "id": 10,
+        "id": 11,
         "word": "10",
         "pinyin": "喜歡",
         "zhuyin": "xǐ huan",
@@ -90,7 +99,7 @@
         "sentence_vi": "我喜歡吃蘋果，也喜歡看書。"
     },
     {
-        "id": 11,
+        "id": 12,
         "word": "11",
         "pinyin": "家",
         "zhuyin": "jiā",
@@ -99,7 +108,7 @@
         "sentence_vi": "這裡是我溫暖的家。"
     },
     {
-        "id": 12,
+        "id": 13,
         "word": "12",
         "pinyin": "客廳",
         "zhuyin": "kè tīng",
@@ -108,7 +117,7 @@
         "sentence_vi": "我們在客廳裡看電視。"
     },
     {
-        "id": 13,
+        "id": 14,
         "word": "13",
         "pinyin": "房間",
         "zhuyin": "fáng jiān",
@@ -117,7 +126,7 @@
         "sentence_vi": "這是我的房間，裡面有床。"
     },
     {
-        "id": 14,
+        "id": 15,
         "word": "14",
         "pinyin": "廚房",
         "zhuyin": "chú fáng",
@@ -126,7 +135,7 @@
         "sentence_vi": "媽媽在廚房裡煮香噴噴的飯。"
     },
     {
-        "id": 15,
+        "id": 16,
         "word": "15",
         "pinyin": "浴室",
         "zhuyin": "yù shì",
@@ -135,7 +144,7 @@
         "sentence_vi": "我去浴室洗洗澡，刷刷牙。"
     },
     {
-        "id": 16,
+        "id": 17,
         "word": "16",
         "pinyin": "門",
         "zhuyin": "mén",
@@ -144,7 +153,7 @@
         "sentence_vi": "進門要記得輕輕關門。"
     },
     {
-        "id": 17,
+        "id": 18,
         "word": "17",
         "pinyin": "窗戶",
         "zhuyin": "chuāng hu",
@@ -153,7 +162,7 @@
         "sentence_vi": "打開窗戶，讓風吹進來。"
     },
     {
-        "id": 18,
+        "id": 19,
         "word": "18",
         "pinyin": "桌子",
         "zhuyin": "zhuō zi",
@@ -162,7 +171,7 @@
         "sentence_vi": "書本和玩具要放在桌子上。"
     },
     {
-        "id": 19,
+        "id": 20,
         "word": "19",
         "pinyin": "椅子",
         "zhuyin": "yǐ zi",
@@ -171,7 +180,7 @@
         "sentence_vi": "請坐在椅子上認真寫字。"
     },
     {
-        "id": 20,
+        "id": 21,
         "word": "20",
         "pinyin": "床",
         "zhuyin": "chuáng",
@@ -180,7 +189,7 @@
         "sentence_vi": "躺在床上睡覺真舒服。"
     },
     {
-        "id": 21,
+        "id": 22,
         "word": "21",
         "pinyin": "電燈",
         "zhuyin": "diàn dēng",
@@ -189,7 +198,7 @@
         "sentence_vi": "離開房間要記得關電燈。"
     },
     {
-        "id": 22,
+        "id": 23,
         "word": "22",
         "pinyin": "樓梯",
         "zhuyin": "lóu tī",
@@ -198,7 +207,7 @@
         "sentence_vi": "走樓梯要慢慢走，不可以用跑的。"
     },
     {
-        "id": 23,
+        "id": 24,
         "word": "23",
         "pinyin": "花園",
         "zhuyin": "huā yuán",
@@ -207,7 +216,7 @@
         "sentence_vi": "花園裡開了好多漂亮的花。"
     },
     {
-        "id": 24,
+        "id": 25,
         "word": "24",
         "pinyin": "大樓",
         "zhuyin": "dà lóu",
@@ -216,7 +225,7 @@
         "sentence_vi": "城市裡有好多高高的大樓。"
     },
     {
-        "id": 25,
+        "id": 26,
         "word": "25",
         "pinyin": "房子",
         "zhuyin": "fáng zi",
@@ -225,7 +234,7 @@
         "sentence_vi": "這是一棟紅色屋頂的房子。"
     },
     {
-        "id": 26,
+        "id": 27,
         "word": "26",
         "pinyin": "碗",
         "zhuyin": "wǎn",
@@ -234,7 +243,7 @@
         "sentence_vi": "吃飯要用小碗端好。"
     },
     {
-        "id": 27,
+        "id": 28,
         "word": "27",
         "pinyin": "筷子",
         "zhuyin": "kuài zi",
@@ -243,7 +252,7 @@
         "sentence_vi": "我正在學習用筷子夾菜。"
     },
     {
-        "id": 28,
+        "id": 29,
         "word": "28",
         "pinyin": "湯匙",
         "zhuyin": "tāng chí",
@@ -252,7 +261,7 @@
         "sentence_vi": "用湯匙喝湯才不會流出來。"
     },
     {
-        "id": 29,
+        "id": 30,
         "word": "29",
         "pinyin": "杯子",
         "zhuyin": "bēi zi",
@@ -261,7 +270,7 @@
         "sentence_vi": "杯子裡裝滿了溫開水。"
     },
     {
-        "id": 30,
+        "id": 31,
         "word": "30",
         "pinyin": "電視",
         "zhuyin": "diàn shì",
@@ -270,7 +279,7 @@
         "sentence_vi": "看電視要保持適當的距離。"
     },
     {
-        "id": 31,
+        "id": 32,
         "word": "31",
         "pinyin": "冰箱",
         "zhuyin": "bīng xiāng",
@@ -279,7 +288,7 @@
         "sentence_vi": "冰箱裡有新鮮的冰牛奶。"
     },
     {
-        "id": 32,
+        "id": 33,
         "word": "32",
         "pinyin": "冷氣",
         "zhuyin": "lěng qì",
@@ -288,7 +297,7 @@
         "sentence_vi": "天氣好熱，打開冷氣涼爽多了。"
     },
     {
-        "id": 33,
+        "id": 34,
         "word": "33",
         "pinyin": "毛巾",
         "zhuyin": "máo jǐn",
@@ -297,7 +306,7 @@
         "sentence_vi": "洗完臉要用乾淨的毛巾擦乾。"
     },
     {
-        "id": 34,
+        "id": 35,
         "word": "34",
         "pinyin": "牙刷",
         "zhuyin": "yá shuā",
@@ -306,7 +315,7 @@
         "sentence_vi": "早晚用牙刷把牙齒刷乾淨。"
     },
     {
-        "id": 35,
+        "id": 36,
         "word": "35",
         "pinyin": "書包",
         "zhuyin": "shū bāo",
@@ -315,7 +324,7 @@
         "sentence_vi": "我會自己整理上學的書包。"
     },
     {
-        "id": 36,
+        "id": 37,
         "word": "36",
         "pinyin": "鉛筆",
         "zhuyin": "qiān bǐ",
@@ -324,7 +333,7 @@
         "sentence_vi": "用鉛筆在紙上畫一個大圓圈。"
     },
     {
-        "id": 37,
+        "id": 38,
         "word": "37",
         "pinyin": "橡皮擦",
         "zhuyin": "xiàng pí cā",
@@ -333,7 +342,7 @@
         "sentence_vi": "寫錯字可以用橡皮擦擦掉。"
     },
     {
-        "id": 38,
+        "id": 39,
         "word": "38",
         "pinyin": "剪刀",
         "zhuyin": "jiǎn dāo",
@@ -342,7 +351,7 @@
         "sentence_vi": "使用剪刀要非常小心安全。"
     },
     {
-        "id": 39,
+        "id": 40,
         "word": "39",
         "pinyin": "手機",
         "zhuyin": "shǒu jī",
@@ -351,7 +360,7 @@
         "sentence_vi": "爸爸用手機和爺爺打電話。"
     },
     {
-        "id": 40,
+        "id": 41,
         "word": "40",
         "pinyin": "電腦",
         "zhuyin": "diàn nǎo",
@@ -360,7 +369,7 @@
         "sentence_vi": "我用電腦看 G學園 的課程。"
     },
     {
-        "id": 41,
+        "id": 42,
         "word": "41",
         "pinyin": "汽車",
         "zhuyin": "qì chē",
@@ -369,7 +378,7 @@
         "sentence_vi": "爸爸開著藍色的汽車帶我出門。"
     },
     {
-        "id": 42,
+        "id": 43,
         "word": "42",
         "pinyin": "公車",
         "zhuyin": "gōng chē",
@@ -378,7 +387,7 @@
         "sentence_vi": "上學可以搭大大的公車。"
     },
     {
-        "id": 43,
+        "id": 44,
         "word": "43",
         "pinyin": "火車",
         "zhuyin": "huǒ chē",
@@ -387,7 +396,7 @@
         "sentence_vi": "火車在鐵軌上嘟嘟嘟地跑。"
     },
     {
-        "id": 44,
+        "id": 45,
         "word": "44",
         "pinyin": "高鐵",
         "zhuyin": "gāo tiě",
@@ -396,7 +405,7 @@
         "sentence_vi": "高鐵的速度非常快。"
     },
     {
-        "id": 45,
+        "id": 46,
         "word": "45",
         "pinyin": "飛機",
         "zhuyin": "fēi jī",
@@ -405,7 +414,7 @@
         "sentence_vi": "飛機在藍天和白雲之間飛翔。"
     },
     {
-        "id": 46,
+        "id": 47,
         "word": "46",
         "pinyin": "自行車",
         "zhuyin": "zì xíng chē",
@@ -414,7 +423,7 @@
         "sentence_vi": "我學會騎兩輪的自行車了。"
     },
     {
-        "id": 47,
+        "id": 48,
         "word": "47",
         "pinyin": "摩托車",
         "zhuyin": "mó tuō chē",
@@ -423,7 +432,7 @@
         "sentence_vi": "騎摩托車一定要戴安全帽。"
     },
     {
-        "id": 48,
+        "id": 49,
         "word": "48",
         "pinyin": "船",
         "zhuyin": "chuán",
@@ -432,7 +441,7 @@
         "sentence_vi": "大船在海面上慢慢地航行。"
     },
     {
-        "id": 49,
+        "id": 50,
         "word": "49",
         "pinyin": "捷運",
         "zhuyin": "jié yùn",
@@ -441,7 +450,7 @@
         "sentence_vi": "搭捷運上學既方便又準時。"
     },
     {
-        "id": 50,
+        "id": 51,
         "word": "50",
         "pinyin": "卡車",
         "zhuyin": "kǎ chē",
@@ -450,7 +459,7 @@
         "sentence_vi": "大卡車載著好多的貨物。"
     },
     {
-        "id": 51,
+        "id": 52,
         "word": "51",
         "pinyin": "救護車",
         "zhuyin": "jiù hù chē",
@@ -459,7 +468,7 @@
         "sentence_vi": "聽見救護車的聲音要趕快讓路。"
     },
     {
-        "id": 52,
+        "id": 53,
         "word": "52",
         "pinyin": "警車",
         "zhuyin": "jǐng chē",
@@ -468,7 +477,7 @@
         "sentence_vi": "警察叔叔開著警車保護大家。"
     },
     {
-        "id": 53,
+        "id": 54,
         "word": "53",
         "pinyin": "消防車",
         "zhuyin": "xiāo fáng chē",
@@ -477,7 +486,7 @@
         "sentence_vi": "紅色的消防車去幫忙滅火。"
     },
     {
-        "id": 54,
+        "id": 55,
         "word": "54",
         "pinyin": "馬路",
         "zhuyin": "mǎ lù",
@@ -486,7 +495,7 @@
         "sentence_vi": "過馬路要牽好大人的手。"
     },
     {
-        "id": 55,
+        "id": 56,
         "word": "55",
         "pinyin": "紅綠燈",
         "zhuyin": "hóng lǜ dēng",
@@ -495,7 +504,7 @@
         "sentence_vi": "紅燈停，綠燈行，黃燈要注意。"
     },
     {
-        "id": 56,
+        "id": 57,
         "word": "56",
         "pinyin": "衣服",
         "zhuyin": "yī fu",
@@ -504,7 +513,7 @@
         "sentence_vi": "我會自己穿好乾淨的衣服。"
     },
     {
-        "id": 57,
+        "id": 58,
         "word": "57",
         "pinyin": "褲子",
         "zhuyin": "kù zi",
@@ -513,7 +522,7 @@
         "sentence_vi": "這條藍色牛仔褲很好看。"
     },
     {
-        "id": 58,
+        "id": 59,
         "word": "58",
         "pinyin": "鞋子",
         "zhuyin": "xié zi",
@@ -522,7 +531,7 @@
         "sentence_vi": "出門前要把鞋子穿好。"
     },
     {
-        "id": 59,
+        "id": 60,
         "word": "59",
         "pinyin": "襪子",
         "zhuyin": "wà zi",
@@ -531,7 +540,7 @@
         "sentence_vi": "穿鞋子之前要先穿襪子。"
     },
     {
-        "id": 60,
+        "id": 61,
         "word": "60",
         "pinyin": "帽子",
         "zhuyin": "mào zi",
@@ -540,7 +549,7 @@
         "sentence_vi": "太陽很大，戴上帽子防曬。"
     },
     {
-        "id": 61,
+        "id": 62,
         "word": "61",
         "pinyin": "外套",
         "zhuyin": "wài tào",
@@ -549,7 +558,7 @@
         "sentence_vi": "外面天氣變冷了，快穿上外套。"
     },
     {
-        "id": 62,
+        "id": 63,
         "word": "62",
         "pinyin": "裙子",
         "zhuyin": "qún zi",
@@ -558,7 +567,7 @@
         "sentence_vi": "妹妹穿著一條漂亮的粉紅色裙子。"
     },
     {
-        "id": 63,
+        "id": 64,
         "word": "63",
         "pinyin": "口袋",
         "zhuyin": "kǒu dài",
@@ -567,7 +576,7 @@
         "sentence_vi": "口袋裡裝著我的小手帕。"
     },
     {
-        "id": 64,
+        "id": 65,
         "word": "64",
         "pinyin": "雨衣",
         "zhuyin": "yǔ yī",
@@ -576,7 +585,7 @@
         "sentence_vi": "下雨天出門要穿雨衣。"
     },
     {
-        "id": 65,
+        "id": 66,
         "word": "65",
         "pinyin": "手套",
         "zhuyin": "shǒu tào",
@@ -585,7 +594,7 @@
         "sentence_vi": "冬天戴上手套，手就不冷了。"
     },
     {
-        "id": 66,
+        "id": 67,
         "word": "66",
         "pinyin": "跑步",
         "zhuyin": "pǎo bù",
@@ -594,7 +603,7 @@
         "sentence_vi": "我們在操場上快樂地跑步。"
     },
     {
-        "id": 67,
+        "id": 68,
         "word": "67",
         "pinyin": "游泳",
         "zhuyin": "yóu yǒng",
@@ -603,7 +612,7 @@
         "sentence_vi": "夏天去游泳池游泳最涼快了。"
     },
     {
-        "id": 68,
+        "id": 69,
         "word": "68",
         "pinyin": "跳繩",
         "zhuyin": "tiào shéng",
@@ -612,7 +621,7 @@
         "sentence_vi": "跳繩可以讓我長得更高。"
     },
     {
-        "id": 69,
+        "id": 70,
         "word": "69",
         "pinyin": "踢足球",
         "zhuyin": "tī zú qiú",
@@ -621,7 +630,7 @@
         "sentence_vi": "我和同學在草地上踢足球。"
     },
     {
-        "id": 70,
+        "id": 71,
         "word": "70",
         "pinyin": "打籃球",
         "zhuyin": "dǎ lán qiú",
@@ -630,7 +639,7 @@
         "sentence_vi": "哥哥投籃的技術非常厲害。"
     },
     {
-        "id": 71,
+        "id": 72,
         "word": "71",
         "pinyin": "畫畫",
         "zhuyin": "huà huà",
@@ -639,7 +648,7 @@
         "sentence_vi": "我用彩色筆在紙上畫畫。"
     },
     {
-        "id": 72,
+        "id": 73,
         "word": "72",
         "pinyin": "彈鋼琴",
         "zhuyin": "tán gāng qín",
@@ -648,7 +657,7 @@
         "sentence_vi": "漂亮的鋼琴聲真好聽。"
     },
     {
-        "id": 73,
+        "id": 74,
         "word": "73",
         "pinyin": "唱歌",
         "zhuyin": "chàng gē",
@@ -657,7 +666,7 @@
         "sentence_vi": "音樂課時，我們一起大聲唱歌。"
     },
     {
-        "id": 74,
+        "id": 75,
         "word": "74",
         "pinyin": "看書",
         "zhuyin": "kàn shū",
@@ -666,7 +675,7 @@
         "sentence_vi": "睡前看書可以增加好多知識。"
     },
     {
-        "id": 75,
+        "id": 76,
         "word": "75",
         "pinyin": "寫字",
         "zhuyin": "xiě zì",
@@ -675,7 +684,7 @@
         "sentence_vi": "寫字姿勢要端正。"
     },
     {
-        "id": 76,
+        "id": 77,
         "word": "76",
         "pinyin": "遊戲",
         "zhuyin": "yóu xì",
@@ -684,7 +693,7 @@
         "sentence_vi": "下課時間我們在操場玩遊戲。"
     },
     {
-        "id": 77,
+        "id": 78,
         "word": "77",
         "pinyin": "露營",
         "zhuyin": "lù yíng",
@@ -693,7 +702,7 @@
         "sentence_vi": "週末全家人一起去山上露營。"
     },
     {
-        "id": 78,
+        "id": 79,
         "word": "78",
         "pinyin": "爬山",
         "zhuyin": "pá shān",
@@ -702,7 +711,7 @@
         "sentence_vi": "爬到山頂可以看到美麗的風景。"
     },
     {
-        "id": 79,
+        "id": 80,
         "word": "79",
         "pinyin": "騎車",
         "zhuyin": "qí chē",
@@ -711,7 +720,7 @@
         "sentence_vi": "下午在公園裡騎自行車很舒服。"
     },
     {
-        "id": 80,
+        "id": 81,
         "word": "80",
         "pinyin": "散步",
         "zhuyin": "sàn bù",
@@ -720,7 +729,7 @@
         "sentence_vi": "吃完晚餐，和爸爸媽媽去散步。"
     },
     {
-        "id": 81,
+        "id": 82,
         "word": "81",
         "pinyin": "山",
         "zhuyin": "shān",
@@ -729,7 +738,7 @@
         "sentence_vi": "遠處有一座高高的大山。"
     },
     {
-        "id": 82,
+        "id": 83,
         "word": "82",
         "pinyin": "水",
         "zhuyin": "shuǐ",
@@ -738,7 +747,7 @@
         "sentence_vi": "口渴了要多喝純淨的水。"
     },
     {
-        "id": 83,
+        "id": 84,
         "word": "83",
         "pinyin": "日",
         "zhuyin": "rì",
@@ -747,7 +756,7 @@
         "sentence_vi": "太陽也叫做「日」，散發著光芒。"
     },
     {
-        "id": 84,
+        "id": 85,
         "word": "84",
         "pinyin": "月",
         "zhuyin": "yuè",
@@ -756,7 +765,7 @@
         "sentence_vi": "月亮也叫做「月」，晚上會發光。"
     },
     {
-        "id": 85,
+        "id": 86,
         "word": "85",
         "pinyin": "天",
         "zhuyin": "tiān",
@@ -765,7 +774,7 @@
         "sentence_vi": "天空上有小鳥在自由飛翔。"
     },
     {
-        "id": 86,
+        "id": 87,
         "word": "86",
         "pinyin": "地",
         "zhuyin": "dì",
@@ -774,7 +783,7 @@
         "sentence_vi": "土地上生長著綠色的青草。"
     },
     {
-        "id": 87,
+        "id": 88,
         "word": "87",
         "pinyin": "風",
         "zhuyin": "fēng",
@@ -783,7 +792,7 @@
         "sentence_vi": "微風吹過，樹葉發出沙沙的聲音。"
     },
     {
-        "id": 88,
+        "id": 89,
         "word": "88",
         "pinyin": "雨",
         "zhuyin": "yǔ",
@@ -792,7 +801,7 @@
         "sentence_vi": "下雨了，出門要記得帶雨傘。"
     },
     {
-        "id": 89,
+        "id": 90,
         "word": "89",
         "pinyin": "雲",
         "zhuyin": "yún",
@@ -801,7 +810,7 @@
         "sentence_vi": "天上的白雲像一朵朵棉花糖。"
     },
     {
-        "id": 90,
+        "id": 91,
         "word": "90",
         "pinyin": "火",
         "zhuyin": "huǒ",
@@ -810,7 +819,7 @@
         "sentence_vi": "煮飯時的火溫度很高，不能亂碰。"
     },
     {
-        "id": 91,
+        "id": 92,
         "word": "91",
         "pinyin": "人",
         "zhuyin": "rén",
@@ -819,7 +828,7 @@
         "sentence_vi": "每個人都要做一個善良的好人。"
     },
     {
-        "id": 92,
+        "id": 93,
         "word": "92",
         "pinyin": "手",
         "zhuyin": "shǒu",
@@ -828,7 +837,7 @@
         "sentence_vi": "吃飯前要用肥皂把手洗乾淨。"
     },
     {
-        "id": 93,
+        "id": 94,
         "word": "93",
         "pinyin": "足",
         "zhuyin": "zú",
@@ -837,7 +846,7 @@
         "sentence_vi": "「足」就是腳，帶我們走遍世界。"
     },
     {
-        "id": 94,
+        "id": 95,
         "word": "94",
         "pinyin": "口",
         "zhuyin": "kǒu",
@@ -846,7 +855,7 @@
         "sentence_vi": "我們用口說話，也用口吃東西。"
     },
     {
-        "id": 95,
+        "id": 96,
         "word": "95",
         "pinyin": "耳",
         "zhuyin": "ěr",
@@ -855,7 +864,7 @@
         "sentence_vi": "耳朵要用來專心聽老師說話。"
     },
     {
-        "id": 96,
+        "id": 97,
         "word": "96",
         "pinyin": "目",
         "zhuyin": "mù",
@@ -864,7 +873,7 @@
         "sentence_vi": "眼睛也叫「目」，用來看世界。"
     },
     {
-        "id": 97,
+        "id": 98,
         "word": "97",
         "pinyin": "大",
         "zhuyin": "dà",
@@ -873,7 +882,7 @@
         "sentence_vi": "大象的身體非常大。"
     },
     {
-        "id": 98,
+        "id": 99,
         "word": "98",
         "pinyin": "小",
         "zhuyin": "xiǎo",
@@ -882,7 +891,7 @@
         "sentence_vi": "螞蟻的身體非常小。"
     },
     {
-        "id": 99,
+        "id": 100,
         "word": "99",
         "pinyin": "多",
         "zhuyin": "duō",
@@ -891,7 +900,7 @@
         "sentence_vi": "天上有好多好多顆星星。"
     },
     {
-        "id": 100,
+        "id": 101,
         "word": "100",
         "pinyin": "少",
         "zhuyin": "shǎo",
