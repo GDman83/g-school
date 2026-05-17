@@ -1,794 +1,902 @@
 [
-  {
-    "1": "2",
-    "你好": "謝謝",
-    "nǐ hǎo": "xiè xie",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄒㄧㄝˋ ㄒㄧㄝ˙",
-    "你好！很高興見到你。": "謝謝爸爸，謝謝媽媽。",
-    "Xin chào! Rất vui được gặp bạn.": "Cảm ơn bố, cảm ơn mẹ."
-  },
-  {
-    "1": "3",
-    "你好": "再見",
-    "nǐ hǎo": "zài jiàn",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄗㄞˋ ㄐㄧㄢˋ",
-    "你好！很高興見到你。": "老師再見，明天見。",
-    "Xin chào! Rất vui được gặp bạn.": "Tạm biệt thầy cô, hẹn gặp lại ngày mai."
-  },
-  {
-    "1": "4",
-    "你好": "早安",
-    "nǐ hǎo": "zǎo ān",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄗㄠˇ ㄢ",
-    "你好！很高興見到你。": "早安，太陽公公起床了。",
-    "Xin chào! Rất vui được gặp bạn.": "Chào buổi sáng, ông mặt trời thức dậy rồi."
-  },
-  {
-    "1": "5",
-    "你好": "晚安",
-    "nǐ hǎo": "wǎn ān",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄨㄢˇ ㄢ",
-    "你好！很高興見到你。": "晚安，祝你有個好夢。",
-    "Xin chào! Rất vui được gặp bạn.": "Chúc ngủ ngon, chúc con có một giấc mơ đẹp."
-  },
-  {
-    "1": "6",
-    "你好": "請",
-    "nǐ hǎo": "qǐng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄑㄧㄥˇ",
-    "你好！很高興見到你。": "請喝水，請坐下。",
-    "Xin chào! Rất vui được gặp bạn.": "Mời uống nước, mời ngồi xuống."
-  },
-  {
-    "1": "7",
-    "你好": "對不起",
-    "nǐ hǎo": "duì bù qǐ",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄉㄨㄟˋ ㄅㄨˋ ㄑㄧˇ",
-    "你好！很高興見到你。": "對不起，我不是故意的。",
-    "Xin chào! Rất vui được gặp bạn.": "Xin lỗi, con không cố ý."
-  },
-  {
-    "1": "8",
-    "你好": "沒關係",
-    "nǐ hǎo": "méi guān xi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄇㄟˊ ㄍㄨㄢ ㄒㄧ˙",
-    "你好！很高興見到你。": "沒關係，下次注意就好。",
-    "Xin chào! Rất vui được gặp bạn.": "Không sao đâu, lần sau chú ý là được."
-  },
-  {
-    "1": "9",
-    "你好": "高興",
-    "nǐ hǎo": "gāo xìng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄍㄠ ㄒㄧㄥˋ",
-    "你好！很高興見到你。": "今天去公園玩，我很高興。",
-    "Xin chào! Rất vui được gặp bạn.": "Hôm nay đi công viên chơi, con rất vui."
-  },
-  {
-    "1": "10",
-    "你好": "喜歡",
-    "nǐ hǎo": "xǐ huan",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄒㄧˇ ㄏㄨㄢ˙",
-    "你好！很高興見到你。": "我喜歡吃蘋果，也喜歡看書。",
-    "Xin chào! Rất vui được gặp bạn.": "Con thích ăn táo, cũng thích đọc sách."
-  },
-  {
-    "1": "11",
-    "你好": "家",
-    "nǐ hǎo": "jiā",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄐㄧㄚ",
-    "你好！很高興見到你。": "這裡是我溫暖的家。",
-    "Xin chào! Rất vui được gặp bạn.": "Đây là ngôi nhà ấm áp của con."
-  },
-  {
-    "1": "12",
-    "你好": "客廳",
-    "nǐ hǎo": "kè tīng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄎㄜˋ ㄊㄧㄥ",
-    "你好！很高興見到你。": "我們在客廳裡看電視。",
-    "Xin chào! Rất vui được gặp bạn.": "Chúng ta xem ti vi ở phòng khách."
-  },
-  {
-    "1": "13",
-    "你好": "房間",
-    "nǐ hǎo": "fáng jiān",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄈㄤˊ ㄐㄧㄢ",
-    "你好！很高興見到你。": "這是我的房間，裡面有床。",
-    "Xin chào! Rất vui được gặp bạn.": "Đây là phòng của con, bên trong có giường."
-  },
-  {
-    "1": "14",
-    "你好": "廚房",
-    "nǐ hǎo": "chú fáng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄔㄨˊ ㄈㄤˊ",
-    "你好！很高興見到你。": "媽媽在廚房裡煮香噴噴的飯。",
-    "Xin chào! Rất vui được gặp bạn.": "Mẹ đang nấu cơm thơm phức trong bếp."
-  },
-  {
-    "1": "15",
-    "你好": "浴室",
-    "nǐ hǎo": "yù shì",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄩˋ ㄕˋ",
-    "你好！很高興見到你。": "我去浴室洗洗澡，刷刷牙。",
-    "Xin chào! Rất vui được gặp bạn.": "Con vào nhà tắm tắm rửa, đánh răng."
-  },
-  {
-    "1": "16",
-    "你好": "門",
-    "nǐ hǎo": "mén",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄇㄣˊ",
-    "你好！很高興見到你。": "進門要記得輕輕關門。",
-    "Xin chào! Rất vui được gặp bạn.": "Vào cửa nhớ đóng cửa nhẹ nhàng."
-  },
-  {
-    "1": "17",
-    "你好": "窗戶",
-    "nǐ hǎo": "chuāng hu",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄔㄨㄤ ㄏㄨ˙",
-    "你好！很高興見到你。": "打開窗戶，讓風吹進來。",
-    "Xin chào! Rất vui được gặp bạn.": "Mở cửa sổ ra cho gió thổi vào."
-  },
-  {
-    "1": "18",
-    "你好": "桌子",
-    "nǐ hǎo": "zhuō zi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄓㄨㄛ ㄗ˙",
-    "你好！很高興見到你。": "書本和玩具要放在桌子上。",
-    "Xin chào! Rất vui được gặp bạn.": "Sách vở và đồ chơi phải để trên bàn."
-  },
-  {
-    "1": "19",
-    "你好": "椅子",
-    "nǐ hǎo": "yǐ zi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄧˇ ㄗ˙",
-    "你好！很高興見到你。": "請坐在椅子上認真寫字。",
-    "Xin chào! Rất vui được gặp bạn.": "Hãy ngồi trên ghế chăm chỉ viết chữ."
-  },
-  {
-    "1": "20",
-    "你好": "床",
-    "nǐ hǎo": "chuáng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄔㄨㄤˊ",
-    "你好！很高興見到你。": "躺在床上睡覺真舒服。",
-    "Xin chào! Rất vui được gặp bạn.": "Nằm ngủ trên giường thật thoải mái."
-  },
-  {
-    "1": "21",
-    "你好": "電燈",
-    "nǐ hǎo": "diàn dēng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄉㄧㄢˋ ㄉㄥ",
-    "你好！很高興見到你。": "離開房間要記得關電燈。",
-    "Xin chào! Rất vui được gặp bạn.": "Rời khỏi phòng nhớ tắt đèn điện."
-  },
-  {
-    "1": "22",
-    "你好": "樓梯",
-    "nǐ hǎo": "lóu tī",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄌㄡˊ ㄊㄧ",
-    "你好！很高興見到你。": "走樓梯要慢慢走，不可以用跑的。",
-    "Xin chào! Rất vui được gặp bạn.": "Đi cầu thang phải đi từ từ, không được chạy."
-  },
-  {
-    "1": "23",
-    "你好": "花園",
-    "nǐ hǎo": "huā yuán",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄏㄨㄚ ㄩㄢˊ",
-    "你好！很高興見到你。": "花園裡開了好多漂亮的花。",
-    "Xin chào! Rất vui được gặp bạn.": "Trong vườn nở rất nhiều hoa đẹp."
-  },
-  {
-    "1": "24",
-    "你好": "大樓",
-    "nǐ hǎo": "dà lóu",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄉㄚˋ ㄌㄡˊ",
-    "你好！很高興見到你。": "城市裡有好多高高的大樓。",
-    "Xin chào! Rất vui được gặp bạn.": "Trong thành phố có rất nhiều tòa nhà cao tầng."
-  },
-  {
-    "1": "25",
-    "你好": "房子",
-    "nǐ hǎo": "fáng zi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄈㄤˊ ㄗ˙",
-    "你好！很高興見到你。": "這是一棟紅色屋頂的房子。",
-    "Xin chào! Rất vui được gặp bạn.": "Đây là một ngôi nhà mái ngói màu đỏ."
-  },
-  {
-    "1": "26",
-    "你好": "碗",
-    "nǐ hǎo": "wǎn",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄨㄢˇ",
-    "你好！很高興見到你。": "吃飯要用小碗端好。",
-    "Xin chào! Rất vui được gặp bạn.": "Ăn cơm phải dùng bát nhỏ cầm cho chắc."
-  },
-  {
-    "1": "27",
-    "你好": "筷子",
-    "nǐ hǎo": "kuài zi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄎㄨㄞˋ ㄗ˙",
-    "你好！很高興見到你。": "我正在學習用筷子夾菜。",
-    "Xin chào! Rất vui được gặp bạn.": "Con đang học cách dùng đũa gắp thức ăn."
-  },
-  {
-    "1": "28",
-    "你好": "湯匙",
-    "nǐ hǎo": "tāng chí",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄊㄤ ㄔˊ",
-    "你好！很高興見到你。": "用湯匙喝湯才不會流出來。",
-    "Xin chào! Rất vui được gặp bạn.": "Dùng thìa húp canh mới không bị đổ ra ngoài."
-  },
-  {
-    "1": "29",
-    "你好": "杯子",
-    "nǐ hǎo": "bēi zi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄅㄟ ㄗ˙",
-    "你好！很高興見到你。": "杯子裡裝滿了溫開水。",
-    "Xin chào! Rất vui được gặp bạn.": "Trong cốc đựng đầy nước ấm."
-  },
-  {
-    "1": "30",
-    "你好": "電視",
-    "nǐ hǎo": "diàn shì",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄉㄧㄢˋ ㄕˋ",
-    "你好！很高興見到你。": "看電視要保持適當的距離。",
-    "Xin chào! Rất vui được gặp bạn.": "Xem ti vi phải giữ khoảng cách phù hợp."
-  },
-  {
-    "1": "31",
-    "你好": "冰箱",
-    "nǐ hǎo": "bīng xiāng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄅㄧㄥ ㄒㄧㄢ",
-    "你好！很高興見到你。": "冰箱裡有新鮮的冰牛奶。",
-    "Xin chào! Rất vui được gặp bạn.": "Trong tủ lạnh có sữa tươi mát lạnh."
-  },
-  {
-    "1": "32",
-    "你好": "冷氣",
-    "nǐ hǎo": "lěng qì",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄌㄥˇ ㄑㄧˋ",
-    "你好！很高興見到你。": "天氣好熱，打開冷氣涼爽多了。",
-    "Xin chào! Rất vui được gặp bạn.": "Thời tiết nóng quá, bật điều hòa mát hơn nhiều."
-  },
-  {
-    "1": "33",
-    "你好": "毛巾",
-    "nǐ hǎo": "máo jǐn",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄇㄠˊ ㄐㄧㄣ",
-    "你好！很高興見到你。": "洗完臉要用乾淨的毛巾擦乾。",
-    "Xin chào! Rất vui được gặp bạn.": "Rửa mặt xong phải dùng khăn mặt sạch lau khô."
-  },
-  {
-    "1": "34",
-    "你好": "牙刷",
-    "nǐ hǎo": "yá shuā",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄧㄚˊ ㄕㄨㄚ",
-    "你好！很高興見到你。": "早晚用牙刷把牙齒刷乾淨。",
-    "Xin chào! Rất vui được gặp bạn.": "Sáng tối dùng bàn chải đánh răng cho sạch."
-  },
-  {
-    "1": "35",
-    "你好": "書包",
-    "nǐ hǎo": "shū bāo",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄕㄨ ㄅㄠ",
-    "你好！很高興見到你。": "我會自己整理上學的書包。",
-    "Xin chào! Rất vui được gặp bạn.": "Con tự sắp xếp cặp sách đi học của mình."
-  },
-  {
-    "1": "36",
-    "你好": "鉛筆",
-    "nǐ hǎo": "qiān bǐ",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄑㄧㄢ ㄅㄧˇ",
-    "你好！很高興見到你。": "用鉛筆在紙上畫一個大圓圈。",
-    "Xin chào! Rất vui được gặp bạn.": "Dùng bút chì vẽ một hình tròn lớn lên giấy."
-  },
-  {
-    "1": "37",
-    "你好": "橡皮擦",
-    "nǐ hǎo": "xiàng pí cā",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄒㄧㄢˋ ㄆㄧˊ ㄘㄚ",
-    "你好！很高興見到你。": "寫錯字可以用橡皮擦擦掉。",
-    "Xin chào! Rất vui được gặp bạn.": "Viết sai chữ có thể dùng cục tẩy xóa đi."
-  },
-  {
-    "1": "38",
-    "你好": "剪刀",
-    "nǐ hǎo": "jiǎn dāo",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄐㄧㄢˇ ㄉㄠ",
-    "你好！很高興見到你。": "使用剪刀要非常小心安全。",
-    "Xin chào! Rất vui được gặp bạn.": "Sử dụng kéo phải hết sức cẩn thận an toàn."
-  },
-  {
-    "1": "39",
-    "你好": "手機",
-    "nǐ hǎo": "shǒu jī",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄕㄡˇ ㄐㄧ",
-    "你好！很高興見到你。": "爸爸用手機和爺爺打電話。",
-    "Xin chào! Rất vui được gặp bạn.": "Bố dùng điện thoại di động gọi điện cho ông nội."
-  },
-  {
-    "1": "40",
-    "你好": "電腦",
-    "nǐ hǎo": "diàn nǎo",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄉㄧㄢˋ ㄋㄠˇ",
-    "你好！很高興見到你。": "我用電腦看 G學園 的課程。",
-    "Xin chào! Rất vui được gặp bạn.": "Con dùng máy tính xem bài học của G Học Viện."
-  },
-  {
-    "1": "41",
-    "你好": "汽車",
-    "nǐ hǎo": "qì chē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄑㄧˋ ㄔㄜ",
-    "你好！很高興見到你。": "爸爸開著藍色的汽車帶我出門。",
-    "Xin chào! Rất vui được gặp bạn.": "Bố lái chiếc xe ô tô màu xanh đưa con ra ngoài."
-  },
-  {
-    "1": "42",
-    "你好": "公車",
-    "nǐ hǎo": "gōng chē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄍㄨㄥ ㄔㄜ",
-    "你好！很高興見到你。": "上學可以搭大大的公車。",
-    "Xin chào! Rất vui được gặp bạn.": "Đi học có thể đi xe buýt lớn."
-  },
-  {
-    "1": "43",
-    "你好": "火車",
-    "nǐ hǎo": "huǒ chē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄏㄨㄛˇ ㄔㄜ",
-    "你好！很高興見到你。": "火車在鐵軌上嘟嘟嘟地跑。",
-    "Xin chào! Rất vui được gặp bạn.": "Tàu hỏa chạy xình xịch trên đường ray."
-  },
-  {
-    "1": "44",
-    "你好": "高鐵",
-    "nǐ hǎo": "gāo tiě",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄍㄠ ㄊㄧㄝˇ",
-    "你好！很高興見到你。": "高鐵的速度非常快。",
-    "Xin chào! Rất vui được gặp bạn.": "Tốc độ của tàu cao tốc rất nhanh."
-  },
-  {
-    "1": "45",
-    "你好": "飛機",
-    "nǐ hǎo": "fēi jī",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄈㄟ ㄐㄧ",
-    "你好！很高興見到你。": "飛機在藍天和白雲之間飛翔。",
-    "Xin chào! Rất vui được gặp bạn.": "Máy bay bay lượn giữa trời xanh và mây trắng."
-  },
-  {
-    "1": "46",
-    "你好": "自行車",
-    "nǐ hǎo": "zì xíng chē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄗˋ ㄒㄧㄥˊ ㄔㄜ",
-    "你好！很高興見到你。": "我學會騎兩輪的自行車了。",
-    "Xin chào! Rất vui được gặp bạn.": "Con đã biết đi xe đạp hai bánh rồi."
-  },
-  {
-    "1": "47",
-    "你好": "摩托車",
-    "nǐ hǎo": "mó tuō chē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄇㄛˊ ㄊㄨㄛ ㄔㄜ",
-    "你好！很高興見到你。": "騎摩托車一定要戴安全帽。",
-    "Xin chào! Rất vui được gặp bạn.": "Đi xe máy nhất định phải đội mũ bảo hiểm."
-  },
-  {
-    "1": "48",
-    "你好": "船",
-    "nǐ hǎo": "chuán",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄔㄨㄢˊ",
-    "你好！很高興見到你。": "大船在海面上慢慢地航行。",
-    "Xin chào! Rất vui được gặp bạn.": "Thuyền lớn đang chầm chậm hành trình trên biển."
-  },
-  {
-    "1": "49",
-    "你好": "捷運",
-    "nǐ hǎo": "jié yùn",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄐㄧㄝˊ ㄩㄣˋ",
-    "你好！很高興見到你。": "搭捷運上學既方便又準時。",
-    "Xin chào! Rất vui được gặp bạn.": "Đi tàu điện ngầm đi học vừa tiện vừa đúng giờ."
-  },
-  {
-    "1": "50",
-    "你好": "卡車",
-    "nǐ hǎo": "kǎ chē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄎㄚˇ ㄔㄜ",
-    "你好！很高興見到你。": "大卡車載著好多的貨物。",
-    "Xin chào! Rất vui được gặp bạn.": "Xe tải lớn đang chở rất nhiều hàng hóa."
-  },
-  {
-    "1": "51",
-    "你好": "救護車",
-    "nǐ hǎo": "jiù hù chē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄐㄧㄡˋ ㄏㄨˋ ㄔㄜ",
-    "你好！很高興見到你。": "聽見救護車的聲音要趕快讓路。",
-    "Xin chào! Rất vui được gặp bạn.": "Nghe thấy tiếng xe cứu thương phải nhanh chóng nhường đường."
-  },
-  {
-    "1": "52",
-    "你好": "警車",
-    "nǐ hǎo": "jǐng chē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄐㄧㄥˇ ㄔㄜ",
-    "你好！很高興見到你。": "警察叔叔開著警車保護大家。",
-    "Xin chào! Rất vui được gặp bạn.": "Chú cảnh sát lái xe cảnh sát bảo vệ mọi người."
-  },
-  {
-    "1": "53",
-    "你好": "消防車",
-    "nǐ hǎo": "xiāo fáng chē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄒㄧㄠ ㄈㄤˊ ㄔㄜ",
-    "你好！很高興見到你。": "紅色的消防車去幫忙滅火。",
-    "Xin chào! Rất vui được gặp bạn.": "Xe cứu hỏa màu đỏ đi giúp dập lửa."
-  },
-  {
-    "1": "54",
-    "你好": "馬路",
-    "nǐ hǎo": "mǎ lù",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄇㄚˇ ㄌㄨˋ",
-    "你好！很高興見到你。": "過馬路要牽好大人的手。",
-    "Xin chào! Rất vui được gặp bạn.": "Qua đường phải nắm chặt tay người lớn."
-  },
-  {
-    "1": "55",
-    "你好": "紅綠燈",
-    "nǐ hǎo": "hóng lǜ dēng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄏㄨㄥˊ ㄌㄩˋ ㄉㄥ",
-    "你好！很高興見到你。": "紅燈停，綠燈行，黃燈要注意。",
-    "Xin chào! Rất vui được gặp bạn.": "Đèn đỏ dừng, đèn xanh đi, đèn vàng chú ý."
-  },
-  {
-    "1": "56",
-    "你好": "衣服",
-    "nǐ hǎo": "yī fu",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄧ ㄈㄨˊ",
-    "你好！很高興見到你。": "我會自己穿好乾淨的衣服。",
-    "Xin chào! Rất vui được gặp bạn.": "Con tự mặc quần áo sạch sẽ của mình."
-  },
-  {
-    "1": "57",
-    "你好": "褲子",
-    "nǐ hǎo": "kù zi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄎㄨˋ ㄗ˙",
-    "你好！很高興見到你。": "這條藍色牛仔褲很好看。",
-    "Xin chào! Rất vui được gặp bạn.": "Chiếc quần bò màu xanh này rất đẹp."
-  },
-  {
-    "1": "58",
-    "你好": "鞋子",
-    "nǐ hǎo": "xié zi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄒㄧㄝˊ ㄗ˙",
-    "你好！很高興見到你。": "出門前要把鞋子穿好。",
-    "Xin chào! Rất vui được gặp bạn.": "Trước khi ra ngoài phải đi giày vào."
-  },
-  {
-    "1": "59",
-    "你好": "襪子",
-    "nǐ hǎo": "wà zi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄨㄚˋ ㄗ˙",
-    "你好！很高興見到你。": "穿鞋子之前要先穿襪子。",
-    "Xin chào! Rất vui được gặp bạn.": "Trước khi đi giày phải đi tất trước."
-  },
-  {
-    "1": "60",
-    "你好": "帽子",
-    "nǐ hǎo": "mào zi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄇㄠˋ ㄗ˙",
-    "你好！很高興見到你。": "太陽很大，戴上帽子防曬。",
-    "Xin chào! Rất vui được gặp bạn.": "Trời nắng to, đội mũ vào để chống nắng."
-  },
-  {
-    "1": "61",
-    "你好": "外套",
-    "nǐ hǎo": "wài tào",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄨㄞˋ ㄊㄠˋ",
-    "你好！很高興見到你。": "外面天氣變冷了，快穿上外套。",
-    "Xin chào! Rất vui được gặp bạn.": "Bên ngoài trời lạnh rồi, mau mặc áo khoác vào."
-  },
-  {
-    "1": "62",
-    "你好": "裙子",
-    "nǐ hǎo": "qún zi",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄑㄩㄣˊ ㄗ˙",
-    "你好！很高興見到你。": "妹妹穿著一條漂亮的粉紅色裙子。",
-    "Xin chào! Rất vui được gặp bạn.": "Em gái mặc một chiếc váy màu hồng rất đẹp."
-  },
-  {
-    "1": "63",
-    "你好": "口袋",
-    "nǐ hǎo": "kǒu dài",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄎㄡˇ ㄉㄞˋ",
-    "你好！很高興見到你。": "口袋裡裝著我的小手帕。",
-    "Xin chào! Rất vui được gặp bạn.": "Trong túi quần đựng chiếc khăn tay nhỏ của con."
-  },
-  {
-    "1": "64",
-    "你好": "雨衣",
-    "nǐ hǎo": "yǔ yī",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄩˇ ㄧ",
-    "你好！很高興見到你。": "下雨天出門要穿雨衣。",
-    "Xin chào! Rất vui được gặp bạn.": "Ngày mưa ra ngoài phải mặc áo mưa."
-  },
-  {
-    "1": "65",
-    "你好": "手套",
-    "nǐ hǎo": "shǒu tào",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄕㄡˇ ㄊㄠˋ",
-    "你好！很高興見到你。": "冬天戴上手套，手就不冷了。",
-    "Xin chào! Rất vui được gặp bạn.": "Mùa đông đeo găng tay vào, tay sẽ không lạnh nữa."
-  },
-  {
-    "1": "66",
-    "你好": "跑步",
-    "nǐ hǎo": "pǎo bù",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄆㄠˇ ㄅㄨˋ",
-    "你好！很高興見到你。": "我們在操場上快樂地跑步。",
-    "Xin chào! Rất vui được gặp bạn.": "Chúng con chạy bộ vui vẻ trên sân trường."
-  },
-  {
-    "1": "67",
-    "你好": "游泳",
-    "nǐ hǎo": "yóu yǒng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄧㄡˊ ㄩㄥˇ",
-    "你好！很高興見到你。": "夏天去游泳池游泳最涼快了。",
-    "Xin chào! Rất vui được gặp bạn.": "Mùa hè đi bơi ở bể bơi là mát mẻ nhất."
-  },
-  {
-    "1": "68",
-    "你好": "跳繩",
-    "nǐ hǎo": "tiào shéng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄊㄧㄠˋ ㄕㄥˊ",
-    "你好！很高興見到你。": "跳繩可以讓我長得更高。",
-    "Xin chào! Rất vui được gặp bạn.": "Nhảy dây có thể giúp con cao hơn."
-  },
-  {
-    "1": "69",
-    "你好": "踢足球",
-    "nǐ hǎo": "tī zú qiú",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄊㄧ ㄗㄨˊ ㄑㄧㄡˊ",
-    "你好！很高興見到你。": "我和同學在草地上踢足球。",
-    "Xin chào! Rất vui được gặp bạn.": "Con 與 các bạn đá bóng trên bãi cỏ."
-  },
-  {
-    "1": "70",
-    "你好": "打籃球",
-    "nǐ hǎo": "dǎ lán qiú",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄉㄚˇ ㄌㄢˊ ㄑㄧㄡˊ",
-    "你好！很高興見到你。": "哥哥投籃的技術非常厲害。",
-    "Xin chào! Rất vui được gặp bạn.": "Kỹ thuật ném rổ của anh trai rất lợi hại."
-  },
-  {
-    "1": "71",
-    "你好": "畫畫",
-    "nǐ hǎo": "huà huà",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄏㄨㄚˋ ㄏㄨㄚˋ",
-    "你好！很高興見到你。": "我用彩色筆在紙上畫畫。",
-    "Xin chào! Rất vui được gặp bạn.": "Con dùng bút màu vẽ tranh trên giấy."
-  },
-  {
-    "1": "72",
-    "你好": "彈鋼琴",
-    "nǐ hǎo": "tán gāng qín",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄊㄢˊ ㄍㄤ ㄑㄧㄣˊ",
-    "你好！很高興見到你。": "漂亮的鋼琴聲真好聽。",
-    "Xin chào! Rất vui được gặp bạn.": "Tiếng đàn piano hay quá."
-  },
-  {
-    "1": "73",
-    "你好": "唱歌",
-    "nǐ hǎo": "chàng gē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄔㄤˋ ㄍㄜ",
-    "你好！很高興見到你。": "音樂課時，我們一起大聲唱歌。",
-    "Xin chào! Rất vui được gặp bạn.": "Trong giờ âm nhạc, chúng con cùng nhau hát to."
-  },
-  {
-    "1": "74",
-    "你好": "看書",
-    "nǐ hǎo": "kàn shū",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄎㄢˋ ㄕㄨ",
-    "你好！很高興見到你。": "睡前看書可以增加好多知識。",
-    "Xin chào! Rất vui được gặp bạn.": "Đọc sách trước khi ngủ có thể tăng thêm nhiều kiến thức."
-  },
-  {
-    "1": "75",
-    "你好": "寫字",
-    "nǐ hǎo": "xiě zì",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄒㄧㄝˇ ㄗˋ",
-    "你好！很高興見到你。": "寫字姿勢要端正。",
-    "Xin chào! Rất vui được gặp bạn.": "Tư thế viết chữ phải ngay ngắn."
-  },
-  {
-    "1": "76",
-    "你好": "遊戲",
-    "nǐ hǎo": "yóu xì",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄧㄡˊ ㄒㄧˋ",
-    "你好！很高興見到你。": "下課時間我們在操場玩遊戲。",
-    "Xin chào! Rất vui được gặp bạn.": "Giờ ra chơi chúng con chơi trò chơi trên sân trường."
-  },
-  {
-    "1": "77",
-    "你好": "露營",
-    "nǐ hǎo": "lù yíng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄌㄨˋ ㄧㄥˊ",
-    "你好！很高興見到你。": "週末全家人一起去山上露營。",
-    "Xin chào! Rất vui được gặp bạn.": "Cuối tuần cả nhà cùng nhau đi cắm trại trên núi."
-  },
-  {
-    "1": "78",
-    "你好": "爬山",
-    "nǐ hǎo": "pá shān",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄆㄚˊ ㄕㄢ",
-    "你好！很高興見到你。": "爬到山頂可以看到美麗的風景。",
-    "Xin chào! Rất vui được gặp bạn.": "Leo lên đỉnh núi có thể ngắm phong cảnh đẹp."
-  },
-  {
-    "1": "79",
-    "你好": "騎車",
-    "nǐ hǎo": "qí chē",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄑㄧˊ ㄔㄜ",
-    "你好！很高興見到你。": "下午在公園裡騎自行車很舒服。",
-    "Xin chào! Rất vui được gặp bạn.": "Chiều đi xe đạp trong công viên rất thoải mái."
-  },
-  {
-    "1": "80",
-    "你好": "散步",
-    "nǐ hǎo": "sàn bù",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄙㄢˋ ㄅㄨˋ",
-    "你好！很高興見到你。": "吃完晚餐，和爸爸媽媽去散步。",
-    "Xin chào! Rất vui được gặp bạn.": "Ăn tối xong, đi tản bộ cùng bố mẹ."
-  },
-  {
-    "1": "81",
-    "你好": "山",
-    "nǐ hǎo": "shān",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄕㄢ",
-    "你好！很高興見到你。": "遠處有一座高高的大山。",
-    "Xin chào! Rất vui được gặp bạn.": "Phía xa có một ngọn núi lớn cao vút."
-  },
-  {
-    "1": "82",
-    "你好": "水",
-    "nǐ hǎo": "shuǐ",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄕㄨㄟˇ",
-    "你好！很高興見到你。": "口渴了要多喝純淨的水。",
-    "Xin chào! Rất vui được gặp bạn.": "Khát nước phải uống nhiều nước tinh khiết."
-  },
-  {
-    "1": "83",
-    "你好": "日",
-    "nǐ hǎo": "rì",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄖˋ",
-    "你好！很高興見到你。": "太陽也叫做「日」，散發著光芒。",
-    "Xin chào! Rất vui được gặp bạn.": "Mặt trời cũng gọi là \"Nhật\", tỏa ra ánh hào quang."
-  },
-  {
-    "1": "84",
-    "你好": "月",
-    "nǐ hǎo": "yuè",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄩㄝˋ",
-    "你好！很高興見到你。": "月亮也叫做「月」，晚上會發光。",
-    "Xin chào! Rất vui được gặp bạn.": "Mặt trăng cũng gọi là \"Nguyệt\", buổi tối sẽ phát sáng."
-  },
-  {
-    "1": "85",
-    "你好": "天",
-    "nǐ hǎo": "tiān",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄊㄧㄢ",
-    "你好！很高興見到你。": "天空上有小鳥在自由飛翔。",
-    "Xin chào! Rất vui được gặp bạn.": "Trên bầu trời có chú chim nhỏ đang tự do bay lượn."
-  },
-  {
-    "1": "86",
-    "你好": "地",
-    "nǐ hǎo": "dì",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄉㄧˋ",
-    "你好！很高興見到你。": "土地上生長著綠色的青草。",
-    "Xin chào! Rất vui được gặp bạn.": "Trên mặt đất mọc cỏ xanh tươi."
-  },
-  {
-    "1": "87",
-    "你好": "風",
-    "nǐ hǎo": "fēng",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄈㄥ",
-    "你好！很高興見到你。": "微風吹過，樹葉發出沙沙的聲音。",
-    "Xin chào! Rất vui được gặp bạn.": "Gió nhẹ thổi qua, lá cây phát ra tiếng xào xạc."
-  },
-  {
-    "1": "88",
-    "你好": "雨",
-    "nǐ hǎo": "yǔ",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄩˇ",
-    "你好！很高興見到你。": "下雨了，出門要記得帶雨傘。",
-    "Xin chào! Rất vui được gặp bạn.": "Trời mưa rồi, ra ngoài phải nhớ mang theo ô."
-  },
-  {
-    "1": "89",
-    "你好": "雲",
-    "nǐ hǎo": "yún",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄩㄣ",
-    "你好！很高興見到你。": "天上的白雲像一朵朵棉花糖。",
-    "Xin chào! Rất vui được gặp bạn.": "Mây trắng trên trời giống như những viên kẹo bông."
-  },
-  {
-    "1": "90",
-    "你好": "火",
-    "nǐ hǎo": "huǒ",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄏㄨㄛˇ",
-    "你好！很高興見到你。": "煮飯時的火溫度很高，不能亂碰。",
-    "Xin chào! Rất vui được gặp bạn.": "Lửa khi nấu cơm nhiệt độ rất cao, không được nghịch."
-  },
-  {
-    "1": "91",
-    "你好": "人",
-    "nǐ hǎo": "rén",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄖㄣˊ",
-    "你好！很高興見到你。": "每個人都要做一個善良的好人。",
-    "Xin chào! Rất vui được gặp bạn.": "Mỗi người đều phải làm một người tốt lương thiện."
-  },
-  {
-    "1": "92",
-    "你好": "手",
-    "nǐ hǎo": "shǒu",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄕㄡˇ",
-    "你好！很高興見到你。": "吃飯前要用肥皂把手洗乾淨。",
-    "Xin chào! Rất vui được gặp bạn.": "Trước khi ăn cơm phải dùng xà phòng rửa sạch tay."
-  },
-  {
-    "1": "93",
-    "你好": "足",
-    "nǐ hǎo": "zú",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄗㄨˊ",
-    "你好！很高興見到你。": "「足」就是腳，帶我們走遍世界。",
-    "Xin chào! Rất vui được gặp bạn.": "\"Túc\" chính là chân, đưa chúng ta đi khắp thế giới."
-  },
-  {
-    "1": "94",
-    "你好": "口",
-    "nǐ hǎo": "kǒu",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄎㄡˇ",
-    "你好！很高興見到你。": "我們用口說話，也用口吃東西。",
-    "Xin chào! Rất vui được gặp bạn.": "Chúng ta dùng miệng để nói, cũng dùng miệng để ăn."
-  },
-  {
-    "1": "95",
-    "你好": "耳",
-    "nǐ hǎo": "ěr",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄦˇ",
-    "你好！很高興見到你。": "耳朵要用來專心聽老師說話。",
-    "Xin chào! Rất vui được gặp bạn.": "Tai phải dùng để chăm chú nghe thầy cô nói."
-  },
-  {
-    "1": "96",
-    "你好": "目",
-    "nǐ hǎo": "mù",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄇㄨˋ",
-    "你好！很高興見到你。": "眼睛也叫「目」，用來看世界。",
-    "Xin chào! Rất vui được gặp bạn.": "Mắt cũng gọi là \"Mục\", dùng để nhìn thế giới."
-  },
-  {
-    "1": "97",
-    "你好": "大",
-    "nǐ hǎo": "dà",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄉㄚˋ",
-    "你好！很高興見到你。": "大象的身體非常大。",
-    "Xin chào! Rất vui được gặp bạn.": "Con voi có thân hình rất lớn."
-  },
-  {
-    "1": "98",
-    "你好": "小",
-    "nǐ hǎo": "xiǎo",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄒㄧㄠˇ",
-    "你好！很高興見到你。": "螞蟻的身體非常小。",
-    "Xin chào! Rất vui được gặp bạn.": "Con kiến có thân hình rất nhỏ."
-  },
-  {
-    "1": "99",
-    "你好": "多",
-    "nǐ hǎo": "duō",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄉㄨㄛ",
-    "你好！很高興見到你。": "天上有好多好多顆星星。",
-    "Xin chào! Rất vui được gặp bạn.": "Trên trời có rất nhiều rất nhiều ngôi sao."
-  },
-  {
-    "1": "100",
-    "你好": "少",
-    "nǐ hǎo": "shǎo",
-    "ㄋㄧˇ ㄏㄠˇ": "ㄕㄠˇ",
-    "你好！很高興見到你。": "盤子裡只剩下很少的餅乾。",
-    "Xin chào! Rất vui được gặp bạn.": "Trong đĩa chỉ còn lại rất ít bánh quy."
-  }
+    {
+        "id": 1,
+        "word": "1",
+        "pinyin": "你好",
+        "zhuyin": "nǐ hǎo",
+        "hint": "你好很高興見到你",
+        "sentence_zh": "ㄋㄧˇ ㄏㄠˇ",
+        "sentence_vi": "你好！很高興見到你。"
+    },
+    {
+        "id": 2,
+        "word": "2",
+        "pinyin": "謝謝",
+        "zhuyin": "xiè xie",
+        "hint": "謝謝爸爸謝謝媽媽",
+        "sentence_zh": "ㄒㄧㄝˋ ㄒㄧㄝ˙",
+        "sentence_vi": "謝謝爸爸，謝謝媽媽。"
+    },
+    {
+        "id": 3,
+        "word": "3",
+        "pinyin": "再見",
+        "zhuyin": "zài jiàn",
+        "hint": "老師再見明天見",
+        "sentence_zh": "ㄗㄞˋ ㄐㄧㄢˋ",
+        "sentence_vi": "老師再見，明天見。"
+    },
+    {
+        "id": 4,
+        "word": "4",
+        "pinyin": "早安",
+        "zhuyin": "zǎo ān",
+        "hint": "早安太陽公公起床了",
+        "sentence_zh": "ㄗㄠˇ ㄢ",
+        "sentence_vi": "早安，太陽公公起床了。"
+    },
+    {
+        "id": 5,
+        "word": "5",
+        "pinyin": "晚安",
+        "zhuyin": "wǎn ān",
+        "hint": "晚安祝你有個好夢",
+        "sentence_zh": "ㄨㄢˇ ㄢ",
+        "sentence_vi": "晚安，祝你有個好夢。"
+    },
+    {
+        "id": 6,
+        "word": "6",
+        "pinyin": "請",
+        "zhuyin": "qǐng",
+        "hint": "請喝水請坐下",
+        "sentence_zh": "ㄑㄧㄥˇ",
+        "sentence_vi": "請喝水，請坐下。"
+    },
+    {
+        "id": 7,
+        "word": "7",
+        "pinyin": "對不起",
+        "zhuyin": "duì bù qǐ",
+        "hint": "對不起我不是故意的",
+        "sentence_zh": "ㄉㄨㄟˋ ㄅㄨˋ ㄑㄧˇ",
+        "sentence_vi": "對不起，我不是故意的。"
+    },
+    {
+        "id": 8,
+        "word": "8",
+        "pinyin": "沒關係",
+        "zhuyin": "méi guān xi",
+        "hint": "沒關係下次注意就好",
+        "sentence_zh": "ㄇㄟˊ ㄍㄨㄢ ㄒㄧ˙",
+        "sentence_vi": "沒關係，下次注意就好。"
+    },
+    {
+        "id": 9,
+        "word": "9",
+        "pinyin": "高興",
+        "zhuyin": "gāo xìng",
+        "hint": "今天去公園玩我很高興",
+        "sentence_zh": "ㄍㄠ ㄒㄧㄥˋ",
+        "sentence_vi": "今天去公園玩，我很高興。"
+    },
+    {
+        "id": 10,
+        "word": "10",
+        "pinyin": "喜歡",
+        "zhuyin": "xǐ huan",
+        "hint": "我喜歡吃蘋果也喜歡看書",
+        "sentence_zh": "ㄒㄧˇ ㄏㄨㄢ˙",
+        "sentence_vi": "我喜歡吃蘋果，也喜歡看書。"
+    },
+    {
+        "id": 11,
+        "word": "11",
+        "pinyin": "家",
+        "zhuyin": "jiā",
+        "hint": "這裡是我溫暖的家",
+        "sentence_zh": "ㄐㄧㄚ",
+        "sentence_vi": "這裡是我溫暖的家。"
+    },
+    {
+        "id": 12,
+        "word": "12",
+        "pinyin": "客廳",
+        "zhuyin": "kè tīng",
+        "hint": "我們在客廳裡看電視",
+        "sentence_zh": "ㄎㄜˋ ㄊㄧㄥ",
+        "sentence_vi": "我們在客廳裡看電視。"
+    },
+    {
+        "id": 13,
+        "word": "13",
+        "pinyin": "房間",
+        "zhuyin": "fáng jiān",
+        "hint": "這是我的房間裡面有床",
+        "sentence_zh": "ㄈㄤˊ ㄐㄧㄢ",
+        "sentence_vi": "這是我的房間，裡面有床。"
+    },
+    {
+        "id": 14,
+        "word": "14",
+        "pinyin": "廚房",
+        "zhuyin": "chú fáng",
+        "hint": "媽媽在廚房裡煮香噴噴的飯",
+        "sentence_zh": "ㄔㄨˊ ㄈㄤˊ",
+        "sentence_vi": "媽媽在廚房裡煮香噴噴的飯。"
+    },
+    {
+        "id": 15,
+        "word": "15",
+        "pinyin": "浴室",
+        "zhuyin": "yù shì",
+        "hint": "我去浴室洗洗澡刷刷牙",
+        "sentence_zh": "ㄩˋ ㄕˋ",
+        "sentence_vi": "我去浴室洗洗澡，刷刷牙。"
+    },
+    {
+        "id": 16,
+        "word": "16",
+        "pinyin": "門",
+        "zhuyin": "mén",
+        "hint": "進門要記得輕輕關門",
+        "sentence_zh": "ㄇㄣˊ",
+        "sentence_vi": "進門要記得輕輕關門。"
+    },
+    {
+        "id": 17,
+        "word": "17",
+        "pinyin": "窗戶",
+        "zhuyin": "chuāng hu",
+        "hint": "打開窗戶讓風吹進來",
+        "sentence_zh": "ㄔㄨㄤ ㄏㄨ˙",
+        "sentence_vi": "打開窗戶，讓風吹進來。"
+    },
+    {
+        "id": 18,
+        "word": "18",
+        "pinyin": "桌子",
+        "zhuyin": "zhuō zi",
+        "hint": "書本和玩具要放在桌子上",
+        "sentence_zh": "ㄓㄨㄛ ㄗ˙",
+        "sentence_vi": "書本和玩具要放在桌子上。"
+    },
+    {
+        "id": 19,
+        "word": "19",
+        "pinyin": "椅子",
+        "zhuyin": "yǐ zi",
+        "hint": "請坐在椅子上認真寫字",
+        "sentence_zh": "ㄧˇ ㄗ˙",
+        "sentence_vi": "請坐在椅子上認真寫字。"
+    },
+    {
+        "id": 20,
+        "word": "20",
+        "pinyin": "床",
+        "zhuyin": "chuáng",
+        "hint": "躺在床上睡覺真舒服",
+        "sentence_zh": "ㄔㄨㄤˊ",
+        "sentence_vi": "躺在床上睡覺真舒服。"
+    },
+    {
+        "id": 21,
+        "word": "21",
+        "pinyin": "電燈",
+        "zhuyin": "diàn dēng",
+        "hint": "離開房間要記得關電燈",
+        "sentence_zh": "ㄉㄧㄢˋ ㄉㄥ",
+        "sentence_vi": "離開房間要記得關電燈。"
+    },
+    {
+        "id": 22,
+        "word": "22",
+        "pinyin": "樓梯",
+        "zhuyin": "lóu tī",
+        "hint": "走樓梯要慢慢走不可以用跑的",
+        "sentence_zh": "ㄌㄡˊ ㄊㄧ",
+        "sentence_vi": "走樓梯要慢慢走，不可以用跑的。"
+    },
+    {
+        "id": 23,
+        "word": "23",
+        "pinyin": "花園",
+        "zhuyin": "huā yuán",
+        "hint": "花園裡開了好多漂亮的花",
+        "sentence_zh": "ㄏㄨㄚ ㄩㄢˊ",
+        "sentence_vi": "花園裡開了好多漂亮的花。"
+    },
+    {
+        "id": 24,
+        "word": "24",
+        "pinyin": "大樓",
+        "zhuyin": "dà lóu",
+        "hint": "城市裡有好多高高的大樓",
+        "sentence_zh": "ㄉㄚˋ ㄌㄡˊ",
+        "sentence_vi": "城市裡有好多高高的大樓。"
+    },
+    {
+        "id": 25,
+        "word": "25",
+        "pinyin": "房子",
+        "zhuyin": "fáng zi",
+        "hint": "這是一棟紅色屋頂的房子",
+        "sentence_zh": "ㄈㄤˊ ㄗ˙",
+        "sentence_vi": "這是一棟紅色屋頂的房子。"
+    },
+    {
+        "id": 26,
+        "word": "26",
+        "pinyin": "碗",
+        "zhuyin": "wǎn",
+        "hint": "吃飯要用小碗端好",
+        "sentence_zh": "ㄨㄢˇ",
+        "sentence_vi": "吃飯要用小碗端好。"
+    },
+    {
+        "id": 27,
+        "word": "27",
+        "pinyin": "筷子",
+        "zhuyin": "kuài zi",
+        "hint": "我正在學習用筷子夾菜",
+        "sentence_zh": "ㄎㄨㄞˋ ㄗ˙",
+        "sentence_vi": "我正在學習用筷子夾菜。"
+    },
+    {
+        "id": 28,
+        "word": "28",
+        "pinyin": "湯匙",
+        "zhuyin": "tāng chí",
+        "hint": "用湯匙喝湯才不會流出來",
+        "sentence_zh": "ㄊㄤ ㄔˊ",
+        "sentence_vi": "用湯匙喝湯才不會流出來。"
+    },
+    {
+        "id": 29,
+        "word": "29",
+        "pinyin": "杯子",
+        "zhuyin": "bēi zi",
+        "hint": "杯子裡裝滿了溫開水",
+        "sentence_zh": "ㄅㄟ ㄗ˙",
+        "sentence_vi": "杯子裡裝滿了溫開水。"
+    },
+    {
+        "id": 30,
+        "word": "30",
+        "pinyin": "電視",
+        "zhuyin": "diàn shì",
+        "hint": "看電視要保持適當的距離",
+        "sentence_zh": "ㄉㄧㄢˋ ㄕˋ",
+        "sentence_vi": "看電視要保持適當的距離。"
+    },
+    {
+        "id": 31,
+        "word": "31",
+        "pinyin": "冰箱",
+        "zhuyin": "bīng xiāng",
+        "hint": "冰箱裡有新鮮的冰牛奶",
+        "sentence_zh": "ㄅㄧㄥ ㄒㄧㄢ",
+        "sentence_vi": "冰箱裡有新鮮的冰牛奶。"
+    },
+    {
+        "id": 32,
+        "word": "32",
+        "pinyin": "冷氣",
+        "zhuyin": "lěng qì",
+        "hint": "天氣好熱打開冷氣涼爽多了",
+        "sentence_zh": "ㄌㄥˇ ㄑㄧˋ",
+        "sentence_vi": "天氣好熱，打開冷氣涼爽多了。"
+    },
+    {
+        "id": 33,
+        "word": "33",
+        "pinyin": "毛巾",
+        "zhuyin": "máo jǐn",
+        "hint": "洗完臉要用乾淨的毛巾擦乾",
+        "sentence_zh": "ㄇㄠˊ ㄐㄧㄣ",
+        "sentence_vi": "洗完臉要用乾淨的毛巾擦乾。"
+    },
+    {
+        "id": 34,
+        "word": "34",
+        "pinyin": "牙刷",
+        "zhuyin": "yá shuā",
+        "hint": "早晚用牙刷把牙齒刷乾淨",
+        "sentence_zh": "ㄧㄚˊ ㄕㄨㄚ",
+        "sentence_vi": "早晚用牙刷把牙齒刷乾淨。"
+    },
+    {
+        "id": 35,
+        "word": "35",
+        "pinyin": "書包",
+        "zhuyin": "shū bāo",
+        "hint": "我會自己整理上學的書包",
+        "sentence_zh": "ㄕㄨ ㄅㄠ",
+        "sentence_vi": "我會自己整理上學的書包。"
+    },
+    {
+        "id": 36,
+        "word": "36",
+        "pinyin": "鉛筆",
+        "zhuyin": "qiān bǐ",
+        "hint": "用鉛筆在紙上畫一個大圓圈",
+        "sentence_zh": "ㄑㄧㄢ ㄅㄧˇ",
+        "sentence_vi": "用鉛筆在紙上畫一個大圓圈。"
+    },
+    {
+        "id": 37,
+        "word": "37",
+        "pinyin": "橡皮擦",
+        "zhuyin": "xiàng pí cā",
+        "hint": "寫錯字可以用橡皮擦擦掉",
+        "sentence_zh": "ㄒㄧㄢˋ ㄆㄧˊ ㄘㄚ",
+        "sentence_vi": "寫錯字可以用橡皮擦擦掉。"
+    },
+    {
+        "id": 38,
+        "word": "38",
+        "pinyin": "剪刀",
+        "zhuyin": "jiǎn dāo",
+        "hint": "使用剪刀要非常小心安全",
+        "sentence_zh": "ㄐㄧㄢˇ ㄉㄠ",
+        "sentence_vi": "使用剪刀要非常小心安全。"
+    },
+    {
+        "id": 39,
+        "word": "39",
+        "pinyin": "手機",
+        "zhuyin": "shǒu jī",
+        "hint": "爸爸用手機和爺爺打電話",
+        "sentence_zh": "ㄕㄡˇ ㄐㄧ",
+        "sentence_vi": "爸爸用手機和爺爺打電話。"
+    },
+    {
+        "id": 40,
+        "word": "40",
+        "pinyin": "電腦",
+        "zhuyin": "diàn nǎo",
+        "hint": "我用電腦看 G學園",
+        "sentence_zh": "ㄉㄧㄢˋ ㄋㄠˇ",
+        "sentence_vi": "我用電腦看 G學園 的課程。"
+    },
+    {
+        "id": 41,
+        "word": "41",
+        "pinyin": "汽車",
+        "zhuyin": "qì chē",
+        "hint": "爸爸開著藍色的汽車帶我出門",
+        "sentence_zh": "ㄑㄧˋ ㄔㄜ",
+        "sentence_vi": "爸爸開著藍色的汽車帶我出門。"
+    },
+    {
+        "id": 42,
+        "word": "42",
+        "pinyin": "公車",
+        "zhuyin": "gōng chē",
+        "hint": "上學可以搭大大的公車",
+        "sentence_zh": "ㄍㄨㄥ ㄔㄜ",
+        "sentence_vi": "上學可以搭大大的公車。"
+    },
+    {
+        "id": 43,
+        "word": "43",
+        "pinyin": "火車",
+        "zhuyin": "huǒ chē",
+        "hint": "火車在鐵軌上嘟嘟嘟地跑",
+        "sentence_zh": "ㄏㄨㄛˇ ㄔㄜ",
+        "sentence_vi": "火車在鐵軌上嘟嘟嘟地跑。"
+    },
+    {
+        "id": 44,
+        "word": "44",
+        "pinyin": "高鐵",
+        "zhuyin": "gāo tiě",
+        "hint": "高鐵的速度非常快",
+        "sentence_zh": "ㄍㄠ ㄊㄧㄝˇ",
+        "sentence_vi": "高鐵的速度非常快。"
+    },
+    {
+        "id": 45,
+        "word": "45",
+        "pinyin": "飛機",
+        "zhuyin": "fēi jī",
+        "hint": "飛機在藍天和白雲之間飛翔",
+        "sentence_zh": "ㄈㄟ ㄐㄧ",
+        "sentence_vi": "飛機在藍天和白雲之間飛翔。"
+    },
+    {
+        "id": 46,
+        "word": "46",
+        "pinyin": "自行車",
+        "zhuyin": "zì xíng chē",
+        "hint": "我學會騎兩輪的自行車了",
+        "sentence_zh": "ㄗˋ ㄒㄧㄥˊ ㄔㄜ",
+        "sentence_vi": "我學會騎兩輪的自行車了。"
+    },
+    {
+        "id": 47,
+        "word": "47",
+        "pinyin": "摩托車",
+        "zhuyin": "mó tuō chē",
+        "hint": "騎摩托車一定要戴安全帽",
+        "sentence_zh": "ㄇㄛˊ ㄊㄨㄛ ㄔㄜ",
+        "sentence_vi": "騎摩托車一定要戴安全帽。"
+    },
+    {
+        "id": 48,
+        "word": "48",
+        "pinyin": "船",
+        "zhuyin": "chuán",
+        "hint": "大船在海面上慢慢地航行",
+        "sentence_zh": "ㄔㄨㄢˊ",
+        "sentence_vi": "大船在海面上慢慢地航行。"
+    },
+    {
+        "id": 49,
+        "word": "49",
+        "pinyin": "捷運",
+        "zhuyin": "jié yùn",
+        "hint": "搭捷運上學既方便又準時",
+        "sentence_zh": "ㄐㄧㄝˊ ㄩㄣˋ",
+        "sentence_vi": "搭捷運上學既方便又準時。"
+    },
+    {
+        "id": 50,
+        "word": "50",
+        "pinyin": "卡車",
+        "zhuyin": "kǎ chē",
+        "hint": "大卡車載著好多的貨物",
+        "sentence_zh": "ㄎㄚˇ ㄔㄜ",
+        "sentence_vi": "大卡車載著好多的貨物。"
+    },
+    {
+        "id": 51,
+        "word": "51",
+        "pinyin": "救護車",
+        "zhuyin": "jiù hù chē",
+        "hint": "聽見救護車的聲音要趕快讓路",
+        "sentence_zh": "ㄐㄧㄡˋ ㄏㄨˋ ㄔㄜ",
+        "sentence_vi": "聽見救護車的聲音要趕快讓路。"
+    },
+    {
+        "id": 52,
+        "word": "52",
+        "pinyin": "警車",
+        "zhuyin": "jǐng chē",
+        "hint": "警察叔叔開著警車保護大家",
+        "sentence_zh": "ㄐㄧㄥˇ ㄔㄜ",
+        "sentence_vi": "警察叔叔開著警車保護大家。"
+    },
+    {
+        "id": 53,
+        "word": "53",
+        "pinyin": "消防車",
+        "zhuyin": "xiāo fáng chē",
+        "hint": "紅色的消防車去幫忙滅火",
+        "sentence_zh": "ㄒㄧㄠ ㄈㄤˊ ㄔㄜ",
+        "sentence_vi": "紅色的消防車去幫忙滅火。"
+    },
+    {
+        "id": 54,
+        "word": "54",
+        "pinyin": "馬路",
+        "zhuyin": "mǎ lù",
+        "hint": "過馬路要牽好大人的手",
+        "sentence_zh": "ㄇㄚˇ ㄌㄨˋ",
+        "sentence_vi": "過馬路要牽好大人的手。"
+    },
+    {
+        "id": 55,
+        "word": "55",
+        "pinyin": "紅綠燈",
+        "zhuyin": "hóng lǜ dēng",
+        "hint": "紅燈停綠燈行黃燈要注意",
+        "sentence_zh": "ㄏㄨㄥˊ ㄌㄩˋ ㄉㄥ",
+        "sentence_vi": "紅燈停，綠燈行，黃燈要注意。"
+    },
+    {
+        "id": 56,
+        "word": "56",
+        "pinyin": "衣服",
+        "zhuyin": "yī fu",
+        "hint": "我會自己穿好乾淨的衣服",
+        "sentence_zh": "ㄧ ㄈㄨˊ",
+        "sentence_vi": "我會自己穿好乾淨的衣服。"
+    },
+    {
+        "id": 57,
+        "word": "57",
+        "pinyin": "褲子",
+        "zhuyin": "kù zi",
+        "hint": "這條藍色牛仔褲很好看",
+        "sentence_zh": "ㄎㄨˋ ㄗ˙",
+        "sentence_vi": "這條藍色牛仔褲很好看。"
+    },
+    {
+        "id": 58,
+        "word": "58",
+        "pinyin": "鞋子",
+        "zhuyin": "xié zi",
+        "hint": "出門前要把鞋子穿好",
+        "sentence_zh": "ㄒㄧㄝˊ ㄗ˙",
+        "sentence_vi": "出門前要把鞋子穿好。"
+    },
+    {
+        "id": 59,
+        "word": "59",
+        "pinyin": "襪子",
+        "zhuyin": "wà zi",
+        "hint": "穿鞋子之前要先穿襪子",
+        "sentence_zh": "ㄨㄚˋ ㄗ˙",
+        "sentence_vi": "穿鞋子之前要先穿襪子。"
+    },
+    {
+        "id": 60,
+        "word": "60",
+        "pinyin": "帽子",
+        "zhuyin": "mào zi",
+        "hint": "太陽很大戴上帽子防曬",
+        "sentence_zh": "ㄇㄠˋ ㄗ˙",
+        "sentence_vi": "太陽很大，戴上帽子防曬。"
+    },
+    {
+        "id": 61,
+        "word": "61",
+        "pinyin": "外套",
+        "zhuyin": "wài tào",
+        "hint": "外面天氣變冷了快穿上外套",
+        "sentence_zh": "ㄨㄞˋ ㄊㄠˋ",
+        "sentence_vi": "外面天氣變冷了，快穿上外套。"
+    },
+    {
+        "id": 62,
+        "word": "62",
+        "pinyin": "裙子",
+        "zhuyin": "qún zi",
+        "hint": "妹妹穿著一條漂亮的粉紅色裙子",
+        "sentence_zh": "ㄑㄩㄣˊ ㄗ˙",
+        "sentence_vi": "妹妹穿著一條漂亮的粉紅色裙子。"
+    },
+    {
+        "id": 63,
+        "word": "63",
+        "pinyin": "口袋",
+        "zhuyin": "kǒu dài",
+        "hint": "口袋裡裝著我的小手帕",
+        "sentence_zh": "ㄎㄡˇ ㄉㄞˋ",
+        "sentence_vi": "口袋裡裝著我的小手帕。"
+    },
+    {
+        "id": 64,
+        "word": "64",
+        "pinyin": "雨衣",
+        "zhuyin": "yǔ yī",
+        "hint": "下雨天出門要穿雨衣",
+        "sentence_zh": "ㄩˇ ㄧ",
+        "sentence_vi": "下雨天出門要穿雨衣。"
+    },
+    {
+        "id": 65,
+        "word": "65",
+        "pinyin": "手套",
+        "zhuyin": "shǒu tào",
+        "hint": "冬天戴上手套手就不冷了",
+        "sentence_zh": "ㄕㄡˇ ㄊㄠˋ",
+        "sentence_vi": "冬天戴上手套，手就不冷了。"
+    },
+    {
+        "id": 66,
+        "word": "66",
+        "pinyin": "跑步",
+        "zhuyin": "pǎo bù",
+        "hint": "我們在操場上快樂地跑步",
+        "sentence_zh": "ㄆㄠˇ ㄅㄨˋ",
+        "sentence_vi": "我們在操場上快樂地跑步。"
+    },
+    {
+        "id": 67,
+        "word": "67",
+        "pinyin": "游泳",
+        "zhuyin": "yóu yǒng",
+        "hint": "夏天去游泳池游泳最涼快了",
+        "sentence_zh": "ㄧㄡˊ ㄩㄥˇ",
+        "sentence_vi": "夏天去游泳池游泳最涼快了。"
+    },
+    {
+        "id": 68,
+        "word": "68",
+        "pinyin": "跳繩",
+        "zhuyin": "tiào shéng",
+        "hint": "跳繩可以讓我長得更高",
+        "sentence_zh": "ㄊㄧㄠˋ ㄕㄥˊ",
+        "sentence_vi": "跳繩可以讓我長得更高。"
+    },
+    {
+        "id": 69,
+        "word": "69",
+        "pinyin": "踢足球",
+        "zhuyin": "tī zú qiú",
+        "hint": "我和同學在草地上踢足球",
+        "sentence_zh": "ㄊㄧ ㄗㄨˊ ㄑㄧㄡˊ",
+        "sentence_vi": "我和同學在草地上踢足球。"
+    },
+    {
+        "id": 70,
+        "word": "70",
+        "pinyin": "打籃球",
+        "zhuyin": "dǎ lán qiú",
+        "hint": "哥哥投籃的技術非常厲害",
+        "sentence_zh": "ㄉㄚˇ ㄌㄢˊ ㄑㄧㄡˊ",
+        "sentence_vi": "哥哥投籃的技術非常厲害。"
+    },
+    {
+        "id": 71,
+        "word": "71",
+        "pinyin": "畫畫",
+        "zhuyin": "huà huà",
+        "hint": "我用彩色筆在紙上畫畫",
+        "sentence_zh": "ㄏㄨㄚˋ ㄏㄨㄚˋ",
+        "sentence_vi": "我用彩色筆在紙上畫畫。"
+    },
+    {
+        "id": 72,
+        "word": "72",
+        "pinyin": "彈鋼琴",
+        "zhuyin": "tán gāng qín",
+        "hint": "漂亮的鋼琴聲真好聽",
+        "sentence_zh": "ㄊㄢˊ ㄍㄤ ㄑㄧㄣˊ",
+        "sentence_vi": "漂亮的鋼琴聲真好聽。"
+    },
+    {
+        "id": 73,
+        "word": "73",
+        "pinyin": "唱歌",
+        "zhuyin": "chàng gē",
+        "hint": "音樂課時我們一起大聲唱歌",
+        "sentence_zh": "ㄔㄤˋ ㄍㄜ",
+        "sentence_vi": "音樂課時，我們一起大聲唱歌。"
+    },
+    {
+        "id": 74,
+        "word": "74",
+        "pinyin": "看書",
+        "zhuyin": "kàn shū",
+        "hint": "睡前看書可以增加好多知識",
+        "sentence_zh": "ㄎㄢˋ ㄕㄨ",
+        "sentence_vi": "睡前看書可以增加好多知識。"
+    },
+    {
+        "id": 75,
+        "word": "75",
+        "pinyin": "寫字",
+        "zhuyin": "xiě zì",
+        "hint": "寫字姿勢要端正",
+        "sentence_zh": "ㄒㄧㄝˇ ㄗˋ",
+        "sentence_vi": "寫字姿勢要端正。"
+    },
+    {
+        "id": 76,
+        "word": "76",
+        "pinyin": "遊戲",
+        "zhuyin": "yóu xì",
+        "hint": "下課時間我們在操場玩遊戲",
+        "sentence_zh": "ㄧㄡˊ ㄒㄧˋ",
+        "sentence_vi": "下課時間我們在操場玩遊戲。"
+    },
+    {
+        "id": 77,
+        "word": "77",
+        "pinyin": "露營",
+        "zhuyin": "lù yíng",
+        "hint": "週末全家人一起去山上露營",
+        "sentence_zh": "ㄌㄨˋ ㄧㄥˊ",
+        "sentence_vi": "週末全家人一起去山上露營。"
+    },
+    {
+        "id": 78,
+        "word": "78",
+        "pinyin": "爬山",
+        "zhuyin": "pá shān",
+        "hint": "爬到山頂可以看到美麗的風景",
+        "sentence_zh": "ㄆㄚˊ ㄕㄢ",
+        "sentence_vi": "爬到山頂可以看到美麗的風景。"
+    },
+    {
+        "id": 79,
+        "word": "79",
+        "pinyin": "騎車",
+        "zhuyin": "qí chē",
+        "hint": "下午在公園裡騎自行車很舒服",
+        "sentence_zh": "ㄑㄧˊ ㄔㄜ",
+        "sentence_vi": "下午在公園裡騎自行車很舒服。"
+    },
+    {
+        "id": 80,
+        "word": "80",
+        "pinyin": "散步",
+        "zhuyin": "sàn bù",
+        "hint": "吃完晚餐和爸爸媽媽去散步",
+        "sentence_zh": "ㄙㄢˋ ㄅㄨˋ",
+        "sentence_vi": "吃完晚餐，和爸爸媽媽去散步。"
+    },
+    {
+        "id": 81,
+        "word": "81",
+        "pinyin": "山",
+        "zhuyin": "shān",
+        "hint": "遠處有一座高高的大山",
+        "sentence_zh": "ㄕㄢ",
+        "sentence_vi": "遠處有一座高高的大山。"
+    },
+    {
+        "id": 82,
+        "word": "82",
+        "pinyin": "水",
+        "zhuyin": "shuǐ",
+        "hint": "口渴了要多喝純淨的水",
+        "sentence_zh": "ㄕㄨㄟˇ",
+        "sentence_vi": "口渴了要多喝純淨的水。"
+    },
+    {
+        "id": 83,
+        "word": "83",
+        "pinyin": "日",
+        "zhuyin": "rì",
+        "hint": "太陽也叫做「日」散發著光芒",
+        "sentence_zh": "ㄖˋ",
+        "sentence_vi": "太陽也叫做「日」，散發著光芒。"
+    },
+    {
+        "id": 84,
+        "word": "84",
+        "pinyin": "月",
+        "zhuyin": "yuè",
+        "hint": "月亮也叫做「月」晚上會發光",
+        "sentence_zh": "ㄩㄝˋ",
+        "sentence_vi": "月亮也叫做「月」，晚上會發光。"
+    },
+    {
+        "id": 85,
+        "word": "85",
+        "pinyin": "天",
+        "zhuyin": "tiān",
+        "hint": "天空上有小鳥在自由飛翔",
+        "sentence_zh": "ㄊㄧㄢ",
+        "sentence_vi": "天空上有小鳥在自由飛翔。"
+    },
+    {
+        "id": 86,
+        "word": "86",
+        "pinyin": "地",
+        "zhuyin": "dì",
+        "hint": "土地上生長著綠色的青草",
+        "sentence_zh": "ㄉㄧˋ",
+        "sentence_vi": "土地上生長著綠色的青草。"
+    },
+    {
+        "id": 87,
+        "word": "87",
+        "pinyin": "風",
+        "zhuyin": "fēng",
+        "hint": "微風吹過樹葉發出沙沙的聲音",
+        "sentence_zh": "ㄈㄥ",
+        "sentence_vi": "微風吹過，樹葉發出沙沙的聲音。"
+    },
+    {
+        "id": 88,
+        "word": "88",
+        "pinyin": "雨",
+        "zhuyin": "yǔ",
+        "hint": "下雨了出門要記得帶雨傘",
+        "sentence_zh": "ㄩˇ",
+        "sentence_vi": "下雨了，出門要記得帶雨傘。"
+    },
+    {
+        "id": 89,
+        "word": "89",
+        "pinyin": "雲",
+        "zhuyin": "yún",
+        "hint": "天上的白雲像一朵朵棉花糖",
+        "sentence_zh": "ㄩㄣ",
+        "sentence_vi": "天上的白雲像一朵朵棉花糖。"
+    },
+    {
+        "id": 90,
+        "word": "90",
+        "pinyin": "火",
+        "zhuyin": "huǒ",
+        "hint": "煮飯時的火溫度很高不能亂碰",
+        "sentence_zh": "ㄏㄨㄛˇ",
+        "sentence_vi": "煮飯時的火溫度很高，不能亂碰。"
+    },
+    {
+        "id": 91,
+        "word": "91",
+        "pinyin": "人",
+        "zhuyin": "rén",
+        "hint": "每個人都要做一個善良的好人",
+        "sentence_zh": "ㄖㄣˊ",
+        "sentence_vi": "每個人都要做一個善良的好人。"
+    },
+    {
+        "id": 92,
+        "word": "92",
+        "pinyin": "手",
+        "zhuyin": "shǒu",
+        "hint": "吃飯前要用肥皂把手洗乾淨",
+        "sentence_zh": "ㄕㄡˇ",
+        "sentence_vi": "吃飯前要用肥皂把手洗乾淨。"
+    },
+    {
+        "id": 93,
+        "word": "93",
+        "pinyin": "足",
+        "zhuyin": "zú",
+        "hint": "「足」就是腳帶我們走遍世界",
+        "sentence_zh": "ㄗㄨˊ",
+        "sentence_vi": "「足」就是腳，帶我們走遍世界。"
+    },
+    {
+        "id": 94,
+        "word": "94",
+        "pinyin": "口",
+        "zhuyin": "kǒu",
+        "hint": "我們用口說話也用口吃東西",
+        "sentence_zh": "ㄎㄡˇ",
+        "sentence_vi": "我們用口說話，也用口吃東西。"
+    },
+    {
+        "id": 95,
+        "word": "95",
+        "pinyin": "耳",
+        "zhuyin": "ěr",
+        "hint": "耳朵要用來專心聽老師說話",
+        "sentence_zh": "ㄦˇ",
+        "sentence_vi": "耳朵要用來專心聽老師說話。"
+    },
+    {
+        "id": 96,
+        "word": "96",
+        "pinyin": "目",
+        "zhuyin": "mù",
+        "hint": "眼睛也叫「目」用來看世界",
+        "sentence_zh": "ㄇㄨˋ",
+        "sentence_vi": "眼睛也叫「目」，用來看世界。"
+    },
+    {
+        "id": 97,
+        "word": "97",
+        "pinyin": "大",
+        "zhuyin": "dà",
+        "hint": "大象的身體非常大",
+        "sentence_zh": "ㄉㄚˋ",
+        "sentence_vi": "大象的身體非常大。"
+    },
+    {
+        "id": 98,
+        "word": "98",
+        "pinyin": "小",
+        "zhuyin": "xiǎo",
+        "hint": "螞蟻的身體非常小",
+        "sentence_zh": "ㄒㄧㄠˇ",
+        "sentence_vi": "螞蟻的身體非常小。"
+    },
+    {
+        "id": 99,
+        "word": "99",
+        "pinyin": "多",
+        "zhuyin": "duō",
+        "hint": "天上有好多好多顆星星",
+        "sentence_zh": "ㄉㄨㄛ",
+        "sentence_vi": "天上有好多好多顆星星。"
+    },
+    {
+        "id": 100,
+        "word": "100",
+        "pinyin": "少",
+        "zhuyin": "shǎo",
+        "hint": "盤子裡只剩下很少的餅乾",
+        "sentence_zh": "ㄕㄠˇ",
+        "sentence_vi": "盤子裡只剩下很少的餅乾。"
+    }
 ]
