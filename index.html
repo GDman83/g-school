@@ -127,9 +127,7 @@
         let currentIndex = 0;
         let audioCtx = null;
 
-        // 核心改動：當點擊大門按鈕，瞬間開通手機所有音訊管道
         function enterSchool() {
-            // 1. 強制啟動並解鎖網頁 Web Audio 環境
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
@@ -137,21 +135,22 @@
                 audioCtx.resume();
             }
 
-            // 2. 丟一個「空白的發音」給手機語音引擎，強制破解手機語音的自動播放鎖
+            // 【核心防呆1：引擎預熱】丟一個有語意但短暫的字給引擎，強制叫醒任何挑剔的手機語音系統
             if ('speechSynthesis' in window) {
-                let silentUtterance = new SpeechSynthesisUtterance('');
-                window.speechSynthesis.speak(silentUtterance);
+                window.speechSynthesis.cancel(); // 先清空一次
+                let warmUp = new SpeechSynthesisUtterance('嗨');
+                warmUp.volume = 0; // 靜音預熱
+                window.speechSynthesis.speak(warmUp);
             }
 
-            // 動畫隱藏大門
             document.getElementById("welcome-overlay").style.opacity = "0";
             setTimeout(() => {
                 document.getElementById("welcome-overlay").style.display = "none";
             }, 500);
             
-            // 執行敲鐘與播放
             playSchoolBell();
-            setTimeout(() => { playSentenceAudio(); }, 1200);
+            // 給予語音引擎 1 秒鐘充裕的初始化時間，再讀例句
+            setTimeout(() => { playSentenceAudio(); }, 1000);
         }
 
         // 學校鐘聲
@@ -236,28 +235,68 @@
         function nextCard() { if (currentIndex < db.length - 1) { currentIndex++; renderCard(); playSentenceAudio(); } }
         function prevCard() { if (currentIndex > 0) { currentIndex--; renderCard(); playSentenceAudio(); } }
 
+        // 【核心智慧優化：跨平台智慧選音色】
+        function setupVoiceLanguage(utterance) {
+            if (!('speechSynthesis' in window)) return;
+            const voices = window.speechSynthesis.getVoices();
+            
+            // 優先找台灣中文 (zh-TW)
+            let targetVoice = voices.find(v => v.lang === 'zh-TW' || v.lang.replace('_', '-').includes('zh-TW'));
+            
+            // 降級方案1：如果找不到台灣中文，找廣義的中文 (zh-CN, zh-HK, zh)
+            if (!targetVoice) {
+                targetVoice = voices.find(v => v.lang.startsWith('zh'));
+            }
+            
+            if (targetVoice) {
+                utterance.voice = targetVoice;
+                utterance.lang = targetVoice.lang;
+            } else {
+                // 最低防線：交給系統自行解讀中文
+                utterance.lang = 'zh-TW';
+            }
+        }
+
+        // 藍喇叭（或換字時）：專門朗讀例句
         function playSentenceAudio() {
             if(db.length === 0 || !('speechSynthesis' in window)) return;
-            window.speechSynthesis.cancel();
+            
+            // 針對某些 iOS 做安全相容處理，不盲目呼叫 cancel
+            if (!navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                window.speechSynthesis.cancel();
+            }
+            
             const current = db[currentIndex];
             if (!current.sentence_zh) return;
             
             const utterance = new SpeechSynthesisUtterance(current.sentence_zh);
-            utterance.lang = 'zh-TW';
+            setupVoiceLanguage(utterance);
             utterance.rate = 0.85;
             window.speechSynthesis.speak(utterance);
         }
 
+        // 黑喇叭：單獨精準慢速朗讀單詞
         function playWordAudio() {
             if(db.length === 0 || !('speechSynthesis' in window)) return;
-            window.speechSynthesis.cancel();
+            
+            if (!navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                window.speechSynthesis.cancel();
+            }
+            
             const current = db[currentIndex];
             if (!current.word) return;
             
             const utterance = new SpeechSynthesisUtterance(current.word);
-            utterance.lang = 'zh-TW';
+            setupVoiceLanguage(utterance);
             utterance.rate = 0.75; 
             window.speechSynthesis.speak(utterance);
+        }
+
+        // 監聽語音載入事件（Chrome必備防死鎖）
+        if ('speechSynthesis' in window && window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = function() {
+                console.log("語音清單已更新完成");
+            };
         }
 
         if ('serviceWorker' in navigator) {
