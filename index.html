@@ -24,7 +24,7 @@
         .phone-container { width: 100%; max-width: 414px; height: 100vh; max-height: 850px; background-color: var(--bg-app); display: flex; flex-direction: column; position: relative; overflow: hidden; }
         @media (min-width: 450px) { .phone-container { height: 820px; border: 12px solid #1E293B; border-radius: 40px; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4); } }
         
-        /* 儀式感首頁大門 */
+        /* 儀式感大門 */
         #welcome-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, #4285F4, #34A853); z-index: 999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; transition: all 0.5s ease; }
         .school-gate-icon { font-size: 80px; margin-bottom: 20px; animation: bounce 2s infinite; }
         .welcome-title { font-size: 28px; font-weight: 900; margin-bottom: 8px; letter-spacing: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
@@ -35,11 +35,11 @@
         .app-title { font-weight: 900; color: var(--google-blue); font-size: 20px; }
         .counter { background: #EEF2F6; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; color: var(--google-blue); font-family: 'Poppins', sans-serif; }
         
-        /* 卡片區域固定高度 - 絕不跳動 */
+        /* 卡片區域 */
         .card-area { flex: 1; padding: 16px 20px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
         .study-card { background: white; border-radius: 32px; padding: 20px; box-shadow: 0 10px 30px rgba(15,23,42,0.04); display: flex; flex-direction: column; position: relative; height: 480px; box-sizing: border-box; }
         
-        /* 雙喇叭面板區 */
+        /* 雙喇叭面板 */
         .audio-control-panel { position: absolute; top: 20px; right: 20px; display: flex; flex-direction: column; gap: 12px; z-index: 10; }
         .audio-btn { width: 42px; height: 42px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .btn-audio-word { background: #0F172A; color: #FFFFFF; }
@@ -122,10 +122,13 @@
         </div>
     </div>
 
+    <audio id="global-audio" preload="auto"></audio>
+
     <script>
         let db = [];
         let currentIndex = 0;
         let audioCtx = null;
+        const audioPlayer = document.getElementById('global-audio');
 
         function enterSchool() {
             if (!audioCtx) {
@@ -135,25 +138,16 @@
                 audioCtx.resume();
             }
 
-            // 【核心防呆1：引擎預熱】丟一個有語意但短暫的字給引擎，強制叫醒任何挑剔的手機語音系統
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // 先清空一次
-                let warmUp = new SpeechSynthesisUtterance('嗨');
-                warmUp.volume = 0; // 靜音預熱
-                window.speechSynthesis.speak(warmUp);
-            }
-
             document.getElementById("welcome-overlay").style.opacity = "0";
             setTimeout(() => {
                 document.getElementById("welcome-overlay").style.display = "none";
             }, 500);
             
             playSchoolBell();
-            // 給予語音引擎 1 秒鐘充裕的初始化時間，再讀例句
-            setTimeout(() => { playSentenceAudio(); }, 1000);
+            setTimeout(() => { playSentenceAudio(); }, 1200);
         }
 
-        // 學校鐘聲
+        // 模擬電子敲鐘聲
         function playSchoolBell() {
             try {
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -235,68 +229,29 @@
         function nextCard() { if (currentIndex < db.length - 1) { currentIndex++; renderCard(); playSentenceAudio(); } }
         function prevCard() { if (currentIndex > 0) { currentIndex--; renderCard(); playSentenceAudio(); } }
 
-        // 【核心智慧優化：跨平台智慧選音色】
-        function setupVoiceLanguage(utterance) {
-            if (!('speechSynthesis' in window)) return;
-            const voices = window.speechSynthesis.getVoices();
-            
-            // 優先找台灣中文 (zh-TW)
-            let targetVoice = voices.find(v => v.lang === 'zh-TW' || v.lang.replace('_', '-').includes('zh-TW'));
-            
-            // 降級方案1：如果找不到台灣中文，找廣義的中文 (zh-CN, zh-HK, zh)
-            if (!targetVoice) {
-                targetVoice = voices.find(v => v.lang.startsWith('zh'));
-            }
-            
-            if (targetVoice) {
-                utterance.voice = targetVoice;
-                utterance.lang = targetVoice.lang;
-            } else {
-                // 最低防線：交給系統自行解讀中文
-                utterance.lang = 'zh-TW';
-            }
-        }
-
-        // 藍喇叭（或換字時）：專門朗讀例句
+        // 🌐 【核心改動：藍喇叭調用雲端最優美的 Google 線上標準台灣國語】
         function playSentenceAudio() {
-            if(db.length === 0 || !('speechSynthesis' in window)) return;
-            
-            // 針對某些 iOS 做安全相容處理，不盲目呼叫 cancel
-            if (!navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-                window.speechSynthesis.cancel();
-            }
-            
+            if(db.length === 0) return;
             const current = db[currentIndex];
             if (!current.sentence_zh) return;
             
-            const utterance = new SpeechSynthesisUtterance(current.sentence_zh);
-            setupVoiceLanguage(utterance);
-            utterance.rate = 0.85;
-            window.speechSynthesis.speak(utterance);
+            // 呼叫 Google TTS 免密碼免費雲端服務，強制輸出標準台灣中文語音音檔
+            const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-TW&client=tw-ob&q=${encodeURIComponent(current.sentence_zh)}`;
+            
+            audioPlayer.src = ttsUrl;
+            audioPlayer.play().catch(e => console.log("音訊播放被攔截:", e));
         }
 
-        // 黑喇叭：單獨精準慢速朗讀單詞
+        // 🌐 【核心改動：黑喇叭調用雲端朗讀單詞】
         function playWordAudio() {
-            if(db.length === 0 || !('speechSynthesis' in window)) return;
-            
-            if (!navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-                window.speechSynthesis.cancel();
-            }
-            
+            if(db.length === 0) return;
             const current = db[currentIndex];
             if (!current.word) return;
             
-            const utterance = new SpeechSynthesisUtterance(current.word);
-            setupVoiceLanguage(utterance);
-            utterance.rate = 0.75; 
-            window.speechSynthesis.speak(utterance);
-        }
-
-        // 監聽語音載入事件（Chrome必備防死鎖）
-        if ('speechSynthesis' in window && window.speechSynthesis.onvoiceschanged !== undefined) {
-            window.speechSynthesis.onvoiceschanged = function() {
-                console.log("語音清單已更新完成");
-            };
+            const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-TW&client=tw-ob&q=${encodeURIComponent(current.word)}`;
+            
+            audioPlayer.src = ttsUrl;
+            audioPlayer.play().catch(e => console.log("音訊播放被攔截:", e));
         }
 
         if ('serviceWorker' in navigator) {
