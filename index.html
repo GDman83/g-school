@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟盟學堂</title>
+    <title>G學園 - 中文啟蒙學堂</title>
     
     <link rel="manifest" href="/g-school/manifest.json">
     <meta name="theme-color" content="#536DFE">
@@ -44,7 +44,7 @@
             min-height: 100vh;
         }
 
-        /* 手機模擬器外殼（PWA 打開時會全螢幕填滿） */
+        /* 手機模擬器外殼 */
         .phone-container {
             width: 100%;
             max-width: 414px;
@@ -66,7 +66,7 @@
             }
         }
 
-        /* 歡迎首頁（敲鐘開課） */
+        /* 歡迎首頁 */
         .start-overlay {
             position: absolute;
             inset: 0;
@@ -119,10 +119,6 @@
             align-items: center;
             gap: 10px;
             transition: transform 0.2s;
-        }
-
-        .start-btn:active {
-            transform: scale(0.95);
         }
 
         /* 讀取與錯誤蓋板 */
@@ -240,7 +236,6 @@
             cursor: pointer;
         }
 
-        /* 核心大字與注音組合 */
         .word-combo-box {
             display: flex;
             align-items: center;
@@ -279,7 +274,6 @@
             margin-bottom: 25px;
         }
 
-        /* 越南文與例句區 */
         .translation-box {
             border-top: 1px solid #F1F5F9;
             padding-top: 20px;
@@ -303,7 +297,6 @@
             font-weight: 500;
         }
 
-        /* 喇叭絕對定位懸浮按鈕 */
         .speaker-floating-icon {
             position: absolute;
             top: 20px;
@@ -319,7 +312,6 @@
             font-size: 16px;
         }
 
-        /* 底部控制導航欄 */
         .bottom-nav {
             padding: 20px;
             background-color: white;
@@ -345,8 +337,7 @@
 
         .btn-prev { background-color: #F1F5F9; color: var(--text-main); }
         .btn-next { background-color: #536DFE; color: white; box-shadow: 0 8px 20px rgba(83,109,254,0.25); }
-        .nav-btn:active { transform: scale(0.98); }
-
+        
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
     </style>
@@ -354,7 +345,6 @@
 <body>
 
     <div class="phone-container">
-        
         <div id="startOverlay" class="start-overlay">
             <div class="start-school-icon">🏫</div>
             <h1 class="start-title">G學園啟盟學堂</h1>
@@ -408,7 +398,6 @@
             <button class="nav-btn btn-prev" onclick="prevCard()"><i class="fas fa-arrow-left"></i> 上一字</button>
             <button class="nav-btn btn-next" onclick="nextCard()">下一字 <i class="fas fa-arrow-right"></i></button>
         </div>
-
     </div>
 
     <audio id="globalAudioPlayer" preload="auto"></audio>
@@ -422,12 +411,10 @@
             fetchLibraryData();
         }
 
-        // 🎯【極速本機加載】徹底捨棄 GAS 網址，直接讀取 GitHub 同目錄下的 data.json
         function fetchLibraryData() {
             document.getElementById('loadingLayer').classList.remove('hidden');
             document.getElementById('errorLayer').classList.add('hidden');
 
-            // 加上時間戳記強制刷新防快取
             fetch('./data.json?t=' + new Date().getTime())
                 .then(response => {
                     if (!response.ok) throw new Error('data.json 讀取失敗');
@@ -461,7 +448,6 @@
             
             document.getElementById('cardCounter').innerText = `${currentIndex + 1} / ${dbData.length}`;
 
-            // 處理注音符號垂直排列
             const zhuyinRaw = item["注音"] || "";
             const zhuyinBox = document.getElementById('zhuyinBox');
             zhuyinBox.innerHTML = "";
@@ -503,7 +489,6 @@
             player.onended = () => { speaker.style.color = '#536DFE'; };
         }
 
-        // 註冊 PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/g-school/sw.js')
