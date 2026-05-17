@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟蒙學堂</title>
+    <title>G學園 - 中文啟盟學堂</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
         .phone-container { width: 100%; max-width: 414px; height: 100vh; max-height: 850px; background-color: var(--bg-app); display: flex; flex-direction: column; position: relative; overflow: hidden; }
         @media (min-width: 450px) { .phone-container { height: 820px; border: 12px solid #1E293B; border-radius: 40px; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4); } }
         
-        /* 儀式感首頁大門 */
+        /* 首頁大門 */
         #welcome-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, #4285F4, #34A853); z-index: 999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; transition: all 0.5s ease; }
         .school-gate-icon { font-size: 80px; margin-bottom: 20px; animation: bounce 2s infinite; }
         .welcome-title { font-size: 28px; font-weight: 900; margin-bottom: 8px; letter-spacing: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
@@ -36,32 +36,37 @@
         .counter { background: #EEF2F6; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; color: var(--google-blue); font-family: 'Poppins', sans-serif; }
         
         /* 卡片區域 */
-        .card-area { flex: 1; padding: 16px 20px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
-        .study-card { background: white; border-radius: 32px; padding: 24px; box-shadow: 0 10px 30px rgba(15,23,42,0.04); display: flex; flex-direction: column; position: relative; height: 500px; box-sizing: border-box; }
+        .card-area { flex: 1; padding: 12px 20px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+        .study-card { background: white; border-radius: 32px; padding: 20px; box-shadow: 0 10px 30px rgba(15,23,42,0.04); display: flex; flex-direction: column; position: relative; height: 530px; box-sizing: border-box; }
         
-        /* 右上角原生單一喇叭（點擊直接朗讀完整句子與核心詞彙） */
-        .audio-control-panel { position: absolute; top: 24px; right: 24px; z-index: 10; }
-        .audio-btn { width: 46px; height: 46px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 14px rgba(66, 133, 244, 0.2); background: var(--google-blue); color: #FFFFFF; }
+        /* 原生大喇叭 */
+        .audio-control-panel { position: absolute; top: 20px; right: 20px; z-index: 10; }
+        .audio-btn { width: 44px; height: 44px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; box-shadow: 0 4px 12px rgba(66, 133, 244, 0.2); background: var(--google-blue); color: #FFFFFF; }
         
-        /* 左上角編號 */
-        .card-id { position: absolute; top: 20px; left: 26px; font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 900; color: #94A3B8; }
+        .card-id { position: absolute; top: 16px; left: 24px; font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #94A3B8; }
         
+        /* 🎯 雙路並進：動態圖形視覺區 */
+        .graphic-display-zone { height: 100px; display: flex; justify-content: center; align-items: center; margin-top: 25px; }
+        .emoji-style { font-size: 70px; line-height: 1; }
+        .svg-container { width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; }
+        .svg-container svg { width: 100%; height: 100%; object-fit: contain; }
+
         /* 單詞核心區 */
-        .word-main-zone { height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 30px; text-align: center; }
-        .pinyin-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 600; color: var(--google-red); margin-bottom: 6px; }
-        .main-word { font-size: 52px; font-weight: 900; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; }
-        .main-word.long-word { font-size: 38px; } 
-        .zhuyin-text { font-size: 16px; font-weight: 700; color: var(--google-green); margin-top: 8px; min-height: 22px; text-align: center; }
+        .word-main-zone { height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .pinyin-text { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 600; color: var(--google-red); }
+        .main-word { font-size: 46px; font-weight: 900; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; }
+        .main-word.long-word { font-size: 34px; } 
+        .zhuyin-text { font-size: 15px; font-weight: 700; color: var(--google-green); margin-top: 2px; min-height: 20px; }
         
-        .divider { height: 1px; background: #F1F5F9; margin-top: 10px; margin-bottom: 20px; }
+        .divider { height: 1px; background: #F1F5F9; margin-top: 5px; margin-bottom: 12px; }
         
         /* 例句區 */
-        .sentence-section { display: flex; flex-direction: column; gap: 14px; height: 180px; justify-content: center; }
-        .target-sentence { font-size: 22px; font-weight: 700; color: var(--text-main); text-align: center; line-height: 1.5; padding: 0 5px; }
+        .sentence-section { display: flex; flex-direction: column; gap: 10px; height: 160px; justify-content: center; }
+        .target-sentence { font-size: 20px; font-weight: 700; color: var(--text-main); text-align: center; line-height: 1.4; }
         .highlight-keyword { color: var(--google-red) !important; font-weight: 900 !important; }
         
-        .translation-box { background: #F8FAFC; border-radius: 18px; padding: 14px; border: 1px solid #F1F5F9; height: 76px; display: flex; align-items: center; justify-content: center; }
-        .translation-sentence { font-size: 15px; color: var(--text-muted); text-align: center; line-height: 1.4; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .translation-box { background: #F8FAFC; border-radius: 16px; padding: 12px; border: 1px solid #F1F5F9; height: 70px; display: flex; align-items: center; justify-content: center; }
+        .translation-sentence { font-size: 14px; color: var(--text-muted); text-align: center; line-height: 1.4; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         
         /* 底部導航按鈕 */
         .nav-bar { padding: 15px 24px 25px; display: flex; gap: 16px; background: white; border-top: 1px solid #E2E8F0; height: 95px; box-sizing: border-box; }
@@ -89,12 +94,13 @@
 
         <div class="card-area">
             <div class="study-card">
-                
                 <div class="audio-control-panel">
-                    <button class="audio-btn" onclick="playSentenceAudio()" title="播放朗讀音檔"><i class="fas fa-volume-up"></i></button>
+                    <button class="audio-btn" onclick="playSentenceAudio()"><i class="fas fa-volume-up"></i></button>
                 </div>
                 
                 <span id="lbl-id" class="card-id">--</span>
+
+                <div id="graphic-zone" class="graphic-display-zone"></div>
 
                 <div class="word-main-zone">
                     <span id="lbl-pinyin" class="pinyin-text">--</span>
@@ -128,23 +134,14 @@
         const audioPlayer = document.getElementById('local-audio-player');
 
         function enterSchool() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
             document.getElementById("welcome-overlay").style.opacity = "0";
-            setTimeout(() => {
-                document.getElementById("welcome-overlay").style.display = "none";
-            }, 500);
-            
+            setTimeout(() => { document.getElementById("welcome-overlay").style.display = "none"; }, 500);
             playSchoolBell();
             setTimeout(() => { playSentenceAudio(); }, 1200);
         }
 
-        // 模擬校園電子鐘聲
         function playSchoolBell() {
             try {
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -157,18 +154,13 @@
                     gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
-                    osc.start(startTime);
-                    osc.stop(startTime + duration);
+                    osc.start(startTime); osc.stop(startTime + duration);
                 };
                 let now = audioCtx.currentTime;
-                playTone(now, 523.25, 0.9);       
-                playTone(now + 0.5, 659.25, 0.9); 
-                playTone(now + 1.0, 587.33, 0.9); 
-                playTone(now + 1.5, 392.00, 1.3); 
+                playTone(now, 523.25, 0.9); playTone(now + 0.5, 659.25, 0.9); playTone(now + 1.0, 587.33, 0.9); playTone(now + 1.5, 392.00, 1.3);
             } catch(e) {}
         }
 
-        // 讀取包含音檔的全新 8 欄位 data.md
         async function loadCardsFromMD() {
             try {
                 const response = await fetch(`./data.md?v=${Date.now()}`);
@@ -179,8 +171,8 @@
                 lines.forEach(line => {
                     if (line.includes('|')) {
                         const cols = line.split('|').map(c => c.trim());
-                        // 精準切出包含第7、8欄的語音字串資料
-                        if (cols.length >= 9 && cols[1] && !cols[1].includes('---') && !cols[1].includes('編號')) {
+                        // 🎯 智慧對齊全新的 9 欄位結構
+                        if (cols.length >= 10 && cols[1] && !cols[1].includes('---') && !cols[1].includes('編號')) {
                             tempDb.push({
                                 id: cols[1], 
                                 word: cols[2], 
@@ -188,13 +180,13 @@
                                 zhuyin: cols[4], 
                                 sentence_zh: cols[5], 
                                 sentence_vi: cols[6],
-                                word_audio: cols[7],     // 單詞音檔文字
-                                sentence_audio: cols[8]  // 例句音檔文字
+                                graphic: cols[7],       // 🎯 第 7 欄：Emoji 或 SVG
+                                word_audio: cols[8],     // 第 8 欄
+                                sentence_audio: cols[9]  // 第 9 欄
                             });
                         }
                     }
                 });
-
                 if(tempDb.length > 0) { db = tempDb; renderCard(); }
             } catch (error) { console.error(error); }
         }
@@ -205,6 +197,21 @@
             
             document.getElementById("lbl-id").textContent = current.id || "";
             
+            // 🎯 【大腦核心：圖形智能渲染判斷】
+            const graphicZone = document.getElementById("graphic-zone");
+            graphicZone.innerHTML = ""; // 先清空
+            
+            let rawGraphic = current.graphic || "";
+            if (rawGraphic) {
+                if (rawGraphic.includes("<svg")) {
+                    // A 方案：如果是 SVG 代碼，塞進容器直接讓手機畫出來！
+                    graphicZone.innerHTML = `<div class="svg-container">${rawGraphic}</div>`;
+                } else {
+                    // B 方案：如果是普通 Emoji 符號，直接用超大文字秀出來！
+                    graphicZone.innerHTML = `<span class="emoji-style">${rawGraphic}</span>`;
+                }
+            }
+
             const wordEl = document.getElementById("lbl-word");
             const keyword = current.word || "";
             wordEl.textContent = keyword;
@@ -227,21 +234,17 @@
         function nextCard() { if (currentIndex < db.length - 1) { currentIndex++; renderCard(); playSentenceAudio(); } }
         function prevCard() { if (currentIndex > 0) { currentIndex--; renderCard(); playSentenceAudio(); } }
 
-        // 🔊【解碼播放核心邏輯】
         function playPackagedAudio(base64Data) {
             if (!base64Data) return;
             try {
                 audioPlayer.pause();
-                // 將 Base64 資料直接還原為瀏覽器原生音訊，實現 100% 離線秒播
                 audioPlayer.src = "data:audio/mp3;base64," + base64Data;
-                audioPlayer.play().catch(e => console.log("自動播放受限:", e));
-            } catch(e) { console.log("音訊解碼失敗:", e); }
+                audioPlayer.play().catch(e => console.log(e));
+            } catch(e) {}
         }
 
-        // 點擊喇叭或切換字卡：預設直接朗讀例句語音
         function playSentenceAudio() { 
             if(db.length > 0) {
-                // 如果例句語音存在就播例句，否則播放單詞語音備援
                 if (db[currentIndex].sentence_audio) {
                     playPackagedAudio(db[currentIndex].sentence_audio);
                 } else {
