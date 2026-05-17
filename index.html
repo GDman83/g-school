@@ -420,20 +420,22 @@
                 });
         }
 
-        // 🎯 核心大腦：直接針對校長那份被 TOOL 變形後的 JSON 欄位位置進行精準解碼！
+        // 🧠 終極降維打擊：全面放棄物件 Key，改用極速「欄位位置盲讀法」！
         function renderCard() {
             if (dbData.length === 0) return;
             const item = dbData[currentIndex];
             
+            // 提取出當前單字物件中，所有的「欄位名稱」與「實際填入值」
             const keys = Object.keys(item);
             const values = Object.values(item);
 
-            // 根據校長上傳的變形 data.json 結構：
-            // keys[1] 是中文主單字（如："你好"）
-            // values[1] 是拼音/提示（如："謝謝" / "嘻嘻"）
-            // keys[3] 是注音（如："ㄋ一ˇ ㄏㄠˇ"）
-            // keys[4] 是越南文單字（如："新潮！Rất vui..."）
-            // values[4] 是例句翻譯（如："謝謝爸爸，謝謝媽媽。"）
+            // 🎯 完美對號入座演算法：
+            // 欄位1：序號 (如 "2") -> keys[0] 或 values[0]
+            // 欄位2：主中文單字 (如 "你好"、"再見") -> 工具會隨機把它塞在 keys[1] 
+            // 欄位3：提示/複誦 (如 "謝謝"、"在建") -> 永遠在 values[1]
+            // 欄位4：注音 (如 "ㄋ一ˇ ㄏㄠˇ") -> 永遠在 keys[3]
+            // 欄位5：越南文 (如 "新潮！...") -> 永遠在 keys[4]
+            // 欄位6：例句 (如 "謝謝爸爸..."、"老師再見...") -> 永遠在 values[4]
 
             let word = keys[1] || "--"; 
             let pinyin = values[1] || ""; 
@@ -441,13 +443,16 @@
             let vietnamese = keys[4] || "--"; 
             let example = values[4] || ""; 
 
+            // 將提取出來的精準資料塞入網頁元素中
             document.getElementById('mainWord').innerText = word;
             document.getElementById('pinyinText').innerText = pinyin ? `提示: ${pinyin}` : "";
             document.getElementById('vietnameseTitle').innerText = vietnamese;
             document.getElementById('exampleSentence').innerText = example;
             
+            // 更新計數器
             document.getElementById('cardCounter').innerText = `${currentIndex + 1} / ${dbData.length}`;
 
+            // 注音符號垂直直列渲染
             const zhuyinBox = document.getElementById('zhuyinBox');
             zhuyinBox.innerHTML = "";
             
