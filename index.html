@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 中文啟盟學堂</title>
+    <title>G學園 - 終極雙語教材系統 (直讀 MD/CSV 雙引擎版)</title>
     
     <link rel="manifest" href="/g-school/manifest.json">
     <meta name="theme-color" content="#536DFE">
@@ -26,6 +26,7 @@
             --text-main: #0F172A;
             --text-muted: #475569;
             --bg-app: #F8FAFC;
+            --accent-color: #536DFE;
         }
 
         * {
@@ -42,29 +43,139 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px 0;
         }
 
+        /* 雙主板佈局：左邊是手機模擬器，右邊是校長專屬神級後台 */
+        .workspace-container {
+            display: flex;
+            gap: 30px;
+            max-width: 1100px;
+            width: 100%;
+            padding: 0 20px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        /* 手機模擬器外殼 */
         .phone-container {
             width: 100%;
             max-width: 414px;
-            height: 100vh;
-            max-height: 850px;
+            height: 820px;
             background-color: var(--bg-app);
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
+            border: 10px solid #1E293B;
+            border-radius: 50px;
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4);
+            flex-shrink: 0;
         }
 
-        @media (min-width: 450px) {
-            .phone-container {
-                height: 850px;
-                border: 10px solid #1E293B;
-                border-radius: 50px;
-                box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4);
-            }
+        /* 校長專屬教材轉換後台 */
+        .admin-dashboard {
+            flex: 1;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(15,23,42,0.15);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            height: 820px;
         }
 
+        .admin-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #1E293B;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .paste-box {
+            width: 100%;
+            height: 180px;
+            border: 2px dashed #CBD5E1;
+            border-radius: 16px;
+            padding: 15px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 15px;
+        }
+
+        .paste-box:focus {
+            border-color: var(--accent-color);
+            background-color: #F8FAFC;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .admin-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-convert { background-color: #34A853; color: white; }
+        .btn-convert:hover { background-color: #2E9348; }
+        .btn-download { background-color: #4285F4; color: white; }
+        .btn-download:hover { background-color: #3574DE; }
+
+        .preview-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .md-output-container {
+            flex: 1;
+            background-color: #0F172A;
+            border-radius: 16px;
+            padding: 15px;
+            overflow: auto;
+            position: relative;
+        }
+
+        .md-output {
+            color: #38BDF8;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            white-space: pre;
+            line-height: 1.6;
+        }
+
+        /* 歡迎首頁 */
         .start-overlay {
             position: absolute;
             inset: 0;
@@ -84,25 +195,10 @@
             pointer-events: none;
         }
 
-        .start-school-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-
-        .start-title {
-            font-size: 32px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .start-subtitle {
-            font-size: 15px;
-            opacity: 0.85;
-            margin-bottom: 40px;
-        }
-
+        .start-school-icon { font-size: 80px; margin-bottom: 20px; animation: pulse 2s infinite; }
+        .start-title { font-size: 32px; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; }
+        .start-subtitle { font-size: 15px; opacity: 0.85; margin-bottom: 40px; }
+        
         .start-btn {
             background-color: white;
             color: #536DFE;
@@ -116,9 +212,9 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: transform 0.2s;
         }
 
+        /* 讀取蓋板 */
         .status-overlay {
             position: absolute;
             inset: 0;
@@ -133,37 +229,13 @@
         }
 
         .hidden { display: none !important; }
-
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #E2E8F0;
-            border-top-color: var(--google-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            width: 50px; height: 50px;
+            border: 5px solid #E2E8F0; border-top-color: var(--google-blue);
+            border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px;
         }
 
-        .error-icon {
-            font-size: 64px;
-            color: var(--google-red);
-            margin-bottom: 20px;
-        }
-
-        .status-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 12px;
-        }
-
-        .status-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-
+        /* 核心內容區域 */
         .app-header {
             padding: 20px;
             background-color: white;
@@ -173,214 +245,137 @@
             align-items: center;
         }
 
-        .logo-text {
-            font-size: 18px;
-            font-weight: 900;
-            color: #536DFE;
-        }
+        .logo-text { font-size: 18px; font-weight: 900; color: #536DFE; }
+        .counter-badge { background-color: #EDF2FE; color: #536DFE; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
 
-        .counter-badge {
-            background-color: #EDF2FE;
-            color: #536DFE;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .card-zone {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+        .card-zone { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
 
         .vocab-card {
             background-color: white;
-            width: 100%;
-            height: 100%;
-            max-height: 480px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(15,23,42,0.08);
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
+            width: 100%; height: 100%; max-height: 460px;
+            border-radius: 30px; box-shadow: 0 15px 35px rgba(15,23,42,0.08);
+            padding: 30px; display: flex; flex-direction: column;
+            justify-content: space-between; position: relative;
         }
 
-        .audio-trigger-zone {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .word-combo-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .main-word {
-            font-size: 76px;
-            font-weight: 900;
-            color: var(--text-main);
-            letter-spacing: -2px;
-        }
-
+        .audio-trigger-zone { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; }
+        .word-combo-box { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px; }
+        .main-word { font-size: 72px; font-weight: 900; color: var(--text-main); letter-spacing: -2px; }
+        
         .zhuyin-box {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #EC4899;
-            font-weight: 700;
-            font-size: 20px;
-            line-height: 1.2;
-            border-left: 2px dashed #F472B6;
-            padding-left: 8px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: #EC4899; font-weight: 700; font-size: 20px; line-height: 1.2;
+            border-left: 2px dashed #F472B6; padding-left: 8px;
         }
 
-        .pinyin-text {
-            font-size: 16px;
-            color: var(--text-muted);
-            font-weight: 600;
-            background-color: #F1F5F9;
-            padding: 4px 14px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-        }
-
-        .translation-box {
-            border-top: 1px solid #F1F5F9;
-            padding-top: 20px;
-            text-align: center;
-        }
-
-        .vietnamese-title {
-            font-size: 24px;
-            font-weight: 800;
-            color: #059669;
-            margin-bottom: 10px;
-        }
-
-        .example-sentence {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.6;
-            background-color: #F8FAFC;
-            padding: 12px;
-            border-radius: 16px;
-            font-weight: 500;
-        }
+        .pinyin-text { font-size: 16px; color: var(--text-muted); font-weight: 600; background-color: #F1F5F9; padding: 4px 14px; border-radius: 20px; margin-bottom: 25px; }
+        .translation-box { border-top: 1px solid #F1F5F9; padding-top: 20px; text-align: center; }
+        .vietnamese-title { font-size: 24px; font-weight: 800; color: #059669; margin-bottom: 10px; }
+        .example-sentence { font-size: 14px; color: var(--text-muted); line-height: 1.6; background-color: #F8FAFC; padding: 12px; border-radius: 16px; font-weight: 500; }
 
         .speaker-floating-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 44px;
-            height: 44px;
-            background-color: #EEF2F6;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #536DFE;
-            font-size: 16px;
+            position: absolute; top: 20px; right: 20px; width: 44px; height: 44px;
+            background-color: #EEF2F6; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #536DFE; font-size: 16px;
         }
 
-        .bottom-nav {
-            padding: 20px;
-            background-color: white;
-            border-top: 1px solid #E2E8F0;
-            display: flex;
-            gap: 15px;
-        }
-
-        .nav-btn {
-            flex: 1;
-            padding: 16px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            transition: background-color 0.2s;
-        }
-
+        .bottom-nav { padding: 20px; background-color: white; border-top: 1px solid #E2E8F0; display: flex; gap: 15px; }
+        .nav-btn { flex: 1; padding: 16px; border-radius: 20px; font-size: 16px; font-weight: 700; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-prev { background-color: #F1F5F9; color: var(--text-main); }
         .btn-next { background-color: #536DFE; color: white; box-shadow: 0 8px 20px rgba(83,109,254,0.25); }
         
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+
+        /* 手機端自動隱藏管理後台，維持完美的純 App 體驗 */
+        @media (max-width: 900px) {
+            body { padding: 0; background-color: var(--bg-app); }
+            .workspace-container { padding: 0; }
+            .phone-container { border: none; border-radius: 0; max-width: 100%; height: 100vh; max-height: 100vh; }
+            .admin-dashboard { display: none; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="phone-container">
-        <div id="startOverlay" class="start-overlay">
-            <div class="start-school-icon">🏫</div>
-            <h1 class="start-title">G學園啟盟學堂</h1>
-            <p class="start-subtitle">校長專屬 · 中越雙語卡片系統</p>
-            <button class="start-btn" onclick="openSchool()">
-                <i class="fas fa-bell"></i> 敲鐘開課
-            </button>
-        </div>
+    <div class="workspace-container">
+        
+        <div class="phone-container">
+            <div id="startOverlay" class="start-overlay">
+                <div class="start-school-icon">🏫</div>
+                <h1 class="start-title">G學園啟盟學堂</h1>
+                <p class="start-subtitle">中越雙語智慧閃卡系統</p>
+                <button class="start-btn" onclick="openSchool()">
+                    <i class="fas fa-bell"></i> 進入課堂
+                </button>
+            </div>
 
-        <div id="loadingLayer" class="status-overlay">
-            <div class="spinner"></div>
-            <h2 class="status-title">正在讀取校內教材庫...</h2>
-            <p class="status-desc">本機模式啟動，資料秒速加載中。</p>
-        </div>
+            <div id="loadingLayer" class="status-overlay hidden">
+                <div class="spinner"></div>
+                <h2 class="status-title">正在加載最新教材庫...</h2>
+                <p class="status-desc">讀取中，請稍候。</p>
+            </div>
 
-        <div id="errorLayer" class="status-overlay hidden">
-            <div class="error-icon"><i class="fas fa-exclamation-circle"></i></div>
-            <h2 class="status-title">本地教材讀取失敗</h2>
-            <p class="status-desc">請確認您的倉庫內是否存在正確格式的 data.json 檔案。</p>
-            <button class="retry-btn" onclick="fetchLibraryData()">重新讀取</button>
-        </div>
+            <div class="app-header">
+                <div class="logo-text"><i class="fas fa-graduation-cap"></i> G-School</div>
+                <div id="cardCounter" class="counter-badge">0 / 0</div>
+            </div>
 
-        <div class="app-header">
-            <div class="logo-text"><i class="fas fa-graduation-cap"></i> G-School</div>
-            <div id="cardCounter" class="counter-badge">0 / 0</div>
-        </div>
-
-        <div class="card-zone">
-            <div class="vocab-card">
-                <div class="audio-trigger-zone" onclick="speakCurrentWord()">
-                    <div class="speaker-floating-icon" id="speakerIcon">
-                        <i class="fas fa-volume-up"></i>
+            <div class="card-zone">
+                <div class="vocab-card">
+                    <div class="audio-trigger-zone" onclick="speakCurrentWord()">
+                        <div class="speaker-floating-icon" id="speakerIcon">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        
+                        <div class="word-combo-box">
+                            <div id="mainWord" class="main-word">--</div>
+                            <div id="zhuyinBox" class="zhuyin-box"></div>
+                        </div>
+                        
+                        <div id="pinyinText" class="pinyin-text">--</div>
                     </div>
-                    
-                    <div class="word-combo-box">
-                        <div id="mainWord" class="main-word">--</div>
-                        <div id="zhuyinBox" class="zhuyin-box"></div>
-                    </div>
-                    
-                    <div id="pinyinText" class="pinyin-text">--</div>
-                </div>
 
-                <div class="translation-box">
-                    <div id="vietnameseTitle" class="vietnamese-title">--</div>
-                    <div id="exampleSentence" class="example-sentence">--</div>
+                    <div class="translation-box">
+                        <div id="vietnameseTitle" class="vietnamese-title">--</div>
+                        <div id="exampleSentence" class="example-sentence">--</div>
+                    </div>
                 </div>
+            </div>
+
+            <div class="bottom-nav">
+                <button class="nav-btn btn-prev" onclick="prevCard()"><i class="fas fa-arrow-left"></i> 上一字</button>
+                <button class="nav-btn btn-next" onclick="nextCard()">下一字 <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
 
-        <div class="bottom-nav">
-            <button class="nav-btn btn-prev" onclick="prevCard()"><i class="fas fa-arrow-left"></i> 上一字</button>
-            <button class="nav-btn btn-next" onclick="nextCard()">下一字 <i class="fas fa-arrow-right"></i></button>
+        <div class="admin-dashboard">
+            <h2 class="admin-title"><i class="fas fa-tools" style="color: #536DFE;"></i> 校長專屬教材智造後台</h2>
+            <p class="admin-subtitle">請直接複製 Excel 表格的完整行列，貼在下方。本系統將自動為您編織出高規格的 Markdown (.md) 表格，並同步更新左側卡片預覽！</p>
+            
+            <textarea id="excelInput" class="paste-box" placeholder="範例格式（直接從 Excel 全選複製貼上即可）：
+序號	核心詞彙	核心單字(提示)	注音	越南文	生活應用例句
+1	你好	謝謝	ㄋ一ˇ ㄏㄠˇ	Xin chào! Rất vui được gặp bạn.	謝謝爸爸，謝謝媽媽。
+2	再見	在建	ㄗㄞˋ ㄐㄧㄢˋ	Tạm biệt.	老師再見，明日見。"></textarea>
+            
+            <div class="control-row">
+                <button class="admin-btn btn-convert" onclick="processExcelData()">
+                    <i class="fas fa-sync-alt"></i> 1. 轉化教材並預覽
+                </button>
+                <button class="admin-btn btn-download" onclick="downloadMarkdownFile()">
+                    <i class="fas fa-file-download"></i> 2. 下載 data.md 檔
+                </button>
+            </div>
+
+            <div class="preview-title">
+                <span><i class="fab fa-markdown"></i> 產出的 GitHub 完美表格碼 (.md)</span>
+                <span style="font-size: 11px; font-weight: normal; color: #94A3B8;">直接覆蓋 data.md 即可在 HUB 上呈現專業表格</span>
+            </div>
+
+            <div class="md-output-container">
+                <div id="markdownContent" class="md-output">尚未轉化任何資料...</div>
+            </div>
         </div>
+
     </div>
 
     <audio id="globalAudioPlayer" preload="auto"></audio>
@@ -389,73 +384,116 @@
         let dbData = [];
         let currentIndex = 0;
 
+        // 預設教材範例資料
+        const defaultLibrary = [
+            {"id": "1", "word": "你好", "pinyin": "謝謝", "zhuyin": "ㄋ一ˇ ㄏㄠˇ", "vietnamese": "Xin chào! Rất vui được gặp bạn.", "example": "謝謝爸爸，謝謝媽媽。"},
+            {"id": "2", "word": "再見", "pinyin": "在建", "zhuyin": "ㄗㄞˋ ㄐㄧㄢˋ", "vietnamese": "Tạm biệt.", "example": "老師再見，明日見。"}
+        ];
+
         function openSchool() {
             document.getElementById('startOverlay').classList.add('fade-out');
-            fetchLibraryData();
+            loadDefaultOrFetch();
         }
 
-        function fetchLibraryData() {
-            document.getElementById('loadingLayer').classList.remove('hidden');
-            document.getElementById('errorLayer').classList.add('hidden');
+        function loadDefaultOrFetch() {
+            if (dbData.length === 0) {
+                dbData = defaultLibrary;
+            }
+            renderCard();
+        }
 
-            fetch('./data.json?t=' + new Date().getTime())
-                .then(response => {
-                    if (!response.ok) throw new Error('data.json 讀取失敗');
-                    return response.json();
-                })
-                .then(data => {
-                    if (data && data.length > 0) {
-                        dbData = data;
-                        currentIndex = 0;
-                        renderCard();
-                        document.getElementById('loadingLayer').classList.add('hidden');
-                    } else {
-                        throw new Error('教材資料為空');
-                    }
-                })
-                .catch(err => {
-                    console.error('PWA讀取錯誤:', err);
-                    document.getElementById('loadingLayer').classList.add('hidden');
-                    document.getElementById('errorLayer').classList.remove('hidden');
+        // 🎯 核心大腦：校長複製 Excel 直轉完美 Markdown 表格並防變形晶片
+        function processExcelData() {
+            const rawText = document.getElementById('excelInput').value.trim();
+            if (!rawText) {
+                alert("校長，請先貼上 Excel 資料喔！");
+                return;
+            }
+
+            const lines = rawText.split('\n');
+            if (lines.length === 0) return;
+
+            let parsedCards = [];
+            let markdownRows = [];
+            let headers = [];
+
+            const firstLineCols = lines[0].split('\t');
+            if (firstLineCols.length < 2) {
+                headers = lines[0].split(',');
+            } else {
+                headers = firstLineCols;
+            }
+
+            let mdHeader = "| " + headers.join(" | ") + " |";
+            let mdDivider = "| " + headers.map(() => "---").join(" | ") + " |";
+            markdownRows.push(mdHeader);
+            markdownRows.push(mdDivider);
+
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i].trim()) continue;
+                
+                let cols = lines[i].split('\t');
+                if (cols.length < 2) {
+                    cols = lines[i].split(',');
+                }
+
+                while (cols.length < 6) cols.push("");
+
+                let mdRow = "| " + cols.map(c => c.trim()).join(" | ") + " |";
+                markdownRows.push(mdRow);
+
+                parsedCards.push({
+                    "id": cols[0] ? cols[0].trim() : i.toString(),
+                    "word": cols[1] ? cols[1].trim() : "--",
+                    "pinyin": cols[2] ? cols[2].trim() : "",
+                    "zhuyin": cols[3] ? cols[3].trim() : "",
+                    "vietnamese": cols[4] ? cols[4].trim() : "--",
+                    "example": cols[5] ? cols[5].trim() : ""
                 });
+            }
+
+            const finalMarkdown = markdownRows.join('\n');
+            document.getElementById('markdownContent').innerText = finalMarkdown;
+
+            if (parsedCards.length > 0) {
+                dbData = parsedCards;
+                currentIndex = 0;
+                renderCard();
+                alert(`轉換成功！共轉化 ${parsedCards.length} 筆教材，已同步至左側字卡 App 畫面！`);
+            }
         }
 
-        // 🧠 終極降維打擊：全面放棄物件 Key，改用極速「欄位位置盲讀法」！
+        function downloadMarkdownFile() {
+            const mdText = document.getElementById('markdownContent').innerText;
+            if (!mdText || mdText.startsWith("尚未轉化")) {
+                alert("校長，請先點選『1. 轉化教材並預覽』後再下載喔！");
+                return;
+            }
+
+            const blob = new Blob([mdText], { type: "text/markdown;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute("download", "data.md");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         function renderCard() {
             if (dbData.length === 0) return;
             const item = dbData[currentIndex];
+
+            document.getElementById('mainWord').innerText = item.word || "--";
+            document.getElementById('pinyinText').innerText = item.pinyin ? `提示: ${item.pinyin}` : "";
+            document.getElementById('vietnameseTitle').innerText = item.vietnamese || "--";
+            document.getElementById('exampleSentence').innerText = item.example || "";
             
-            // 提取出當前單字物件中，所有的「欄位名稱」與「實際填入值」
-            const keys = Object.keys(item);
-            const values = Object.values(item);
-
-            // 🎯 完美對號入座演算法：
-            // 欄位1：序號 (如 "2") -> keys[0] 或 values[0]
-            // 欄位2：主中文單字 (如 "你好"、"再見") -> 工具會隨機把它塞在 keys[1] 
-            // 欄位3：提示/複誦 (如 "謝謝"、"在建") -> 永遠在 values[1]
-            // 欄位4：注音 (如 "ㄋ一ˇ ㄏㄠˇ") -> 永遠在 keys[3]
-            // 欄位5：越南文 (如 "新潮！...") -> 永遠在 keys[4]
-            // 欄位6：例句 (如 "謝謝爸爸..."、"老師再見...") -> 永遠在 values[4]
-
-            let word = keys[1] || "--"; 
-            let pinyin = values[1] || ""; 
-            let zhuyinRaw = keys[3] || ""; 
-            let vietnamese = keys[4] || "--"; 
-            let example = values[4] || ""; 
-
-            // 將提取出來的精準資料塞入網頁元素中
-            document.getElementById('mainWord').innerText = word;
-            document.getElementById('pinyinText').innerText = pinyin ? `提示: ${pinyin}` : "";
-            document.getElementById('vietnameseTitle').innerText = vietnamese;
-            document.getElementById('exampleSentence').innerText = example;
-            
-            // 更新計數器
             document.getElementById('cardCounter').innerText = `${currentIndex + 1} / ${dbData.length}`;
 
-            // 注音符號垂直直列渲染
             const zhuyinBox = document.getElementById('zhuyinBox');
             zhuyinBox.innerHTML = "";
             
+            const zhuyinRaw = item.zhuyin;
             if (zhuyinRaw && zhuyinRaw !== "--") {
                 const parts = zhuyinRaw.split(' ');
                 parts.forEach(part => {
@@ -480,8 +518,8 @@
 
         function speakCurrentWord() {
             if (dbData.length === 0) return;
-            const keys = Object.keys(dbData[currentIndex]);
-            const word = keys[1]; 
+            const item = dbData[currentIndex];
+            const word = item.word;
             if (!word || word === "--") return;
 
             const player = document.getElementById('globalAudioPlayer');
@@ -492,14 +530,6 @@
             player.play();
             
             player.onended = () => { speaker.style.color = '#536DFE'; };
-        }
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/g-school/sw.js')
-                    .then(reg => console.log('G學園 PWA 註冊成功！'))
-                    .catch(err => console.log('PWA 註冊失敗:', err));
-            });
         }
     </script>
 </body>
