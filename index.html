@@ -3,227 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 啟盟魔法學堂</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="./emojis.js"></script>
+    <title>啟盟學堂 G-School</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --google-blue: #4285F4; --google-red: #EA4335; --google-yellow: #FBBC05; --google-green: #34A853; --text-main: #0F172A; --text-muted: #475569; --bg-app: #F8FAFC; }
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #CBD5E1; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .phone-container { width: 100%; max-width: 414px; height: 100vh; max-height: 850px; background-color: var(--bg-app); display: flex; flex-direction: column; position: relative; overflow: hidden; }
-        @media (min-width: 450px) { .phone-container { height: 820px; border: 12px solid #1E293B; border-radius: 40px; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4); } }
-        
-        /* 🏛️ 城堡大門 */
-        #welcome-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, #1E3A8A, #3B82F6); z-index: 999; display: flex; flex-direction: column; padding: 30px 24px; color: white; transition: all 0.3s ease; overflow-y: auto; }
-        .school-header { text-align: center; margin-top: 15px; margin-bottom: 25px; }
-        .school-logo { font-size: 60px; margin-bottom: 10px; display: inline-block; }
-        .welcome-title { font-size: 26px; font-weight: 900; letter-spacing: 1px; }
-        .menu-section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; color: #93C5FD; display: flex; align-items: center; gap: 6px; }
-        .menu-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
-        .portal-card { background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 24px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: 0.2s; }
-        .portal-card:active { transform: scale(0.97); background: rgba(255, 255, 255, 0.25); }
-        .portal-icon { font-size: 32px; width: 55px; height: 55px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.2); }
-        .portal-name { font-size: 17px; font-weight: 900; color: white; }
-        .portal-desc { font-size: 12px; color: #BFDBFE; }
-        
-        /* 頂部導航 */
-        .app-header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #E2E8F0; }
-        .back-to-gate-btn { background: #F1F5F9; border: none; padding: 8px 12px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 13px; }
-        .counter { background: #EEF2F6; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; color: var(--google-blue); }
-
-        /* 卡片主體 */
-        .card-area { flex: 1; padding: 10px 20px; display: flex; flex-direction: column; justify-content: center; }
-        .study-card { background: white; border-radius: 32px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; flex-direction: column; position: relative; height: 560px; }
-        .card-id { position: absolute; top: 16px; left: 24px; font-family: 'Poppins'; font-weight: 900; color: #CBD5E1; background: #F8FAFC; padding: 2px 10px; border-radius: 8px; }
-        
-        /* 1. 圖形區 */
-        .graphic-display-zone { height: 110px; display: flex; justify-content: center; align-items: center; margin-top: 5px; }
-        .emoji-style { font-size: 90px; }
-        .svg-container { width: 100px; height: 100px; }
-
-        /* 2. 上方文字區 (詞彙或拼音) */
-        .word-main-zone { height: 45px; display: flex; justify-content: center; align-items: center; text-align: center; }
-        .main-word { font-size: 26px; font-weight: 900; color: var(--text-muted); }
-
-        /* 3. 大肚子盒子 */
-        .zhuyin-display-zone { height: 145px; display: flex; justify-content: center; align-items: center; background: #FFF7ED; border-radius: 24px; margin: 5px 0; border: 2px dashed #FED7AA; position: relative; }
-        .zhuyin-large-char { font-size: 90px; font-weight: 950; color: var(--google-red); text-align: center; line-height: 1; }
-        .word-audio-btn { width: 46px; height: 46px; border-radius: 50%; border: none; background: var(--google-red); color: white; cursor: pointer; font-size: 18px; box-shadow: 0 4px 10px rgba(234,67,53,0.3); margin-left: 15px; }
-
-        /* 4. 底部獨立拼音學習欄位 */
-        .pinyin-spelling-zone { height: 45px; display: flex; justify-content: center; align-items: center; text-align: center; margin-bottom: 5px; }
-        .pinyin-spelling-text { font-size: 32px; font-weight: 900; color: var(--text-muted); letter-spacing: 2px; }
-
-        /* 5. 例句區 */
-        .sentence-section { height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; }
-        .target-sentence { font-size: 22px; font-weight: 900; color: var(--text-main); text-align: center; }
-        .sentence-audio-btn { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--google-blue); color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(66,133,244,0.3); }
-
-        /* 按鈕控制 */
-        .nav-control-block { background: white; padding: 15px 20px 30px; display: flex; flex-direction: column; gap: 10px; }
-        .nav-row { display: flex; gap: 10px; }
-        .nav-btn { flex: 1; height: 50px; border-radius: 15px; font-weight: 700; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-prev { background: #E2E8F0; }
-        .btn-next { background: var(--google-blue); color: white; }
-        .btn-jump { background: #F8FAFC; border: 1px solid #E2E8F0; font-size: 12px; height: 40px; border-radius: 10px; }
+        body { font-family: 'Lexend', 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .card-shadow { box-shadow: 0 20px 40px -15px rgba(0,0,0,0.08); }
     </style>
 </head>
-<body>
-    <div class="phone-container">
-        <div id="welcome-overlay">
-            <div class="school-header">
-                <div class="school-logo">🏰</div>
-                <div class="welcome-title">G學園啟盟學堂</div>
-                <div class="welcome-subtitle">請校長與寶貝選擇魔法傳送門</div>
+<body class="bg-slate-50 min-h-screen flex flex-col antialiased select-none">
+
+    <header class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
+            <button id="btnBackToHub" class="hidden flex items-center space-x-1 text-slate-500 hover:text-slate-800 transition active:scale-95">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+                <span class="font-bold text-base">返回主頁</span>
+            </button>
+            <div id="hubTitle" class="flex items-center space-x-2 mx-auto">
+                <span class="text-xl">🎒</span>
+                <h1 class="text-lg font-black text-slate-800 tracking-wide">啟盟學堂</h1>
             </div>
-            <div class="menu-section-title"><i class="fas fa-shapes"></i> 1. 注音符號園區</div>
-            <div class="menu-grid">
-                <div class="portal-card" onclick="enterDepartment('zhuyin')" style="border-color:#FBBC05">
-                    <div class="portal-icon" style="color:#FBBC05">ㄅ</div>
-                    <div class="portal-info">
-                        <div class="portal-name">ㄅㄆㄇ啟盟幼兒園</div>
-                        <div class="portal-desc">正宗注音符號與極簡音感複讀</div>
-                    </div>
+            <div class="w-10"></div> </div>
+    </header>
+
+    <main id="hubUniverse" class="flex-1 max-w-md w-full mx-auto px-5 py-8 flex flex-col justify-center space-y-6">
+        <div class="text-center space-y-2 mb-4">
+            <h2 class="text-2xl font-black text-slate-800 tracking-tight">小寶貝，今天想學什麼呢？</h2>
+            <p class="text-sm text-slate-400 font-medium">請選擇一個進入學堂宇宙</p>
+        </div>
+
+        <button onclick="launchUniverse('core.md', '🌟 初階核心識字')" class="w-full bg-white border-2 border-slate-100 hover:border-amber-400 p-6 rounded-3xl card-shadow flex items-center space-x-5 transition duration-300 active:scale-95 group text-left">
+            <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition">🌟</div>
+            <div class="flex-1">
+                <h3 class="text-lg font-bold text-slate-800">單元一：核心識字學堂</h3>
+                <p class="text-xs text-slate-400 mt-0.5">常用核心漢字、生活應用配對</p>
+            </div>
+            <svg class="w-5 h-5 text-slate-300 group-hover:text-amber-500 transition" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </button>
+
+        <button onclick="launchUniverse('zhuyin.md', 'ㄅ 注音符號啟蒙')" class="w-full bg-white border-2 border-slate-100 hover:border-indigo-400 p-6 rounded-3xl card-shadow flex items-center space-x-5 transition duration-300 active:scale-95 group text-left">
+            <div class="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition">ㄅ</div>
+            <div class="flex-1">
+                <h3 class="text-lg font-bold text-slate-800">單元二：注音啟蒙學堂</h3>
+                <p class="text-xs text-slate-400 mt-0.5">37正統注音符號、聲母韻母基礎</p>
+            </div>
+            <svg class="w-5 h-5 text-slate-300 group-hover:text-indigo-500 transition" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </button>
+    </main>
+
+    <main id="appUniverse" class="hidden flex-1 max-w-md w-full mx-auto px-4 py-4 flex flex-col justify-between">
+        
+        <div class="flex justify-between items-center px-2 mb-3">
+            <span id="txtUnitTag" class="text-xs font-extrabold bg-slate-200 text-slate-600 px-3 py-1 rounded-full uppercase tracking-wider">UNIT</span>
+            <span id="txtCounter" class="text-sm font-bold text-slate-400">0 / 0</span>
+        </div>
+
+        <div class="bg-white rounded-[32px] card-shadow border border-slate-100 p-6 flex flex-col justify-between flex-1 min-h-[420px] relative overflow-hidden transition-all duration-300">
+            
+            <div class="flex justify-between items-start z-10">
+                <div class="text-left">
+                    <span id="cardId" class="text-xs font-black text-slate-300 block">#01</span>
+                    <span id="cardSub" class="text-base font-bold text-amber-500 mt-0.5 block">拼音載入中</span>
+                </div>
+                <button onclick="speakCurrentText('main')" class="w-12 h-12 bg-slate-50 hover:bg-amber-100 text-slate-600 hover:text-amber-600 rounded-2xl flex items-center justify-center transition active:scale-90 card-shadow">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/></svg>
+                </button>
+            </div>
+
+            <div class="flex flex-col items-center justify-center flex-1 my-4 space-y-4">
+                <h1 id="cardMain" class="text-7xl font-black text-slate-800 tracking-normal transition-all">字</h1>
+                <div id="imgContainer" class="w-24 h-24 hidden transition-all duration-300">
+                    <img id="cardImg" src="" class="w-full h-full object-contain" alt="圖形提示">
                 </div>
             </div>
-            <div class="menu-section-title"><i class="fas fa-graduation-cap"></i> 2. 初階核心區</div>
-            <div class="menu-grid">
-                <div class="portal-card" onclick="enterDepartment('c100')">
-                    <div class="portal-icon" style="color:#4285F4">🌱</div>
-                    <div class="portal-info"><div class="portal-name">初階核心 100 字</div><div class="portal-desc">編號 1~100 生活必學</div></div>
-                </div>
-                <div class="portal-card" onclick="enterDepartment('c200')">
-                    <div class="portal-icon" style="color:#34A853">🌿</div>
-                    <div class="portal-info"><div class="portal-name">初階核心 200 字</div><div class="portal-desc">編號 101~200 詞彙量提升</div></div>
-                </div>
+
+            <div id="sentenceBox" class="bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2 relative group transition">
+                <button onclick="speakCurrentText('sentence')" class="absolute top-3 right-3 w-8 h-8 bg-white text-slate-400 hover:text-amber-500 rounded-xl flex items-center justify-center shadow-sm transition active:scale-90">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/></svg>
+                </button>
+                <p id="cardExample" class="text-sm font-bold text-slate-700 pr-8 leading-relaxed">例句載入中...</p>
+                <div class="border-t border-slate-200/60 my-1"></div>
+                <p id="cardVN" class="text-xs font-semibold text-slate-400 leading-normal">Dịch nghĩa...</p>
             </div>
         </div>
 
-        <div class="app-header">
-            <button class="back-to-gate-btn" onclick="backToGate()"><i class="fas fa-door-open"></i> 回大門</button>
-            <div id="dept-title" style="font-weight:900">--</div>
-            <div id="card-counter" class="counter">0/0</div>
+        <div class="grid grid-cols-2 gap-4 mt-5">
+            <button onclick="navigateCard(-1)" class="bg-white border border-slate-200 text-slate-600 font-bold py-4 px-6 rounded-2xl shadow-sm transition hover:bg-slate-50 active:scale-95 flex items-center justify-center space-x-2">
+                <svg class="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+                <span>上一個</span>
+            </button>
+            <button onclick="navigateCard(1)" class="bg-slate-900 text-white font-bold py-4 px-6 rounded-2xl shadow-md transition hover:bg-slate-800 active:scale-95 flex items-center justify-center space-x-2">
+                <span>下一個</span>
+                <svg class="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+            </button>
         </div>
+    </main>
 
-        <div class="card-area">
-            <div class="study-card">
-                <span id="lbl-id" class="card-id">--</span>
-                <div id="graphic-zone" class="graphic-display-zone"></div>
-                <div class="word-main-zone"><div id="lbl-word" class="main-word">--</div></div>
-                <div class="zhuyin-display-zone">
-                    <div id="lbl-large-zhuyin" class="zhuyin-large-char">--</div>
-                    <button class="word-audio-btn" onclick="playAudio('word')"><i class="fas fa-volume-up"></i></button>
-                </div>
-                <div class="pinyin-spelling-zone"><div id="lbl-spelling" class="pinyin-spelling-text">--</div></div>
-                <div class="sentence-section">
-                    <div style="display:flex; align-items:center; gap:12px; justify-content:center; width:100%">
-                        <div id="lbl-sentence-zh" class="target-sentence">--</div>
-                        <button class="sentence-audio-btn" onclick="playAudio('sent')"><i class="fas fa-volume-up"></i></button>
-                    </div>
-                    <div id="lbl-sentence-vi" style="color:#64748B; font-size:14px; font-weight:700; text-align:center;">--</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nav-control-block">
-            <div class="nav-row">
-                <button class="nav-btn btn-prev" onclick="prevCard()"><i class="fas fa-arrow-left"></i> 上一字</button>
-                <button class="nav-btn btn-next" onclick="nextCard()">下一字 <i class="fas fa-arrow-right"></i></button>
-            </div>
-            <div class="nav-row">
-                <button class="nav-btn btn-jump" onclick="jumpCards(-10)">退 10 字</button>
-                <button class="nav-btn btn-jump" onclick="jumpCards(10)">進 10 字</button>
-            </div>
-        </div>
-    </div>
-    <audio id="audio-player"></audio>
     <script>
-        let rawDb = [], filteredDb = [], currentIndex = 0, currentDept = '';
-        const player = document.getElementById('audio-player');
+        // 🏰 全局數據保險箱
+        let currentDatabase = [];
+        let currentIndex = 0;
+        const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/GDman83/g-school/main/";
 
-        async function loadData() {
-            const resp = await fetch(`./data.md?v=${Date.now()}`);
-            const text = await resp.text();
-            rawDb = text.split('\n').map(l => {
-                if (!l.includes('|')) return null;
-                // 🛑 核心解鎖：嚴格利用 Excel 的格子切開，不砍掉空元素，直接取得對齊 Index
-                const cells = l.split('|').map(s => s.trim());
-                if (cells.length < 8 || cells[1] === '編號' || cells[1].includes('---')) return null;
-
-                return { 
-                    id:      cells[1], // A 欄 (編號)
-                    colB:    cells[2], // B 欄 (核心詞彙 / 注音符號)
-                    colC:    cells[3], // C 欄 (拼音提示 / 輔助詞彙)
-                    colD:    cells[4], // D 欄 (注音 / 完整拼音)
-                    colE:    cells[5], // E 欄 (例句)
-                    colF:    cells[6], // F 欄 (越南文)
-                    colG:    cells[7], // G 欄 (圖形提示)
-                    audioI:  cells[8], // H 欄 (字音頻)
-                    audioJ:  cells[9]  // I 欄 (句音頻)
-                };
-            }).filter(o => o !== null);
+        // 🚪 開啟特定宇宙分流
+        function launchUniverse(fileName, titleText) {
+            document.getElementById('hubUniverse').classList.add('hidden');
+            document.getElementById('appUniverse').classList.remove('hidden');
+            document.getElementById('btnBackToHub').classList.remove('hidden');
+            document.getElementById('hubTitle').querySelector('h1').innerText = titleText;
+            
+            // 🚚 現場搬運指定 .md 房間
+            fetch(GITHUB_RAW_BASE + fileName)
+                .then(res => res.text())
+                .then(markdown => {
+                    parseMarkdownData(markdown);
+                    currentIndex = 0;
+                    renderCard();
+                })
+                .catch(err => {
+                    alert("城堡連線失敗，請檢查網路！" + err);
+                });
         }
 
-        function enterDepartment(dept) {
-            currentDept = dept;
-            if (dept === 'zhuyin') filteredDb = rawDb.filter(o => o.id.startsWith('ㄅ'));
-            else if (dept === 'c100') filteredDb = rawDb.filter(o => { let n = parseInt(o.id); return n >= 1 && n <= 100; });
-            else if (dept === 'c200') filteredDb = rawDb.filter(o => { let n = parseInt(o.id); return n >= 101 && n <= 200; });
-            
-            currentIndex = parseInt(localStorage.getItem('G_PROG_'+dept)) || 0;
-            document.getElementById('dept-title').innerText = (dept==='zhuyin'?'ㄅㄆㄇ啟盟園':'初階核心區');
-            document.getElementById('welcome-overlay').style.display = 'none';
-            render(); playAudio('word');
+        // 🔙 安全返回大廳
+        document.getElementById('btnBackToHub').addEventListener('click', () => {
+            document.getElementById('hubUniverse').classList.remove('hidden');
+            document.getElementById('appUniverse').classList.add('hidden');
+            document.getElementById('btnBackToHub').classList.add('hidden');
+            document.getElementById('hubTitle').querySelector('h1').innerText = "啟盟學堂";
+        });
+
+        // 📐 解析 Markdown 鐵軌表格大腦
+        function parseMarkdownData(md) {
+            currentDatabase = [];
+            const lines = md.split('\n');
+            for(let i=0; i<lines.length; i++) {
+                const line = lines[i].trim();
+                if(!line.startsWith('|') || line.includes(':---') || line.includes('主要展示')) continue;
+                
+                const cells = line.split('|').map(c => c.trim());
+                if(cells.length < 8) continue; // 欄位安全檢測
+                
+                currentDatabase.push({
+                    id: cells[1],
+                    main: cells[2],
+                    sub: cells[3],
+                    pinyin: cells[4], // 用於注音符號的獨立拼音
+                    example: cells[5],
+                    vn: cells[6],
+                    imgCode: cells[7]  // 圖形提示欄位碼
+                });
+            }
         }
 
-        function render() {
-            if (!filteredDb[currentIndex]) return;
-            const curr = filteredDb[currentIndex];
-            document.getElementById('lbl-id').innerText = curr.id;
+        // 🎴 渲染大卡片數據
+        function renderCard() {
+            if(currentDatabase.length === 0) return;
+            const item = currentDatabase[currentIndex];
             
-            // 🖼️ 圖形渲染邏輯 (G欄有SVG直接塞，沒有則去本地 Emoji 庫找)
-            const gz = document.getElementById('graphic-zone');
-            if (curr.colG && curr.colG.includes('<svg')) {
-                gz.innerHTML = `<div class="svg-container">${curr.colG}</div>`;
+            document.getElementById('cardId').innerText = `# ${item.id}`;
+            document.getElementById('cardMain').innerText = item.main;
+            document.getElementById('txtCounter').innerText = `${currentIndex + 1} / ${currentDatabase.length}`;
+            
+            // 🧠 智慧判斷：如果是注音單元，將獨立拼音顯示在上方提示區
+            if(item.id.startsWith('ㄅ') && item.pinyin) {
+                document.getElementById('cardSub').innerText = item.pinyin;
+                document.getElementById('cardSub').classList.remove('hidden');
+            } else if(item.sub) {
+                document.getElementById('cardSub').innerText = item.sub;
+                document.getElementById('cardSub').classList.remove('hidden');
             } else {
-                let lookupKey = (currentDept === 'zhuyin') ? curr.colC : curr.colB;
-                gz.innerHTML = `<span class="emoji-style">${curr.colG || (window.emojiDictionary ? window.emojiDictionary[lookupKey] : '')}</span>`;
+                document.getElementById('cardSub').classList.add('hidden');
             }
 
-            // 🔀 完全獨立的兩套排版邏輯
-            if (currentDept === 'zhuyin') {
-                // 【1. 注音區輸出方式】
-                document.getElementById('lbl-word').innerText = `${curr.colC} ${curr.colB}`; // 上方：爸爸 ㄅ
-                document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大肚子盒子：ㄅ (大紅字)
-                document.getElementById('lbl-spelling').innerText = curr.colD;              // 下方獨立欄位：ㄅㄚˋ ㄅㄚ˙
-                document.getElementById('lbl-sentence-zh').innerText = curr.colE;          // 例句
-                document.getElementById('lbl-sentence-vi').innerText = curr.colF || "";
+            // 🗺️ 例句與越南文展示
+            if(!item.example) {
+                document.getElementById('sentenceBox').classList.add('hidden');
             } else {
-                // 【2. 初階核心區輸出方式】
-                document.getElementById('lbl-word').innerText = curr.colC;                  // 上方：nǐ hǎo (純拼音)
-                document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大肚子盒子：你好 (中文字)
-                document.getElementById('lbl-spelling').innerText = "";                     // 核心詞彙不佔用下方拼音欄
-                document.getElementById('lbl-sentence-zh').innerText = curr.colE;          // 例句
-                document.getElementById('lbl-sentence-vi').innerText = curr.colF || "";
+                document.getElementById('sentenceBox').classList.remove('hidden');
+                document.getElementById('cardExample').innerText = item.example;
+                document.getElementById('cardVN').innerText = item.vn || "";
             }
 
-            document.getElementById('card-counter').innerText = `${currentIndex+1}/${filteredDb.length}`;
-            localStorage.setItem('G_PROG_'+currentDept, currentIndex);
+            // 🖼️ 智慧圖形提示對齊
+            const imgContainer = document.getElementById('imgContainer');
+            const cardImg = document.getElementById('cardImg');
+            if(item.imgCode && item.imgCode.match(/\.(jpeg|jpg|gif|png)/i)) {
+                cardImg.src = item.imgCode;
+                imgContainer.classList.remove('hidden');
+            } else {
+                imgContainer.classList.add('hidden');
+            }
         }
 
-        function playAudio(type) {
-            const curr = filteredDb[currentIndex];
-            const base64 = (type=='word' ? curr.audioI : curr.audioJ);
-            if (base64) { player.src = "data:audio/mp3;base64," + base64; player.play(); }
+        // 🎮 前後導航切換
+        function navigateCard(direction) {
+            currentIndex += direction;
+            if(currentIndex < 0) currentIndex = currentDatabase.length - 1;
+            if(currentIndex >= currentDatabase.length) currentIndex = 0;
+            renderCard();
         }
-        function nextCard() { if(currentIndex < filteredDb.length-1) { currentIndex++; render(); playAudio('word'); } }
-        function prevCard() { if(currentIndex > 0) { currentIndex--; render(); playAudio('word'); } }
-        function jumpCards(n) { currentIndex = Math.max(0, Math.min(filteredDb.length-1, currentIndex+n)); render(); playAudio('word'); }
-        function backToGate() { document.getElementById('welcome-overlay').style.display = 'flex'; }
-        window.onload = loadData;
+
+        // 🗣️ 終極大核心：呼叫本機原廠最標準台灣腔中文女聲引擎
+        function speakCurrentText(type) {
+            if(currentDatabase.length === 0) return;
+            const item = currentDatabase[currentIndex];
+            let textToSpeak = "";
+
+            if (type === 'main') {
+                textToSpeak = item.main;
+            } else {
+                // 清洗例句中的英文與括號，確保發音純淨
+                textToSpeak = item.example.split('\n')[0].split('(')[0].replace(/[a-zA-Z]/g, "").trim();
+            }
+
+            if (!textToSpeak) return;
+
+            // 🚀 啟動 Web Speech 語音火箭
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            
+            // 🎯 強制指定台灣腔標準發音（zh-TW）
+            utterance.lang = "zh-TW";
+            utterance.rate = 0.85; // 速度微微放慢，最適合小朋友學習！
+            utterance.pitch = 1.0;
+
+            // 🔍 尋找本機內建的最優質台灣腔女聲（如 Apple Mei-Jia 或 Google 台灣女聲）
+            const voices = window.speechSynthesis.getVoices();
+            const twVoice = voices.find(v => v.lang === "zh-TW" || v.lang === "zh_TW");
+            if(twVoice) utterance.voice = twVoice;
+
+            // 如果本機正在發音，先中斷，避免串音
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // 📱 解決部分手機瀏覽器語音快取延遲問題
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.getVoices();
+            window.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        }
     </script>
 </body>
 </html>
