@@ -3,108 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>G學園 - 啟蒙魔法學堂</title>
+    <title>G學園 - 啟盟魔法學堂</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <script src="./emojis.js"></script>
-
     <style>
-        :root {
-            --google-blue: #4285F4;
-            --google-red: #EA4335;
-            --google-yellow: #FBBC05;
-            --google-green: #34A853;
-            --text-main: #0F172A;
-            --text-muted: #475569;
-            --bg-app: #F8FAFC;
-        }
+        :root { --google-blue: #4285F4; --google-red: #EA4335; --google-yellow: #FBBC05; --google-green: #34A853; --text-main: #0F172A; --text-muted: #475569; --bg-app: #F8FAFC; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #CBD5E1; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        
         .phone-container { width: 100%; max-width: 414px; height: 100vh; max-height: 850px; background-color: var(--bg-app); display: flex; flex-direction: column; position: relative; overflow: hidden; }
         @media (min-width: 450px) { .phone-container { height: 820px; border: 12px solid #1E293B; border-radius: 40px; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4); } }
         
-        /* 🏛️ 華麗大門：多部門城堡傳送選單 */
-        #welcome-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, #1E3A8A, #3B82F6); z-index: 999; display: flex; flex-direction: column; padding: 30px 24px; color: white; transition: all 0.4s ease; overflow-y: auto; }
-        .school-header { text-align: center; margin-top: 20px; margin-bottom: 30px; }
-        .school-logo { font-size: 65px; animation: bounce 2.5s infinite; margin-bottom: 10px; display: inline-block; }
-        .welcome-title { font-size: 26px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-        .welcome-subtitle { font-size: 13px; opacity: 0.8; margin-top: 5px; }
-        
+        /* 🏛️ 城堡大門選單 */
+        #welcome-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, #1E3A8A, #3B82F6); z-index: 999; display: flex; flex-direction: column; padding: 30px 24px; color: white; transition: all 0.3s ease; overflow-y: auto; }
+        .school-header { text-align: center; margin-top: 15px; margin-bottom: 25px; }
+        .school-logo { font-size: 60px; margin-bottom: 10px; display: inline-block; }
+        .welcome-title { font-size: 26px; font-weight: 900; letter-spacing: 1px; }
         .menu-section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; color: #93C5FD; display: flex; align-items: center; gap: 6px; }
-        .menu-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 30px; }
+        .menu-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+        .portal-card { background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 24px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: 0.2s; }
+        .portal-card:active { transform: scale(0.97); background: rgba(255, 255, 255, 0.25); }
+        .portal-icon { font-size: 32px; width: 55px; height: 55px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.2); }
+        .portal-name { font-size: 17px; font-weight: 900; color: white; }
+        .portal-desc { font-size: 12px; color: #BFDBFE; }
         
-        /* 傳送門按鈕樣式 */
-        .portal-card { background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 24px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; text-align: left; transition: all 0.2s; position: relative; overflow: hidden; }
-        .portal-card:active { transform: scale(0.97); background: rgba(255, 255, 255, 0.25); border-color: var(--google-yellow); }
-        .portal-icon { font-size: 32px; background: rgba(255,255,255,0.2); width: 55px; height: 55px; border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .portal-info { flex: 1; }
-        .portal-name { font-size: 17px; font-weight: 900; color: #FFFFFF; }
-        .portal-desc { font-size: 12px; color: #BFDBFE; margin-top: 2px; }
-        .portal-badge { position: absolute; right: 20px; font-size: 14px; opacity: 0.5; }
-        
-        /* 特殊高亮園區 */
-        .portal-zhuyin { border-color: rgba(251, 188, 5, 0.4); background: linear-gradient(135deg, rgba(251, 188, 5, 0.2), rgba(255,255,255,0.05)); }
-        
-        /* 字卡主畫面頂部 */
-        .app-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; border-bottom: 1px solid #E2E8F0; height: 65px; }
-        .back-to-gate-btn { background: #F1F5F9; border: none; color: var(--text-main); padding: 6px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-        .counter-zone { display: flex; align-items: center; gap: 8px; }
-        .counter { background: #EEF2F6; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; color: var(--google-blue); font-family: 'Poppins', sans-serif; }
-        .clear-progress-btn { background: none; border: none; color: #94A3B8; cursor: pointer; font-size: 14px; }
-        
-        /* 卡片主體區域 */
-        .card-area { flex: 1; padding: 12px 20px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
-        .study-card { background: white; border-radius: 32px; padding: 20px; box-shadow: 0 10px 30px rgba(15,23,42,0.04); display: flex; flex-direction: column; position: relative; height: 530px; box-sizing: border-box; }
-        .card-id { position: absolute; top: 16px; left: 24px; font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 900; color: #94A3B8; background: #F8FAFC; padding: 2px 10px; border-radius: 8px; }
-        
-        /* 視覺渲染區 */
-        .graphic-display-zone { height: 95px; display: flex; justify-content: center; align-items: center; margin-top: 15px; }
-        .emoji-style { font-size: 70px; line-height: 1; }
-        .svg-container { width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; }
-        .svg-container svg { width: 100%; height: 100%; }
+        /* 學習主畫面 */
+        .app-header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #E2E8F0; }
+        .back-to-gate-btn { background: #F1F5F9; border: none; padding: 8px 12px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 13px; }
+        .counter { background: #EEF2F6; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; color: var(--google-blue); }
 
-        /* 核心字詞展示區 */
-        .word-main-zone { height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .pinyin-text { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 600; color: var(--text-muted); opacity: 0.7; margin-bottom: 2px; }
+        .card-area { flex: 1; padding: 10px 20px; display: flex; flex-direction: column; justify-content: center; }
+        .study-card { background: white; border-radius: 32px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; flex-direction: column; position: relative; height: 560px; }
+        .card-id { position: absolute; top: 16px; left: 24px; font-family: 'Poppins'; font-weight: 900; color: #CBD5E1; background: #F8FAFC; padding: 2px 10px; border-radius: 8px; }
         
-        .word-speaker-row { display: flex; align-items: center; justify-content: center; gap: 14px; }
-        .main-word { font-size: 46px; font-weight: 900; color: var(--text-main); letter-spacing: -1px; line-height: 1.1; }
-        
-        /* 🎯 注音反紅變粗核心樣式 */
-        .highlight-zhuyin-red { color: var(--google-red) !important; font-weight: 950 !important; font-size: 1.1em; padding: 0 2px; }
-        
-        .word-audio-btn { width: 42px; height: 42px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; background: var(--google-red); color: #FFFFFF; box-shadow: 0 4px 12px rgba(234, 67, 53, 0.3); }
-        .zhuyin-text { font-size: 16px; font-weight: 700; color: var(--google-green); margin-top: 4px; }
-        
-        .divider { height: 1px; background: #F1F5F9; margin-top: 8px; margin-bottom: 12px; }
-        
-        /* 複讀加深音展示區 */
-        .sentence-section { display: flex; flex-direction: column; gap: 10px; height: 150px; justify-content: center; }
-        .sentence-speaker-row { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 0 4px; }
-        .target-sentence { font-size: 24px; font-weight: 900; color: var(--text-main); text-align: center; line-height: 1.3; flex: 1; }
-        
-        .sentence-audio-btn { width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 15px; background: var(--google-blue); color: #FFFFFF; box-shadow: 0 4px 12px rgba(66, 133, 244, 0.25); flex-shrink: 0; }
+        /* 1. 頂部圖形區 */
+        .graphic-display-zone { height: 110px; display: flex; justify-content: center; align-items: center; margin-top: 10px; }
+        .emoji-style { font-size: 90px; }
+        .svg-container { width: 100px; height: 100px; }
 
-        .translation-box { background: #F8FAFC; border-radius: 16px; padding: 10px; border: 1px solid #F1F5F9; height: 55px; display: flex; align-items: center; justify-content: center; }
-        .translation-sentence { font-size: 14px; color: var(--text-muted); text-align: center; font-weight: 600; }
-        
-        /* 控制底座面板 */
-        .nav-control-block { background: white; border-top: 1px solid #E2E8F0; padding: 12px 20px 25px; display: flex; flex-direction: column; gap: 10px; height: 135px; box-sizing: border-box; }
-        .nav-row { display: flex; gap: 12px; width: 100%; }
-        .nav-btn { flex: 1; height: 48px; border-radius: 20px; font-size: 15px; font-weight: 700; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; }
-        .btn-prev { background: #E2E8F0; color: var(--text-main); }
-        .btn-next { background: var(--google-blue); color: white; box-shadow: 0 6px 15px rgba(66, 133, 244, 0.25); }
-        .btn-jump { background: #F1F5F9; color: var(--text-muted); font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 600; border: 1px solid #E2E8F0; height: 36px; border-radius: 12px; }
+        /* 2. 輔助單詞區 (如：貓咪 ㄇ) */
+        .word-main-zone { height: 60px; display: flex; justify-content: center; align-items: center; text-align: center; }
+        .main-word { font-size: 26px; font-weight: 900; color: var(--text-muted); }
 
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-12px); } 60% { transform: translateY(-6px); } }
+        /* 🎯 3. 【核心升級：注音主展區 - 專攻 B 欄特大符號】 */
+        .zhuyin-display-zone { height: 160px; display: flex; justify-content: center; align-items: center; background: #FFF7ED; border-radius: 24px; margin: 10px 0; border: 2px dashed #FED7AA; }
+        .zhuyin-large-char { font-size: 100px; font-weight: 950; color: var(--google-red); text-align: center; line-height: 1; min-width: 100px; }
+        .word-audio-btn { width: 46px; height: 46px; border-radius: 50%; border: none; background: var(--google-red); color: white; cursor: pointer; font-size: 18px; box-shadow: 0 4px 10px rgba(234,67,53,0.3); margin-left: 15px; }
+
+        /* 4. 底部例句/複讀加深音區 */
+        .sentence-section { height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; margin-top: 5px; }
+        .target-sentence { font-size: 24px; font-weight: 900; color: var(--text-main); }
+        .sentence-audio-btn { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--google-blue); color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(66,133,244,0.3); }
+
+        /* 下方導航 */
+        .nav-control-block { background: white; padding: 15px 20px 30px; display: flex; flex-direction: column; gap: 10px; }
+        .nav-row { display: flex; gap: 10px; }
+        .nav-btn { flex: 1; height: 50px; border-radius: 15px; font-weight: 700; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-prev { background: #E2E8F0; }
+        .btn-next { background: var(--google-blue); color: white; }
+        .btn-jump { background: #F8FAFC; border: 1px solid #E2E8F0; font-size: 12px; height: 40px; border-radius: 10px; }
     </style>
 </head>
 <body>
-
     <div class="phone-container">
         <div id="welcome-overlay">
             <div class="school-header">
@@ -112,81 +74,55 @@
                 <div class="welcome-title">G學園啟盟學堂</div>
                 <div class="welcome-subtitle">請校長與寶貝選擇魔法傳送門</div>
             </div>
-
             <div class="menu-section-title"><i class="fas fa-shapes"></i> 基礎語感奠基</div>
             <div class="menu-grid">
-                <div class="portal-card portal-zhuyin" onclick="enterDepartment('zhuyin')">
-                    <div class="portal-icon" style="color: #FBBC05;">ㄅ</div>
+                <div class="portal-card" onclick="enterDepartment('zhuyin')" style="border-color:#FBBC05">
+                    <div class="portal-icon" style="color:#FBBC05">ㄅ</div>
                     <div class="portal-info">
                         <div class="portal-name">ㄅㄆㄇ啟蒙幼兒園</div>
                         <div class="portal-desc">37個正宗注音符號與極簡音感複讀</div>
                     </div>
-                    <i class="fas fa-chevron-right portal-badge"></i>
                 </div>
             </div>
-
-            <div class="menu-section-title"><i class="fas fa-graduation-cap"></i> 核心詞彙世界 (初階 600 字)</div>
+            <div class="menu-section-title"><i class="fas fa-graduation-cap"></i> 核心詞彙世界</div>
             <div class="menu-grid">
                 <div class="portal-card" onclick="enterDepartment('c100')">
-                    <div class="portal-icon" style="color: #4285F4;">🌱</div>
-                    <div class="portal-info">
-                        <div class="portal-name">初階核心 100 字・第一關</div>
-                        <div class="portal-desc">編號 001 ~ 100 生活必學核心詞</div>
-                    </div>
-                    <i class="fas fa-chevron-right portal-badge"></i>
+                    <div class="portal-icon" style="color:#4285F4">🌱</div>
+                    <div class="portal-info"><div class="portal-name">初階核心 100 字</div><div class="portal-desc">編號 001~100 生活必學</div></div>
                 </div>
                 <div class="portal-card" onclick="enterDepartment('c200')">
-                    <div class="portal-icon" style="color: #34A853;">🌿</div>
-                    <div class="portal-info">
-                        <div class="portal-name">初階核心 200 字・第二關</div>
-                        <div class="portal-desc">編號 101 ~ 200 詞彙量翻倍躍升</div>
-                    </div>
-                    <i class="fas fa-chevron-right portal-badge"></i>
-                </div>
-                <div class="portal-card" onclick="enterDepartment('c300')">
-                    <div class="portal-icon" style="color: #EA4335;">🌳</div>
-                    <div class="portal-info">
-                        <div class="portal-name">黃金儲備 300 字・終點衝刺</div>
-                        <div class="portal-desc">編號 201 ~ 300 挑戰完整中文大語境</div>
-                    </div>
-                    <i class="fas fa-chevron-right portal-badge"></i>
+                    <div class="portal-icon" style="color:#34A853">🌿</div>
+                    <div class="portal-info"><div class="portal-name">初階核心 200 字</div><div class="portal-desc">編號 101~200 詞彙量提升</div></div>
                 </div>
             </div>
         </div>
 
         <div class="app-header">
             <button class="back-to-gate-btn" onclick="backToGate()"><i class="fas fa-door-open"></i> 回大門</button>
-            <div id="dept-title-tag" style="font-weight:900; color:var(--text-main); font-size:15px;">--</div>
-            <div class="counter-zone">
-                <div id="card-counter" class="counter">0 / 0</div>
-                <button class="clear-progress-btn" onclick="resetCurrentProgress()" title="重置本區進度"><i class="fas fa-rotate-right"></i></button>
-            </div>
+            <div id="dept-title" style="font-weight:900">--</div>
+            <div id="card-counter" class="counter">0/0</div>
         </div>
 
         <div class="card-area">
             <div class="study-card">
                 <span id="lbl-id" class="card-id">--</span>
                 <div id="graphic-zone" class="graphic-display-zone"></div>
-
+                
                 <div class="word-main-zone">
-                    <span id="lbl-pinyin" class="pinyin-text">--</span>
-                    <div class="word-speaker-row">
-                        <div id="lbl-word" class="main-word">--</div>
-                        <button class="word-audio-btn" onclick="playWordAudioOnly()"><i class="fas fa-volume-up"></i></button>
-                    </div>
-                    <div id="lbl-zhuyin" class="zhuyin-text">--</div>
+                    <div id="lbl-word" class="main-word">--</div>
                 </div>
-                
-                <div class="divider"></div>
-                
+
+                <div class="zhuyin-display-zone">
+                    <div id="lbl-large-zhuyin" class="zhuyin-large-char">--</div>
+                    <button class="word-audio-btn" onclick="playAudio('word')"><i class="fas fa-volume-up"></i></button>
+                </div>
+
                 <div class="sentence-section">
-                    <div class="sentence-speaker-row">
+                    <div style="display:flex; align-items:center; gap:12px">
                         <div id="lbl-sentence-zh" class="target-sentence">--</div>
-                        <button class="sentence-audio-btn" onclick="playSentenceAudioOnly()"><i class="fas fa-volume-up"></i></button>
+                        <button class="sentence-audio-btn" onclick="playAudio('sent')"><i class="fas fa-volume-up"></i></button>
                     </div>
-                    <div class="translation-box">
-                        <div id="lbl-sentence-vi" class="translation-sentence">--</div>
-                    </div>
+                    <div id="lbl-sentence-vi" style="color:#64748B; font-size:14px; font-weight:700">--</div>
                 </div>
             </div>
         </div>
@@ -197,216 +133,74 @@
                 <button class="nav-btn btn-next" onclick="nextCard()">下一字 <i class="fas fa-arrow-right"></i></button>
             </div>
             <div class="nav-row">
-                <button class="nav-btn btn-jump" onclick="jumpCards(-10)"><i class="fas fa-fast-backward"></i> 退 10 字</button>
-                <button class="nav-btn btn-jump" onclick="jumpCards(10)">進 10 字 <i class="fas fa-fast-forward"></i></button>
+                <button class="nav-btn btn-jump" onclick="jumpCards(-10)">退 10 字</button>
+                <button class="nav-btn btn-jump" onclick="jumpCards(10)">進 10 字</button>
             </div>
         </div>
     </div>
-
-    <audio id="local-audio-player" preload="auto"></audio>
-
+    <audio id="audio-player"></audio>
     <script>
-        let rawDb = [];      // 總資料庫
-        let filteredDb = []; // 過濾後的當前校區資料庫
-        let currentIndex = 0;
-        let currentDept = 'zhuyin'; // 當前園區代號
-        let audioCtx = null;
-        const audioPlayer = document.getElementById('local-audio-player');
+        let rawDb = [], filteredDb = [], currentIndex = 0, currentDept = '';
+        const player = document.getElementById('audio-player');
 
-        // 🏛️ 分流選單核心：點擊卡片進入指定園區
+        async function loadData() {
+            const resp = await fetch(`./data.md?v=${Date.now()}`);
+            const text = await resp.text();
+            rawDb = text.split('\n').filter(l => l.includes('|')).map(l => {
+                const c = l.split('|').map(s => s.trim());
+                // mapping: c[1]=編號, c[2]=B欄注音符號, c[3]=C欄詞彙, c[4]=D欄注音拼音, c[5]=E欄例句, c[6]=F欄例句翻譯, c[7]=H欄圖形, c[8]=I欄字音頻, c[9]=J欄句音頻
+                return { id:c[1], core_symbol:c[2], word:c[3], pinyin:c[4], sent_zh:c[5], sent_vi:c[6], graphic:c[7], audio_w:c[8], audio_s:c[9] };
+            }).filter(o => o.id && !o.id.includes('---') && o.id !== '編號');
+        }
+
         function enterDepartment(dept) {
             currentDept = dept;
-            filterDatabaseByDept();
+            if (dept === 'zhuyin') filteredDb = rawDb.filter(o => o.id.includes('ㄅ') || isNaN(o.id));
+            else if (dept === 'c100') filteredDb = rawDb.filter(o => { let n = parseInt(o.id); return n >= 1 && n <= 100; });
+            else if (dept === 'c200') filteredDb = rawDb.filter(o => { let n = parseInt(o.id); return n >= 101 && n <= 200; });
             
-            if (filteredDb.length === 0) {
-                alert("該園區資料尚在同步中，請先上傳 Excel 並點擊同步按鈕！");
-                return;
-            }
-
-            // 💾 讀取該園區的專屬獨立記憶進度
-            const savedIndex = localStorage.getItem("G_SCHOOL_PROGRESS_" + currentDept);
-            if (savedIndex && !isNaN(savedIndex)) {
-                currentIndex = parseInt(savedIndex, 10);
-                if(currentIndex >= filteredDb.length) currentIndex = 0;
-            } else {
-                currentIndex = 0;
-            }
-
-            // 設置園區頂部標題
-            const titleMap = { 'zhuyin': 'ㄅㄆㄇ啟蒙區', 'c100': '初階核心100字', 'c200': '初階200字', 'c300': '黃金300字' };
-            document.getElementById("dept-title-tag").textContent = titleMap[dept] || "學習區";
-
-            // 解鎖音頻大門並隱藏選單
-            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            
-            document.getElementById("welcome-overlay").style.opacity = "0";
-            setTimeout(() => { document.getElementById("welcome-overlay").style.display = "none"; }, 400);
-
-            renderCard();
-            setTimeout(() => { playWordAudioOnly(); }, 500);
+            currentIndex = parseInt(localStorage.getItem('G_PROG_'+dept)) || 0;
+            document.getElementById('dept-title').innerText = (dept==='zhuyin'?'ㄅㄆㄇ啟蒙':'核心詞彙');
+            document.getElementById('welcome-overlay').style.display = 'none';
+            render(); playAudio('word');
         }
 
-        function backToGate() {
-            document.getElementById("welcome-overlay").style.display = "flex";
-            setTimeout(() => { document.getElementById("welcome-overlay").style.opacity = "1"; }, 10);
-        }
+        function render() {
+            if (!filteredDb[currentIndex]) return;
+            const curr = filteredDb[currentIndex];
+            document.getElementById('lbl-id').innerText = curr.id;
+            
+            // 圖形提示
+            const gz = document.getElementById('graphic-zone');
+            if (curr.graphic.includes('<svg')) gz.innerHTML = `<div class="svg-container">${curr.graphic}</div>`;
+            else gz.innerHTML = `<span class="emoji-style">${curr.graphic || (window.emojiDictionary?window.emojiDictionary[curr.word]:'')}</span>`;
 
-        // ⚙️ 核心過濾演算法：根據編號（ㄅ01、001等）智慧分流
-        function filterDatabaseByDept() {
             if (currentDept === 'zhuyin') {
-                // 抓取所有編號包含「ㄅ」或非純數字的注音符號行
-                filteredDb = rawDb.filter(item => item.id && (item.id.includes('ㄅ') || isNaN(item.id.trim())));
-            } else if (currentDept === 'c100') {
-                filteredDb = rawDb.filter(item => {
-                    let num = parseInt(item.id, 10);
-                    return !isNaN(num) && num >= 1 && num <= 100;
-                });
-            } else if (currentDept === 'c200') {
-                filteredDb = rawDb.filter(item => {
-                    let num = parseInt(item.id, 10);
-                    return !isNaN(num) && num >= 101 && num <= 200;
-                });
-            } else if (currentDept === 'c300') {
-                filteredDb = rawDb.filter(item => {
-                    let num = parseInt(item.id, 10);
-                    return !isNaN(num) && num >= 201 && num <= 300;
-                });
-            }
-        }
-
-        function saveProgress() {
-            localStorage.setItem("G_SCHOOL_PROGRESS_" + currentDept, currentIndex);
-        }
-
-        function resetCurrentProgress() {
-            if(confirm("確定要將本專區的學習進度歸零重頭開始嗎？")) {
-                currentIndex = 0;
-                saveProgress();
-                renderCard();
-                playWordAudioOnly();
-            }
-        }
-
-        async function loadCardsFromMD() {
-            try {
-                const response = await fetch(`./data.md?v=${Date.now()}`);
-                const text = await response.text();
-                const lines = text.split('\n');
-                let tempDb = [];
-                
-                lines.forEach(line => {
-                    if (line.includes('|')) {
-                        const cols = line.split('|').map(c => c.trim());
-                        if (cols.length >= 10 && cols[1] && !cols[1].includes('---') && !cols[1].includes('編號')) {
-                            tempDb.push({
-                                id: cols[1], 
-                                word: cols[2], 
-                                pinyin: cols[3], 
-                                zhuyin: cols[4], 
-                                sentence_zh: cols[5], 
-                                sentence_vi: cols[6],
-                                graphic: cols[7],       
-                                word_audio: cols[8],     
-                                sentence_audio: cols[9]  
-                            });
-                        }
-                    }
-                });
-                if(tempDb.length > 0) { 
-                    rawDb = tempDb; 
-                }
-            } catch (error) { console.error(error); }
-        }
-
-        function renderCard() {
-            if(filteredDb.length === 0) return;
-            const current = filteredDb[currentIndex];
-            
-            document.getElementById("lbl-id").textContent = current.id || "";
-            
-            // 圖形渲染
-            const graphicZone = document.getElementById("graphic-zone");
-            graphicZone.innerHTML = ""; 
-            const keyword = current.word || "";
-            let rawGraphic = current.graphic || "";
-            
-            if (rawGraphic && rawGraphic.includes("<svg")) {
-                graphicZone.innerHTML = `<div class="svg-container">${rawGraphic}</div>`;
-            } else if (rawGraphic) {
-                graphicZone.innerHTML = `<span class="emoji-style">${rawGraphic}</span>`;
-            } else if (window.emojiDictionary && window.emojiDictionary[keyword]) {
-                graphicZone.innerHTML = `<span class="emoji-style">${window.emojiDictionary[keyword]}</span>`;
-            }
-
-            // 🎯 【優化亮點一】：如果是注音符號園區，單詞主展區要顯示「詞彙 ＋ 注音符號」
-            if (currentDept === 'zhuyin') {
-                const mainTargetZhuyin = current.zhuyin || ""; // B欄的那個「ㄅ」
-                const combinedText = `${keyword} ${mainTargetZhuyin}`; // 爸爸 ㄅ
-                document.getElementById("lbl-word").innerHTML = combinedText;
+                // 注音專區：中央放純粹的 B 欄注音符號 (例如 ㄇ)，下方輔助字顯示「貓咪 ㄇ」
+                document.getElementById('lbl-word').innerText = `${curr.word} ${curr.core_symbol}`;
+                document.getElementById('lbl-large-zhuyin').innerText = curr.core_symbol;
             } else {
-                document.getElementById("lbl-word").textContent = keyword;
+                // 普通100字專區：中央放大大的中文字 (B欄)，小標題放拼音
+                document.getElementById('lbl-word').innerText = curr.pinyin;
+                document.getElementById('lbl-large-zhuyin').innerText = curr.core_symbol;
             }
 
-            document.getElementById("lbl-pinyin").textContent = current.pinyin || "";
-            
-            // 🎯 【優化亮點二】：拼音/注音欄位展示，並自動將要學的目標注音符號「反紅變粗」
-            const rowZhuyinField = current.zhuyin || ""; // 這通常是 D欄的「ㄅㄚˋ ㄅㄚ˙」
-            const coreTarget = current.zhuyin && current.zhuyin.length === 1 ? current.zhuyin : ""; // 比如單打一個「ㄅ」的對象
-            
-            // 自動過濾反紅
-            if (currentDept === 'zhuyin' && rowZhuyinField) {
-                // 如果是注音區，把整行注音文字裡的那個核心符號（如ㄅ）著色反紅
-                const pattern = filteredDb[currentIndex].id.charAt(0); // 抓取ㄅ01的「ㄅ」
-                document.getElementById("lbl-zhuyin").innerHTML = rowZhuyinField.replace(new RegExp(pattern, 'g'), `<span class="highlight-zhuyin-red">${pattern}</span>`);
-            } else {
-                document.getElementById("lbl-zhuyin").textContent = rowZhuyinField || "--";
-            }
-            
-            // 簡化後的例句主展區（複讀加深音）
-            document.getElementById("lbl-sentence-zh").textContent = current.sentence_zh || "--";
-            document.getElementById("lbl-sentence-vi").textContent = current.sentence_vi || "--";
-            
-            document.getElementById("card-counter").textContent = `${currentIndex + 1} / ${filteredDb.length}`;
-            
-            saveProgress(); 
+            document.getElementById('lbl-sentence-zh').innerText = curr.sent_zh;
+            document.getElementById('lbl-sentence-vi').innerText = curr.sent_vi || "";
+            document.getElementById('card-counter').innerText = `${currentIndex+1}/${filteredDb.length}`;
+            localStorage.setItem('G_PROG_'+currentDept, currentIndex);
         }
 
-        function nextCard() { if (currentIndex < filteredDb.length - 1) { currentIndex++; renderCard(); playWordAudioOnly(); } }
-        function prevCard() { if (currentIndex > 0) { currentIndex--; renderCard(); playWordAudioOnly(); } }
-
-        function jumpCards(step) {
-            if (filteredDb.length === 0) return;
-            let targetIndex = currentIndex + step;
-            if (targetIndex >= filteredDb.length) targetIndex = filteredDb.length - 1;
-            if (targetIndex < 0) targetIndex = 0;
-            currentIndex = targetIndex;
-            renderCard();
-            playWordAudioOnly();
+        function playAudio(type) {
+            const curr = filteredDb[currentIndex];
+            const base64 = (type==='word' ? curr.audio_w : curr.audio_s);
+            if (base64) { player.src = "data:audio/mp3;base64," + base64; player.play(); }
         }
-
-        function playPackagedAudio(base64Data) {
-            if (!base64Data) return;
-            try {
-                audioPlayer.pause();
-                audioPlayer.src = "data:audio/mp3;base64," + base64Data;
-                audioPlayer.play().catch(e => console.log(e));
-            } catch(e) {}
-        }
-
-        function playWordAudioOnly() {
-            if(filteredDb.length > 0 && filteredDb[currentIndex].word_audio) {
-                playPackagedAudio(filteredDb[currentIndex].word_audio);
-            }
-        }
-
-        function playSentenceAudioOnly() {
-            if(filteredDb.length > 0 && filteredDb[currentIndex].sentence_audio) {
-                playPackagedAudio(filteredDb[currentIndex].sentence_audio);
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', loadCardsFromMD);
+        function nextCard() { if(currentIndex < filteredDb.length-1) { currentIndex++; render(); playAudio('word'); } }
+        function prevCard() { if(currentIndex > 0) { currentIndex--; render(); playAudio('word'); } }
+        function jumpCards(n) { currentIndex = Math.max(0, Math.min(filteredDb.length-1, currentIndex+n)); render(); playAudio('word'); }
+        function backToGate() { document.getElementById('welcome-overlay').style.display = 'flex'; }
+        window.onload = loadData;
     </script>
 </body>
 </html>
