@@ -16,7 +16,7 @@
         .phone-container { width: 100%; max-width: 414px; height: 100vh; max-height: 850px; background-color: var(--bg-app); display: flex; flex-direction: column; position: relative; overflow: hidden; }
         @media (min-width: 450px) { .phone-container { height: 820px; border: 12px solid #1E293B; border-radius: 40px; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4); } }
         
-        /* 🏛️ 城堡大門選單 */
+        /* 🏛️ 城堡大門 */
         #welcome-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, #1E3A8A, #3B82F6); z-index: 999; display: flex; flex-direction: column; padding: 30px 24px; color: white; transition: all 0.3s ease; overflow-y: auto; }
         .school-header { text-align: center; margin-top: 15px; margin-bottom: 25px; }
         .school-logo { font-size: 60px; margin-bottom: 10px; display: inline-block; }
@@ -29,39 +29,40 @@
         .portal-name { font-size: 17px; font-weight: 900; color: white; }
         .portal-desc { font-size: 12px; color: #BFDBFE; }
         
-        /* 學習主畫面 */
+        /* 頂部導航 */
         .app-header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #E2E8F0; }
         .back-to-gate-btn { background: #F1F5F9; border: none; padding: 8px 12px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 13px; }
         .counter { background: #EEF2F6; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; color: var(--google-blue); }
 
+        /* 卡片主體 */
         .card-area { flex: 1; padding: 10px 20px; display: flex; flex-direction: column; justify-content: center; }
         .study-card { background: white; border-radius: 32px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; flex-direction: column; position: relative; height: 560px; }
         .card-id { position: absolute; top: 16px; left: 24px; font-family: 'Poppins'; font-weight: 900; color: #CBD5E1; background: #F8FAFC; padding: 2px 10px; border-radius: 8px; }
         
-        /* 1. 頂部圖形區 */
+        /* 1. 圖形區 */
         .graphic-display-zone { height: 110px; display: flex; justify-content: center; align-items: center; margin-top: 5px; }
         .emoji-style { font-size: 90px; }
         .svg-container { width: 100px; height: 100px; }
 
-        /* 2. 上方/輔助文字區 (詞彙或拼音展示) */
+        /* 2. 上方文字區 (詞彙或拼音) */
         .word-main-zone { height: 45px; display: flex; justify-content: center; align-items: center; text-align: center; }
         .main-word { font-size: 26px; font-weight: 900; color: var(--text-muted); }
 
-        /* 🎯 3. 大展示盒 */
+        /* 3. 大肚子盒子 */
         .zhuyin-display-zone { height: 145px; display: flex; justify-content: center; align-items: center; background: #FFF7ED; border-radius: 24px; margin: 5px 0; border: 2px dashed #FED7AA; position: relative; }
         .zhuyin-large-char { font-size: 90px; font-weight: 950; color: var(--google-red); text-align: center; line-height: 1; }
         .word-audio-btn { width: 46px; height: 46px; border-radius: 50%; border: none; background: var(--google-red); color: white; cursor: pointer; font-size: 18px; box-shadow: 0 4px 10px rgba(234,67,53,0.3); margin-left: 15px; }
 
-        /* 🎯 4. 獨立拼音學習欄位 */
+        /* 4. 底部獨立拼音學習欄位 */
         .pinyin-spelling-zone { height: 45px; display: flex; justify-content: center; align-items: center; text-align: center; margin-bottom: 5px; }
         .pinyin-spelling-text { font-size: 32px; font-weight: 900; color: var(--text-muted); letter-spacing: 2px; }
 
-        /* 5. 底部例句/複讀加深音區 */
+        /* 5. 例句區 */
         .sentence-section { height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; }
-        .target-sentence { font-size: 22px; font-weight: 900; color: var(--text-main); }
+        .target-sentence { font-size: 22px; font-weight: 900; color: var(--text-main); text-align: center; }
         .sentence-audio-btn { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--google-blue); color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(66,133,244,0.3); }
 
-        /* 下方導航 */
+        /* 按鈕控制 */
         .nav-control-block { background: white; padding: 15px 20px 30px; display: flex; flex-direction: column; gap: 10px; }
         .nav-row { display: flex; gap: 10px; }
         .nav-btn { flex: 1; height: 50px; border-radius: 15px; font-weight: 700; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
@@ -78,21 +79,21 @@
                 <div class="welcome-title">G學園啟盟學堂</div>
                 <div class="welcome-subtitle">請校長與寶貝選擇魔法傳送門</div>
             </div>
-            <div class="menu-section-title"><i class="fas fa-shapes"></i> 基礎語感奠基</div>
+            <div class="menu-section-title"><i class="fas fa-shapes"></i> 1. 注音符號園區</div>
             <div class="menu-grid">
                 <div class="portal-card" onclick="enterDepartment('zhuyin')" style="border-color:#FBBC05">
                     <div class="portal-icon" style="color:#FBBC05">ㄅ</div>
                     <div class="portal-info">
                         <div class="portal-name">ㄅㄆㄇ啟盟幼兒園</div>
-                        <div class="portal-desc">37個正宗注音符號與極簡音感複讀</div>
+                        <div class="portal-desc">正宗注音符號與極簡音感複讀</div>
                     </div>
                 </div>
             </div>
-            <div class="menu-section-title"><i class="fas fa-graduation-cap"></i> 核心詞彙世界</div>
+            <div class="menu-section-title"><i class="fas fa-graduation-cap"></i> 2. 初階核心區</div>
             <div class="menu-grid">
                 <div class="portal-card" onclick="enterDepartment('c100')">
                     <div class="portal-icon" style="color:#4285F4">🌱</div>
-                    <div class="portal-info"><div class="portal-name">初階核心 100 字</div><div class="portal-desc">編號 001~100 生活必學</div></div>
+                    <div class="portal-info"><div class="portal-name">初階核心 100 字</div><div class="portal-desc">編號 1~100 生活必學</div></div>
                 </div>
                 <div class="portal-card" onclick="enterDepartment('c200')">
                     <div class="portal-icon" style="color:#34A853">🌿</div>
@@ -111,26 +112,18 @@
             <div class="study-card">
                 <span id="lbl-id" class="card-id">--</span>
                 <div id="graphic-zone" class="graphic-display-zone"></div>
-                
-                <div class="word-main-zone">
-                    <div id="lbl-word" class="main-word">--</div>
-                </div>
-
+                <div class="word-main-zone"><div id="lbl-word" class="main-word">--</div></div>
                 <div class="zhuyin-display-zone">
                     <div id="lbl-large-zhuyin" class="zhuyin-large-char">--</div>
                     <button class="word-audio-btn" onclick="playAudio('word')"><i class="fas fa-volume-up"></i></button>
                 </div>
-
-                <div class="pinyin-spelling-zone">
-                    <div id="lbl-spelling" class="pinyin-spelling-text">--</div>
-                </div>
-
+                <div class="pinyin-spelling-zone"><div id="lbl-spelling" class="pinyin-spelling-text">--</div></div>
                 <div class="sentence-section">
-                    <div style="display:flex; align-items:center; gap:12px">
+                    <div style="display:flex; align-items:center; gap:12px; justify-content:center; width:100%">
                         <div id="lbl-sentence-zh" class="target-sentence">--</div>
                         <button class="sentence-audio-btn" onclick="playAudio('sent')"><i class="fas fa-volume-up"></i></button>
                     </div>
-                    <div id="lbl-sentence-vi" style="color:#64748B; font-size:14px; font-weight:700">--</div>
+                    <div id="lbl-sentence-vi" style="color:#64748B; font-size:14px; font-weight:700; text-align:center;">--</div>
                 </div>
             </div>
         </div>
@@ -154,49 +147,34 @@
         async function loadData() {
             const resp = await fetch(`./data.md?v=${Date.now()}`);
             const text = await resp.text();
-            rawDb = text.split('\n').filter(l => l.includes('|')).map(l => {
-                const cells = l.split('|').map(s => s.trim()).filter(s => s !== "");
-                
-                // 🎯【最強特徵自主辨識，無視任何格數錯位】
-                if (cells.length < 4 || cells[0].includes('---') || cells[0] === '編號') return null;
+            rawDb = text.split('\n').map(l => {
+                if (!l.includes('|')) return null;
+                // 🛑 核心解鎖：嚴格利用 Excel 的格子切開，不砍掉空元素，直接取得對齊 Index
+                const cells = l.split('|').map(s => s.trim());
+                if (cells.length < 8 || cells[1] === '編號' || cells[1].includes('---')) return null;
 
-                let id = cells[0]; // 第一個非空一定是編號
-                let colB = cells[1]; // 第二個一定是中文字或核心符號
-                let colC = cells[2]; // 第三個一定是詞彙或舊拼音
-                
-                // 尋找包含例句的格子 (特徵：通常較長或包含標點)
-                let sentIdx = cells.findIndex((c, idx) => idx > 2 && (c.includes('，') || c.includes('！') || c.includes('？') || c.includes('。')));
-                let colE = sentIdx !== -1 ? cells[sentIdx] : (cells[4] || "");
-                let colF = sentIdx !== -1 ? cells[sentIdx + 1] : (cells[5] || "");
-
-                // 尋找含有注音拼音特徵的格子 (D欄：通常在C欄和E欄之間)
-                let colD = "";
-                if (id.includes('ㄅ') && sentIdx > 3) {
-                    colD = cells[3];
-                }
-
-                // 尋找最後兩個超長 Base64 音頻
-                let audioCells = cells.filter(c => c.length > 100);
-                let audioI = audioCells[0] || "";
-                let audioJ = audioCells[1] || "";
-
-                // 尋找圖形提示 (排除例句、編號和音頻後，剩下的長度適中的可能就是SVG或圖形)
-                let colH = "";
-                let possibleH = cells.find(c => c.includes('<svg') || (c.length > 0 && c.length < 10 && !c.includes('，') && c !== id && c !== colB && c !== colC && c !== colD));
-                if (possibleH) colH = possibleH;
-
-                return { id, colB, colC, colD, colE, colF, colH, audioI, audioJ };
+                return { 
+                    id:      cells[1], // A 欄 (編號)
+                    colB:    cells[2], // B 欄 (核心詞彙 / 注音符號)
+                    colC:    cells[3], // C 欄 (拼音提示 / 輔助詞彙)
+                    colD:    cells[4], // D 欄 (注音 / 完整拼音)
+                    colE:    cells[5], // E 欄 (例句)
+                    colF:    cells[6], // F 欄 (越南文)
+                    colG:    cells[7], // G 欄 (圖形提示)
+                    audioI:  cells[8], // H 欄 (字音頻)
+                    audioJ:  cells[9]  // I 欄 (句音頻)
+                };
             }).filter(o => o !== null);
         }
 
         function enterDepartment(dept) {
             currentDept = dept;
-            if (dept === 'zhuyin') filteredDb = rawDb.filter(o => o.id.includes('ㄅ'));
+            if (dept === 'zhuyin') filteredDb = rawDb.filter(o => o.id.startsWith('ㄅ'));
             else if (dept === 'c100') filteredDb = rawDb.filter(o => { let n = parseInt(o.id); return n >= 1 && n <= 100; });
             else if (dept === 'c200') filteredDb = rawDb.filter(o => { let n = parseInt(o.id); return n >= 101 && n <= 200; });
             
             currentIndex = parseInt(localStorage.getItem('G_PROG_'+dept)) || 0;
-            document.getElementById('dept-title').innerText = (dept==='zhuyin'?'ㄅㄆㄇ啟蒙':'核心詞彙');
+            document.getElementById('dept-title').innerText = (dept==='zhuyin'?'ㄅㄆㄇ啟盟園':'初階核心區');
             document.getElementById('welcome-overlay').style.display = 'none';
             render(); playAudio('word');
         }
@@ -206,27 +184,29 @@
             const curr = filteredDb[currentIndex];
             document.getElementById('lbl-id').innerText = curr.id;
             
-            // 圖形提示
+            // 🖼️ 圖形渲染邏輯 (G欄有SVG直接塞，沒有則去本地 Emoji 庫找)
             const gz = document.getElementById('graphic-zone');
-            if (curr.colH && curr.colH.includes('<svg')) {
-                gz.innerHTML = `<div class="svg-container">${curr.colH}</div>`;
+            if (curr.colG && curr.colG.includes('<svg')) {
+                gz.innerHTML = `<div class="svg-container">${curr.colG}</div>`;
             } else {
                 let lookupKey = (currentDept === 'zhuyin') ? curr.colC : curr.colB;
-                gz.innerHTML = `<span class="emoji-style">${curr.colH || (window.emojiDictionary ? window.emojiDictionary[lookupKey] : '')}</span>`;
+                gz.innerHTML = `<span class="emoji-style">${curr.colG || (window.emojiDictionary ? window.emojiDictionary[lookupKey] : '')}</span>`;
             }
 
-            // 雙軌智慧切換
+            // 🔀 完全獨立的兩套排版邏輯
             if (currentDept === 'zhuyin') {
+                // 【1. 注音區輸出方式】
                 document.getElementById('lbl-word').innerText = `${curr.colC} ${curr.colB}`; // 上方：爸爸 ㄅ
-                document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大盒：ㄅ
-                document.getElementById('lbl-spelling').innerText = curr.colD;              // 拼音：ㄅㄚˋ ㄅㄚ˙
+                document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大肚子盒子：ㄅ (大紅字)
+                document.getElementById('lbl-spelling').innerText = curr.colD;              // 下方獨立欄位：ㄅㄚˋ ㄅㄚ˙
                 document.getElementById('lbl-sentence-zh').innerText = curr.colE;          // 例句
                 document.getElementById('lbl-sentence-vi').innerText = curr.colF || "";
             } else {
-                document.getElementById('lbl-word').innerText = curr.colC;                  // 上方：ㄋㄧˇ ㄏㄠˇ
-                document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大盒：你好 (中文字)
-                document.getElementById('lbl-spelling').innerText = "";
-                document.getElementById('lbl-sentence-zh').innerText = curr.colE;
+                // 【2. 初階核心區輸出方式】
+                document.getElementById('lbl-word').innerText = curr.colC;                  // 上方：nǐ hǎo (純拼音)
+                document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大肚子盒子：你好 (中文字)
+                document.getElementById('lbl-spelling').innerText = "";                     // 核心詞彙不佔用下方拼音欄
+                document.getElementById('lbl-sentence-zh').innerText = curr.colE;          // 例句
                 document.getElementById('lbl-sentence-vi').innerText = curr.colF || "";
             }
 
