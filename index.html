@@ -52,7 +52,7 @@
         .zhuyin-large-char { font-size: 90px; font-weight: 950; color: var(--google-red); text-align: center; line-height: 1; }
         .word-audio-btn { width: 46px; height: 46px; border-radius: 50%; border: none; background: var(--google-red); color: white; cursor: pointer; font-size: 18px; box-shadow: 0 4px 10px rgba(234,67,53,0.3); margin-left: 15px; }
 
-        /* 🎯 4. 獨立拼音學習欄位 (如：ㄅㄚˋ ㄅㄚ˙) */
+        /* 🎯 4. 獨立拼音學習欄位 */
         .pinyin-spelling-zone { height: 45px; display: flex; justify-content: center; align-items: center; text-align: center; margin-bottom: 5px; }
         .pinyin-spelling-text { font-size: 32px; font-weight: 900; color: var(--text-muted); letter-spacing: 2px; }
 
@@ -155,12 +155,38 @@
             const resp = await fetch(`./data.md?v=${Date.now()}`);
             const text = await resp.text();
             rawDb = text.split('\n').filter(l => l.includes('|')).map(l => {
-                const c = l.split('|').map(s => s.trim());
-                // 🎯【終極精準對齊修正】
-                // 因為 Markdown 開頭有 |，所以 c[0] 是空的，c[1]才是A欄(編號)！
-                // 嚴格對齊：c[1]=編號, c[2]=B欄, c[3]=C欄, c[4]=D欄, c[5]=E欄, c[6]=F欄, c[7]=H欄, c[8]=I欄, c[9]=J欄
-                return { id:c[1], colB:c[2], colC:c[3], colD:c[4], colE:c[5], colF:c[6], colH:c[7], audioI:c[8], audioJ:c[9] };
-            }).filter(o => o.id && !o.id.includes('---') && o.id !== '編號');
+                const cells = l.split('|').map(s => s.trim()).filter(s => s !== "");
+                
+                // 🎯【最強特徵自主辨識，無視任何格數錯位】
+                if (cells.length < 4 || cells[0].includes('---') || cells[0] === '編號') return null;
+
+                let id = cells[0]; // 第一個非空一定是編號
+                let colB = cells[1]; // 第二個一定是中文字或核心符號
+                let colC = cells[2]; // 第三個一定是詞彙或舊拼音
+                
+                // 尋找包含例句的格子 (特徵：通常較長或包含標點)
+                let sentIdx = cells.findIndex((c, idx) => idx > 2 && (c.includes('，') || c.includes('！') || c.includes('？') || c.includes('。')));
+                let colE = sentIdx !== -1 ? cells[sentIdx] : (cells[4] || "");
+                let colF = sentIdx !== -1 ? cells[sentIdx + 1] : (cells[5] || "");
+
+                // 尋找含有注音拼音特徵的格子 (D欄：通常在C欄和E欄之間)
+                let colD = "";
+                if (id.includes('ㄅ') && sentIdx > 3) {
+                    colD = cells[3];
+                }
+
+                // 尋找最後兩個超長 Base64 音頻
+                let audioCells = cells.filter(c => c.length > 100);
+                let audioI = audioCells[0] || "";
+                let audioJ = audioCells[1] || "";
+
+                // 尋找圖形提示 (排除例句、編號和音頻後，剩下的長度適中的可能就是SVG或圖形)
+                let colH = "";
+                let possibleH = cells.find(c => c.includes('<svg') || (c.length > 0 && c.length < 10 && !c.includes('，') && c !== id && c !== colB && c !== colC && c !== colD));
+                if (possibleH) colH = possibleH;
+
+                return { id, colB, colC, colD, colE, colF, colH, audioI, audioJ };
+            }).filter(o => o !== null);
         }
 
         function enterDepartment(dept) {
@@ -180,7 +206,7 @@
             const curr = filteredDb[currentIndex];
             document.getElementById('lbl-id').innerText = curr.id;
             
-            // 圖形提示 (H欄優先，空則讀取庫)
+            // 圖形提示
             const gz = document.getElementById('graphic-zone');
             if (curr.colH && curr.colH.includes('<svg')) {
                 gz.innerHTML = `<div class="svg-container">${curr.colH}</div>`;
@@ -189,21 +215,19 @@
                 gz.innerHTML = `<span class="emoji-style">${curr.colH || (window.emojiDictionary ? window.emojiDictionary[lookupKey] : '')}</span>`;
             }
 
-            // 🎯 智慧分流雙軌排版
+            // 雙軌智慧切換
             if (currentDept === 'zhuyin') {
-                // 【注音園區】
                 document.getElementById('lbl-word').innerText = `${curr.colC} ${curr.colB}`; // 上方：爸爸 ㄅ
-                document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大盒：ㄅ (超大紅字)
-                document.getElementById('lbl-spelling').innerText = curr.colD;              // 拼音：ㄅㄚˋ ㄅㄚ˙ (還原出現！)
-                document.getElementById('lbl-sentence-zh').innerText = curr.colE;          // 例句：爸爸，ㄅ！
-                document.getElementById('lbl-sentence-vi').innerText = curr.colF || "";     // 越南文
+                document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大盒：ㄅ
+                document.getElementById('lbl-spelling').innerText = curr.colD;              // 拼音：ㄅㄚˋ ㄅㄚ˙
+                document.getElementById('lbl-sentence-zh').innerText = curr.colE;          // 例句
+                document.getElementById('lbl-sentence-vi').innerText = curr.colF || "";
             } else {
-                // 【核心詞彙區 100/200字】
-                document.getElementById('lbl-word').innerText = curr.colC;                  // 上方：ㄋㄧˇ ㄏㄠˇ (舊拼音)
+                document.getElementById('lbl-word').innerText = curr.colC;                  // 上方：ㄋㄧˇ ㄏㄠˇ
                 document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大盒：你好 (中文字)
-                document.getElementById('lbl-spelling').innerText = "";                     // 核心詞彙不佔用下方拼音欄
-                document.getElementById('lbl-sentence-zh').innerText = curr.colE;          // 舊例句
-                document.getElementById('lbl-sentence-vi').innerText = curr.colF || "";     // 舊翻譯
+                document.getElementById('lbl-spelling').innerText = "";
+                document.getElementById('lbl-sentence-zh').innerText = curr.colE;
+                document.getElementById('lbl-sentence-vi').innerText = curr.colF || "";
             }
 
             document.getElementById('card-counter').innerText = `${currentIndex+1}/${filteredDb.length}`;
