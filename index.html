@@ -39,22 +39,26 @@
         .card-id { position: absolute; top: 16px; left: 24px; font-family: 'Poppins'; font-weight: 900; color: #CBD5E1; background: #F8FAFC; padding: 2px 10px; border-radius: 8px; }
         
         /* 1. 頂部圖形區 */
-        .graphic-display-zone { height: 110px; display: flex; justify-content: center; align-items: center; margin-top: 10px; }
+        .graphic-display-zone { height: 110px; display: flex; justify-content: center; align-items: center; margin-top: 5px; }
         .emoji-style { font-size: 90px; }
         .svg-container { width: 100px; height: 100px; }
 
-        /* 2. 輔助單詞區 (如：貓咪 ㄇ) */
-        .word-main-zone { height: 60px; display: flex; justify-content: center; align-items: center; text-align: center; }
+        /* 2. 上方/輔助文字區 (詞彙或拼音展示) */
+        .word-main-zone { height: 45px; display: flex; justify-content: center; align-items: center; text-align: center; }
         .main-word { font-size: 26px; font-weight: 900; color: var(--text-muted); }
 
-        /* 🎯 3. 【核心升級：注音主展區 - 專攻 B 欄特大符號】 */
-        .zhuyin-display-zone { height: 160px; display: flex; justify-content: center; align-items: center; background: #FFF7ED; border-radius: 24px; margin: 10px 0; border: 2px dashed #FED7AA; }
-        .zhuyin-large-char { font-size: 100px; font-weight: 950; color: var(--google-red); text-align: center; line-height: 1; min-width: 100px; }
+        /* 🎯 3. 大展示盒 */
+        .zhuyin-display-zone { height: 145px; display: flex; justify-content: center; align-items: center; background: #FFF7ED; border-radius: 24px; margin: 5px 0; border: 2px dashed #FED7AA; position: relative; }
+        .zhuyin-large-char { font-size: 90px; font-weight: 950; color: var(--google-red); text-align: center; line-height: 1; }
         .word-audio-btn { width: 46px; height: 46px; border-radius: 50%; border: none; background: var(--google-red); color: white; cursor: pointer; font-size: 18px; box-shadow: 0 4px 10px rgba(234,67,53,0.3); margin-left: 15px; }
 
-        /* 4. 底部例句/複讀加深音區 */
-        .sentence-section { height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; margin-top: 5px; }
-        .target-sentence { font-size: 24px; font-weight: 900; color: var(--text-main); }
+        /* 🎯 4. 新增：獨立出來的拼音學習欄位 (如：ㄅㄚˋ ㄅㄚ˙) */
+        .pinyin-spelling-zone { height: 45px; display: flex; justify-content: center; align-items: center; text-align: center; margin-bottom: 5px; }
+        .pinyin-spelling-text { font-size: 32px; font-weight: 900; color: var(--google-green); letter-spacing: 2px; }
+
+        /* 5. 底部例句/複讀加深音區 */
+        .sentence-section { height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; }
+        .target-sentence { font-size: 22px; font-weight: 900; color: var(--text-main); }
         .sentence-audio-btn { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--google-blue); color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(66,133,244,0.3); }
 
         /* 下方導航 */
@@ -117,6 +121,10 @@
                     <button class="word-audio-btn" onclick="playAudio('word')"><i class="fas fa-volume-up"></i></button>
                 </div>
 
+                <div class="pinyin-spelling-zone">
+                    <div id="lbl-spelling" class="pinyin-spelling-text">--</div>
+                </div>
+
                 <div class="sentence-section">
                     <div style="display:flex; align-items:center; gap:12px">
                         <div id="lbl-sentence-zh" class="target-sentence">--</div>
@@ -148,14 +156,14 @@
             const text = await resp.text();
             rawDb = text.split('\n').filter(l => l.includes('|')).map(l => {
                 const c = l.split('|').map(s => s.trim());
-                // mapping: c[1]=編號, c[2]=B欄注音符號, c[3]=C欄詞彙, c[4]=D欄注音拼音, c[5]=E欄例句, c[6]=F欄例句翻譯, c[7]=H欄圖形, c[8]=I欄字音頻, c[9]=J欄句音頻
-                return { id:c[1], core_symbol:c[2], word:c[3], pinyin:c[4], sent_zh:c[5], sent_vi:c[6], graphic:c[7], audio_w:c[8], audio_s:c[9] };
+                // 精准映射：c[1]=編號, c[2]=B欄, c[3]=C欄, c[4]=D欄, c[5]=E欄, c[6]=F欄, c[7]=H欄, c[8]=I欄, c[9]=J欄
+                return { id:c[1], colB:c[2], colC:c[3], colD:c[4], colE:c[5], colF:c[6], colH:c[7], audioI:c[8], audioJ:c[9] };
             }).filter(o => o.id && !o.id.includes('---') && o.id !== '編號');
         }
 
         function enterDepartment(dept) {
             currentDept = dept;
-            if (dept === 'zhuyin') filteredDb = rawDb.filter(o => o.id.includes('ㄅ') || isNaN(o.id));
+            if (dept === 'zhuyin') filteredDb = rawDb.filter(o => o.id.includes('ㄅ'));
             else if (dept === 'c100') filteredDb = rawDb.filter(o => { let n = parseInt(o.id); return n >= 1 && n <= 100; });
             else if (dept === 'c200') filteredDb = rawDb.filter(o => { let n = parseInt(o.id); return n >= 101 && n <= 200; });
             
@@ -170,30 +178,38 @@
             const curr = filteredDb[currentIndex];
             document.getElementById('lbl-id').innerText = curr.id;
             
-            // 圖形提示
+            // 圖形提示 (H欄優先，空則讀取庫)
             const gz = document.getElementById('graphic-zone');
-            if (curr.graphic.includes('<svg')) gz.innerHTML = `<div class="svg-container">${curr.graphic}</div>`;
-            else gz.innerHTML = `<span class="emoji-style">${curr.graphic || (window.emojiDictionary?window.emojiDictionary[curr.word]:'')}</span>`;
-
-            if (currentDept === 'zhuyin') {
-                // 注音專區：中央放純粹的 B 欄注音符號 (例如 ㄇ)，下方輔助字顯示「貓咪 ㄇ」
-                document.getElementById('lbl-word').innerText = `${curr.word} ${curr.core_symbol}`;
-                document.getElementById('lbl-large-zhuyin').innerText = curr.core_symbol;
-            } else {
-                // 普通100字專區：中央放大大的中文字 (B欄)，小標題放拼音
-                document.getElementById('lbl-word').innerText = curr.pinyin;
-                document.getElementById('lbl-large-zhuyin').innerText = curr.core_symbol;
+            if (curr.colH.includes('<svg')) gz.innerHTML = `<div class="svg-container">${curr.colH}</div>`;
+            else {
+                let lookupKey = (currentDept === 'zhuyin') ? curr.colC : curr.colB;
+                gz.innerHTML = `<span class="emoji-style">${curr.colH || (window.emojiDictionary?window.emojiDictionary[lookupKey]:'')}</span>`;
             }
 
-            document.getElementById('lbl-sentence-zh').innerText = curr.sent_zh;
-            document.getElementById('lbl-sentence-vi').innerText = curr.sent_vi || "";
+            // 🎯 智慧相容渲染邏輯
+            if (currentDept === 'zhuyin') {
+                // 【注音園區】
+                document.getElementById('lbl-word').innerText = `${curr.colC} ${curr.colB}`; // 上方顯示：爸爸 ㄅ
+                document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大橘盒顯示：ㄅ
+                document.getElementById('lbl-spelling').innerText = curr.colD;              // 拼音欄還原：ㄅㄚˋ ㄅㄚ˙ (亮綠色)
+                document.getElementById('lbl-sentence-zh').innerText = curr.colE;          // 例句：爸爸 ㄅ
+                document.getElementById('lbl-sentence-vi').innerText = curr.colF || "";     // 越南文
+            } else {
+                // 【核心詞彙區 100/200字】
+                document.getElementById('lbl-word').innerText = curr.colC;                  // 上方顯示原本的拼音 (ㄋㄧˇ ㄏㄠˇ)
+                document.getElementById('lbl-large-zhuyin').innerText = curr.colB;          // 大橘盒還原顯示中文字 (你好)
+                document.getElementById('lbl-spelling').innerText = "";                     // 核心詞彙不需要下方拼音欄，留空
+                document.getElementById('lbl-sentence-zh').innerText = curr.colE;          // 核心例句
+                document.getElementById('lbl-sentence-vi').innerText = curr.colF || "";     // 核心翻譯
+            }
+
             document.getElementById('card-counter').innerText = `${currentIndex+1}/${filteredDb.length}`;
             localStorage.setItem('G_PROG_'+currentDept, currentIndex);
         }
 
         function playAudio(type) {
             const curr = filteredDb[currentIndex];
-            const base64 = (type==='word' ? curr.audio_w : curr.audio_s);
+            const base64 = (type=='word' ? curr.audioI : curr.audioJ);
             if (base64) { player.src = "data:audio/mp3;base64," + base64; player.play(); }
         }
         function nextCard() { if(currentIndex < filteredDb.length-1) { currentIndex++; render(); playAudio('word'); } }
