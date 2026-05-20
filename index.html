@@ -1,303 +1,216 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>啟盟學堂 G-School</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Lexend', 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; }
-        /* 確保注入的 SVG 能完美撐滿並保持置中比例 */
-        .svg-container svg { width: 100%; height: 100%; object-fit: contain; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎒 啟盟學堂智慧字卡 HUB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&display=swap');
+    body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; }
+    /* 精準控制注音與文字的上下緊密排版 */
+    .ruby-container ruby { ruby-position: over; font-variant-east-asian: ruby; }
+    .ruby-container rt { font-size: 0.35em; color: #475569; font-weight: 700; letter-spacing: 1px; padding-bottom: 4px; }
+  </style>
 </head>
-<body class="bg-slate-50 min-h-screen flex flex-col antialiased select-none">
+<body class="flex flex-col min-h-screen">
 
-    <header class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
-        <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
-            <button id="btnBackToHub" class="hidden flex items-center space-x-1 text-slate-500 active:scale-95 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
-                <span class="font-bold">返回</span>
-            </button>
-            <div id="hubTitle" class="flex items-center space-x-2 mx-auto">
-                <span class="text-xl">🎒</span>
-                <h1 class="text-lg font-black text-slate-800 tracking-wide">啟盟學堂</h1>
-            </div>
-            <div class="w-12"></div>
-        </div>
-    </header>
+  <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md p-4 sticky top-0 z-50">
+    <div class="max-w-md mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-black tracking-wider"><i class="fa-solid fa-graduation-cap mr-2"></i>啟盟學堂</h1>
+      <span id="counter" class="bg-white text-indigo-700 text-sm font-bold px-3 py-1 rounded-full shadow-inner">載入中...</span>
+    </div>
+  </header>
 
-    <main id="hubUniverse" class="flex-1 max-w-md w-full mx-auto px-5 py-8 flex flex-col justify-center space-y-6">
-        <div class="text-center space-y-2 mb-4">
-            <h2 class="text-2xl font-black text-slate-800">小寶貝，想學什麼呢？</h2>
-            <p class="text-sm text-slate-400">請選擇一個進入學堂宇宙</p>
-        </div>
-        <button onclick="launchUniverse('core.md', '🌟 核心識字')" class="w-full bg-white border border-slate-100 p-6 rounded-3xl shadow-sm flex items-center space-x-5 transition active:scale-95 group text-left">
-            <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition">🌟</div>
-            <div class="flex-1">
-                <h3 class="text-lg font-bold text-slate-800">單元一：核心識字學堂</h3>
-                <p id="record-core" class="text-xs text-amber-600 mt-0.5 font-medium">尚未有學習紀錄</p>
-            </div>
-            <svg class="w-5 h-5 text-slate-300 group-hover:text-amber-500 transition" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+  <main class="flex-grow flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100 p-6 space-y-6 relative overflow-hidden transition-all duration-300">
+      
+      <div class="flex justify-between items-center">
+        <span id="card-id" class="text-slate-400 font-extrabold text-lg tracking-widest">#00</span>
+        <button onclick="playAudio('main')" class="w-12 h-12 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-600 flex items-center justify-center shadow-sm transition-all active:scale-95 group focus:outline-none">
+          <i class="fa-solid fa-volume-high text-xl group-hover:scale-110 transition-transform"></i>
         </button>
-        <button onclick="launchUniverse('zhuyin.md', 'ㄅ 注音啟盟')" class="w-full bg-white border border-slate-100 p-6 rounded-3xl shadow-sm flex items-center space-x-5 transition active:scale-95 group text-left">
-            <div class="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition">ㄅ</div>
-            <div class="flex-1">
-                <h3 class="text-lg font-bold text-slate-800">單元二：注音符號啟蒙</h3>
-                <p id="record-zhuyin" class="text-xs text-indigo-600 mt-0.5 font-medium">尚未有學習紀錄</p>
-            </div>
-            <svg class="w-5 h-5 text-slate-300 group-hover:text-indigo-500 transition" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-        </button>
-    </main>
+      </div>
 
-    <main id="appUniverse" class="hidden flex-1 max-w-md w-full mx-auto px-4 py-3 flex flex-col justify-between">
+      <div class="flex flex-col items-center justify-center py-4 space-y-4">
+        <div id="main-word-box" class="ruby-container text-6xl md:text-7xl font-black text-slate-800 tracking-wide text-center">
+          </div>
+        <div id="sub-tip" class="text-slate-400 text-sm font-medium"></div>
+      </div>
+
+      <div class="flex justify-center items-center p-4 bg-slate-50 rounded-2xl border border-dashed border-slate-200 min-h-[140px]">
+        <div id="image-display" class="text-7xl select-none filter drop-shadow-md">
+          </div>
+      </div>
+
+      <div class="bg-indigo-50/50 rounded-2xl p-5 border border-indigo-100/60 relative group">
+        <button onclick="playAudio('sentence')" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white hover:bg-indigo-100 text-indigo-600 flex items-center justify-center shadow-sm transition-all active:scale-95 focus:outline-none">
+          <i class="fa-solid fa-volume-high text-xs"></i>
+        </button>
         
-        <div class="flex justify-between items-center px-2 mb-1">
-            <span id="txtUnitTag" class="text-xs font-bold bg-slate-100 text-slate-500 px-3 py-1 rounded-full">UNIT</span>
-            <span id="txtCounter" class="text-sm font-bold text-slate-400">0 / 0</span>
+        <div class="space-y-3 pr-6">
+          <div id="example-sentence" class="ruby-container text-xl md:text-2xl font-bold text-slate-800 leading-relaxed">
+            </div>
+          <div class="border-t border-indigo-100 my-2"></div>
+          <p id="vietnamese-translation" class="text-slate-500 font-medium text-base italic md:text-lg">
+            </p>
         </div>
+      </div>
 
-        <div class="bg-white rounded-[32px] shadow-sm border border-slate-100 p-6 flex flex-col justify-between flex-1 min-h-[480px] relative">
-            
-            <div class="flex justify-between items-start z-10">
-                <div class="text-left space-y-0.5">
-                    <span id="cardId" class="text-xs font-black text-slate-300 block">#01</span>
-                    <span id="cardSub" class="text-2xl font-black text-amber-500 tracking-wide block">注音符號位置</span>
-                </div>
-                <button onclick="speakSystemTTS('main')" class="w-12 h-12 bg-slate-50 hover:bg-amber-100 text-slate-600 hover:text-amber-600 rounded-2xl flex items-center justify-center transition active:scale-90 shadow-inner">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/></svg>
-                </button>
-            </div>
+    </div>
+  </main>
 
-            <div class="flex-1 flex items-center justify-center px-1 my-2">
-                <div class="w-full flex flex-row items-center justify-center space-x-6">
-                    <h1 id="cardMain" class="font-black text-slate-800 tracking-tight transition-all">字</h1>
-                    
-                    <div id="imgContainer" class="svg-container w-32 h-32 flex items-center justify-center bg-slate-50 rounded-2xl p-2 border border-slate-100 shadow-sm overflow-hidden">
-                        </div>
-                </div>
-            </div>
+  <footer class="bg-white border-t border-slate-200 p-4 sticky bottom-0 z-50">
+    <div class="max-w-md mx-auto space-y-3">
+      <div class="grid grid-cols-2 gap-4">
+        <button onclick="navigateCard(-1)" class="py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-lg rounded-2xl shadow-sm transition-all active:scale-95 focus:outline-none flex items-center justify-center">
+          <i class="fa-solid fa-chevron-left mr-2"></i> 上一個
+        </button>
+        <button onclick="navigateCard(1)" class="py-4 bg-slate-800 hover:bg-slate-900 text-white font-black text-lg rounded-2xl shadow-md transition-all active:scale-95 focus:outline-none flex items-center justify-center">
+          下一個 <i class="fa-solid fa-chevron-right ml-2"></i>
+        </button>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-xs font-bold text-slate-400">
+        <button onclick="navigateCard(-10)" class="py-2 hover:text-slate-600 transition-colors focus:outline-none"><i class="fa-solid fa-angles-left mr-1"></i> 快退 10 筆</button>
+        <button onclick="navigateCard(10)" class="py-2 hover:text-slate-600 transition-colors focus:outline-none text-right">快進 10 筆 <i class="fa-solid fa-angles-right ml-1"></i></button>
+      </div>
+    </div>
+  </footer>
 
-            <div id="sentenceBox" class="bg-slate-50 rounded-2xl p-5 border border-slate-100 space-y-3 relative">
-                <button onclick="speakSystemTTS('sentence')" class="absolute top-4 right-4 w-9 h-9 bg-white text-slate-400 hover:text-amber-500 rounded-xl flex items-center justify-center shadow-sm active:scale-90 transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/></svg>
-                </button>
-                <p id="cardExample" class="text-3xl md:text-4xl font-black text-slate-800 pr-10 leading-snug">例句載入中...</p>
-                <div class="border-t border-slate-200 my-1"></div>
-                <p id="cardVN" class="text-lg font-bold text-slate-500 leading-normal">Dịch nghĩa...</p>
-            </div>
-        </div>
+  <script>
+    let cardsData = [];
+    let currentIndex = 0;
+    let currentAudio = null;
 
-        <div class="flex flex-col space-y-2.5 mt-3">
-            <div class="grid grid-cols-2 gap-4">
-                <button onclick="navigateCard(-1)" class="bg-white border border-slate-200 text-slate-600 font-bold py-4 rounded-2xl active:scale-95 transition flex items-center justify-center space-x-2">
-                    <svg class="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
-                    <span>上一個</span>
-                </button>
-                <button onclick="navigateCard(1)" class="bg-slate-900 text-white font-bold py-4 rounded-2xl active:scale-95 transition flex items-center justify-center space-x-2 shadow-sm">
-                    <span>下一個</span>
-                    <svg class="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-                </button>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-                <button onclick="navigateCard(-10)" class="bg-slate-100 hover:bg-slate-200 text-slate-500 font-medium py-2 rounded-xl active:scale-95 transition text-xs flex items-center justify-center space-x-1">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"/></svg>
-                    <span>快退 10 筆</span>
-                </button>
-                <button onclick="navigateCard(10)" class="bg-slate-100 hover:bg-slate-200 text-slate-500 font-medium py-2 rounded-xl active:scale-95 transition text-xs flex items-center justify-center space-x-1">
-                    <span>快進 10 筆</span>
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15L5.25 12l7.5-7.5"/></svg>
-                </button>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        let currentDatabase = [];
-        let currentIndex = 0;
-        let currentUnitType = ""; 
-        const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/GDman83/g-school/main/";
-
-        // 初始化檢查大廳歷史進度標籤
-        function updateHubRecordLabels() {
-            ['core', 'zhuyin'].forEach(type => {
-                const savedIndex = localStorage.getItem(`gs_record_${type}`);
-                const label = document.getElementById(`record-${type}`);
-                if (savedIndex !== null) {
-                    label.innerText = `上次讀到第 ${parseInt(savedIndex) + 1} 頁 (自動續讀開啟)`;
-                    label.classList.remove('text-slate-400');
-                }
-            });
+    // 🚀 初始化：從 GitHub 城堡抓取唯一的全校總清單
+    async function initG_School() {
+      try {
+        // 直接讀取工頭一車拉過來的唯一實心總表
+        const response = await fetch('school_total.md');
+        if (!response.ok) throw new Error('無法讀取總表檔案');
+        const text = await response.text();
+        parseMarkdownData(text);
+        
+        if(cardsData.length > 0) {
+          renderCard(0);
+        } else {
+          document.getElementById('main-word-box').innerText = "倉庫空空如也";
         }
+      } catch (error) {
+        console.error(error);
+        document.getElementById('main-word-box').innerText = "連線城堡失敗";
+      }
+    }
 
-        // 📐 強力修復：智慧型多相容 Markdown 表格拆解引擎
-        function parseMarkdownTable(md) {
-            const lines = md.split('\n');
-            const data = [];
-            
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i].trim();
-                // 過濾標頭檔與空行
-                if (!line.startsWith('|') || line.includes(':---') || line.includes('主要展示') || line.includes('編號')) continue;
-                
-                // 精確使用 | 進行切分，並剔除首尾空白
-                const cells = line.split('|').map(c => c.trim());
-                // 移除前後因 | 產生的虛無欄位
-                if (cells[0] === '') cells.shift();
-                if (cells[cells.length - 1] === '') cells.pop();
-                
-                if (cells.length < 6) continue; 
-                
-                // 修正：確實抓取所有欄位，並將圖形字串前後的空白清乾淨
-                data.push({
-                    id: cells[0] || "",
-                    main: cells[1] || "",
-                    sub: cells[2] || "",       // 輔助提示 (注音符號裡如 "爸爸 ㄅ")
-                    pinyin: cells[3] || "",    // 獨立拼音/注音 (核心識字裡放注音，注音符號裡放拼音)
-                    example: cells[4] || "",
-                    vn: cells[5] || "",
-                    imgCode: cells[6] ? cells[6].trim() : "" // 圖形代碼 (可能是 <svg... 或者是 圖片.png)
-                });
-            }
-            return data;
-        }
+    // 📋 解析 Markdown 數據，精準還原欄位
+    function parseMarkdownData(mdText) {
+      const lines = mdText.split('\n');
+      cardsData = [];
+      
+      for (let i = 2; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line || !line.startsWith('|')) continue;
+        
+        // 欄位切分：| 編號 | 主要展示 | 輔助提示 | 純正注音 | 生活例句 | 越南文翻譯 | 圖形代碼 |
+        const cols = line.split('|').map(c => c.trim());
+        if (cols.length < 8) continue;
+        
+        const id = cols[1];
+        const main = cols[2];
+        const sub = cols[3];
+        const zhuyin = cols[4];  // 這是純注音！
+        const example = cols[5];
+        const vn = cols[6];
+        const imgCode = cols[7];
+        
+        if (!main) continue;
+        
+        cardsData.push({ id, main, sub, zhuyin, example, vn, imgCode });
+      }
+    }
 
-        // 🎴 智慧分流渲染器：完美放大字體並打通所有圖形格式
-        function renderCard() {
-            if (currentDatabase.length === 0) return;
-            const item = currentDatabase[currentIndex];
-            
-            document.getElementById('cardId').innerText = `# ${item.id}`;
-            document.getElementById('cardMain').innerText = item.main;
-            document.getElementById('cardExample').innerText = item.example;
-            document.getElementById('cardVN').innerText = item.vn;
-            document.getElementById('txtCounter').innerText = `${currentIndex + 1} / ${currentDatabase.length}`;
-            
-            const cardSub = document.getElementById('cardSub');
-            const cardMainElement = document.getElementById('cardMain');
+    // 💥 智慧渲染引擎：將漢字與注音完美黏合
+    function renderCard(index) {
+      if (index < 0 || index >= cardsData.length) return;
+      currentIndex = index;
+      const card = cardsData[index];
+      
+      // 更新計數器與編號
+      document.getElementById('counter').innerText = `${currentIndex + 1} / ${cardsData.length}`;
+      document.getElementById('card-id').innerText = `# ${card.id}`;
+      document.getElementById('sub-tip').innerText = card.sub === "-" ? "" : card.sub;
+      
+      // 1. 處理主要詞彙 (漢字 + 注音) 的黏合
+      const mainBox = document.getElementById('main-word-box');
+      mainBox.innerHTML = buildRubyString(card.main, card.zhuyin);
+      
+      // 2. 處理圖片資產
+      const imgBox = document.getElementById('image-display');
+      imgBox.innerText = (card.imgCode && card.imgCode !== "-") ? card.imgCode : "🎒";
+      
+      // 3. 處理應用例句 (自動分離中越文，並為中文做基本的排版)
+      const exampleBox = document.getElementById('example-sentence');
+      if(card.example && card.example !== "-") {
+        // 這裡未來可進一步對齊例句注音，目前先放大純中文字體
+        exampleBox.innerText = card.example;
+        exampleBox.parentElement.parentElement.classList.remove('hidden');
+      } else {
+        exampleBox.innerText = "";
+        exampleBox.parentElement.parentElement.classList.add('hidden');
+      }
+      
+      // 4. 處理越南文
+      document.getElementById('vietnamese-translation').innerText = (card.vn && card.vn !== "-") ? card.vn : "";
+    }
 
-            // 🌟 根據不同單元，進行字體極限放大與拼音/注音位置互換調整
-            if (currentUnitType === "core") {
-                // 核心識字單元：上方要大字顯示您寫在字庫裡的【注音符號】(第4欄 pinyin)
-                cardSub.innerText = item.pinyin || item.sub || "🌟";
-                // 漢字主體放大
-                cardMainElement.className = "text-6xl md:text-7xl font-black text-slate-800 tracking-tight transition-all";
-            } else {
-                // 注音啟盟單元：上方顯示組合拼音 (第4欄 pinyin)
-                cardSub.innerText = item.pinyin || "ㄅㄆㄇ";
-                // 注音符號（主字）頂天立地放大！解決太小的問題
-                cardMainElement.className = "text-8xl md:text-9xl font-black text-slate-800 transition-all";
-            }
+    // 🧩 漢字與注音的智能黏合演算法 (按字數或空格拆分對齊)
+    function buildRubyString(word, zhuyin) {
+      if (!zhuyin || zhuyin === "-") return word;
+      
+      const charArray = word.split('');
+      // 支援注音用空格或逗號隔開的狀況
+      const zhuyinArray = zhuyin.includes(' ') ? zhuyin.split(' ') : zhuyin.split(',');
+      
+      // 如果兩邊長度一致，完美一對一綁定
+      if (charArray.length === zhuyinArray.length) {
+        return charArray.map((char, i) => `<ruby>${char}<rt>${zhuyinArray[i]}</rt></ruby>`).join('');
+      }
+      
+      // 如果長度不一致，直接把整串注音頂在上方展示，絕不穿幫
+      return `<ruby>${word}<rt>${zhuyin}</rt></ruby>`;
+    }
 
-            // 🎯 核心圖形相容性引擎修正：支援 SVG 與 所有圖片檔名
-            const imgContainer = document.getElementById('imgContainer');
-            const rawImgStr = item.imgCode;
+    // 🎵 城堡物流音訊播放器
+    function playAudio(type) {
+      if (cardsData.length === 0) return;
+      const card = cardsData[currentIndex];
+      
+      // 暫停上一個正在播的聲音
+      if (currentAudio) {
+        currentAudio.pause();
+      }
+      
+      // 精準指向工頭幫我們命名好的 MP3 檔案門牌
+      const filename = type === 'main' ? `school_${card.id}_main.mp3` : `school_${card.id}_sentence.mp3`;
+      const audioUrl = `audio/${filename}`;
+      
+      currentAudio = new Audio(audioUrl);
+      currentAudio.play().catch(e => {
+        console.log("🔊 提示：此音頻目前在 GitHub 城堡中卡住或尚未由 TTS 生成完畢，下次接關同步後即可補齊！");
+      });
+    }
 
-            if (rawImgStr && rawImgStr.toLowerCase().includes('<svg')) {
-                // 格式 A: 如果是原汁原味的 SVG 向量代碼，直接注入容器
-                imgContainer.innerHTML = rawImgStr;
-            } else if (rawImgStr && rawImgStr !== "" && rawImgStr !== "-") {
-                // 格式 B: 如果是圖片路徑或純檔名（如: apple.png / image.jpg）
-                // 防呆判斷：如果是完整網址就直接用，如果是純檔名就去補齊 GitHub 倉庫路徑
-                const imgSrc = rawImgStr.startsWith('http') ? rawImgStr : GITHUB_RAW_BASE + rawImgStr;
-                imgContainer.innerHTML = `<img src="${imgSrc}" class="w-full h-full object-contain" onerror="showFallbackFallback(this)" alt="提示圖">`;
-            } else {
-                // 格式 C: 欄位空白時的預設精美小圖形
-                setFallbackIcon();
-            }
+    // 🎮 導航切換控制
+    function navigateCard(step) {
+      let nextIndex = currentIndex + step;
+      if (nextIndex < 0) nextIndex = 0;
+      if (nextIndex >= cardsData.length) nextIndex = cardsData.length - 1;
+      renderCard(nextIndex);
+    }
 
-            // 💾 隨時儲存進度
-            localStorage.setItem(`gs_record_${currentUnitType}`, currentIndex);
-        }
-
-        // 圖片讀取失敗時的自動補救機制
-        function showFallbackFallback(imgElement) {
-            console.log("圖片加載失敗，切換至預設圖標");
-            setFallbackIcon();
-        }
-
-        // 設定防呆預設 SVG 圖卡
-        function setFallbackIcon() {
-            document.getElementById('imgContainer').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-12 h-12 text-slate-300" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>`;
-        }
-
-        // 🚪 宇宙分流進入點
-        function launchUniverse(fileName, unitTitleText) {
-            currentUnitType = fileName.split('.')[0]; 
-            document.getElementById('hubUniverse').classList.add('hidden');
-            document.getElementById('appUniverse').classList.remove('hidden');
-            document.getElementById('btnBackToHub').classList.remove('hidden');
-            document.getElementById('hubTitle').querySelector('h1').innerText = unitTitleText;
-            document.getElementById('txtUnitTag').innerText = currentUnitType.toUpperCase();
-            
-            fetch(GITHUB_RAW_BASE + fileName + "?t=" + new Date().getTime()) 
-                .then(res => res.text())
-                .then(md => {
-                    currentDatabase = parseMarkdownTable(md);
-                    
-                    // 💾 進度恢復機制
-                    const savedIndex = localStorage.getItem(`gs_record_${currentUnitType}`);
-                    if (savedIndex !== null && parseInt(savedIndex) < currentDatabase.length) {
-                        currentIndex = parseInt(savedIndex);
-                    } else {
-                        currentIndex = 0;
-                    }
-                    
-                    renderCard();
-                })
-                .catch(err => {
-                    alert("讀取失敗：" + err);
-                    document.getElementById('btnBackToHub').click();
-                });
-        }
-
-        // 🔙 返回大廳
-        document.getElementById('btnBackToHub').addEventListener('click', () => {
-            document.getElementById('hubUniverse').classList.remove('hidden');
-            document.getElementById('appUniverse').classList.add('hidden');
-            document.getElementById('btnBackToHub').classList.add('hidden');
-            document.getElementById('hubTitle').querySelector('h1').innerText = "啟盟學堂";
-            updateHubRecordLabels();
-        });
-
-        // 前後切換與快進控制
-        function navigateCard(direction) {
-            if (currentDatabase.length === 0) return;
-            currentIndex += direction;
-            
-            if (currentIndex < 0) currentIndex = currentDatabase.length - 1;
-            if (currentIndex >= currentDatabase.length) currentIndex = 0;
-            
-            renderCard();
-        }
-
-        // 🗣️ 系統發音引擎
-        function speakSystemTTS(type) {
-            if (currentDatabase.length === 0) return;
-            const item = currentDatabase[currentIndex];
-            let textToSpeak = "";
-
-            if (type === 'main') {
-                textToSpeak = item.main;
-            } else {
-                // 剔除英文或括號
-                textToSpeak = item.example.split('\n')[0].split('(')[0].replace(/[a-zA-Z]/g, "").trim();
-            }
-
-            if (!textToSpeak || !('speechSynthesis' in window)) return;
-
-            const utterance = new SpeechSynthesisUtterance(textToSpeak);
-            utterance.lang = "zh-TW"; 
-            utterance.rate = 0.7; 
-
-            window.speechSynthesis.cancel();
-            window.speechSynthesis.speak(utterance);
-        }
-
-        // 啟動首頁
-        updateHubRecordLabels();
-    </script>
+    // 啟動大樓！
+    window.onload = initG_School;
+  </script>
 </body>
 </html>
