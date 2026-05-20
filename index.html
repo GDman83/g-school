@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎒 啟盟學堂智慧字卡 HUB</title>
+  <title>🎒 啟蒙學堂智慧字卡 HUB</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -19,10 +19,10 @@
     <div class="max-w-md mx-auto flex justify-between items-center">
       <div class="flex items-center cursor-pointer" onclick="showMenu()">
         <i class="fa-solid fa-house-chimney mr-3 text-xl"></i>
-        <h1 class="text-xl font-black tracking-wider">啟盟學堂</h1>
+        <h1 class="text-xl font-black tracking-wider">啟蒙學堂</h1>
       </div>
       <span id="counter" class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full border border-white/30">
-        準備中...
+        連線中...
       </span>
     </div>
   </header>
@@ -30,7 +30,7 @@
   <div id="unit-menu" class="flex-grow flex flex-col items-center justify-center p-6 space-y-8">
     <div class="text-center space-y-2">
       <h2 class="text-3xl font-black text-slate-800">今天要學什麼呢？</h2>
-      <p class="text-slate-500 font-medium">請選擇一個學習單元</p>
+      <p class="text-slate-500 font-medium tracking-widest">請選擇一個學習單元</p>
     </div>
 
     <div class="w-full max-w-sm space-y-4">
@@ -65,7 +65,7 @@
 
       <div class="flex flex-col items-center justify-center py-2 space-y-2">
         <div id="main-word-box" class="ruby-container text-7xl font-black text-slate-800 text-center leading-none"></div>
-        <div id="sub-tip" class="text-slate-400 text-lg font-bold tracking-widest pt-2"></div>
+        <div id="sub-tip" class="text-slate-400 text-lg font-bold tracking-widest pt-2 text-center"></div>
       </div>
 
       <div class="flex justify-center items-center p-4 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200 min-h-[160px]">
@@ -86,13 +86,21 @@
   </main>
 
   <footer id="card-footer" class="hidden bg-white border-t border-slate-200 p-6 sticky bottom-0 z-50">
-    <div class="max-w-md mx-auto">
+    <div class="max-w-md mx-auto space-y-4">
       <div class="grid grid-cols-2 gap-4">
         <button onclick="navigateCard(-1)" class="py-5 bg-slate-100 text-slate-600 font-black text-xl rounded-2xl active:scale-95 flex items-center justify-center transition-all">
           <i class="fa-solid fa-chevron-left mr-2"></i> 上一頁
         </button>
         <button onclick="navigateCard(1)" class="py-5 bg-indigo-600 text-white font-black text-xl rounded-2xl shadow-xl active:scale-95 flex items-center justify-center transition-all">
           下一頁 <i class="fa-solid fa-chevron-right ml-2"></i>
+        </button>
+      </div>
+      <div class="grid grid-cols-2 gap-8 text-sm font-black text-slate-400 px-2">
+        <button onclick="navigateCard(-10)" class="text-left hover:text-slate-600 active:scale-90 transition-all focus:outline-none uppercase tracking-tighter">
+          <i class="fa-solid fa-angles-left mr-1"></i> 快退 10 筆
+        </button>
+        <button onclick="navigateCard(10)" class="text-right hover:text-slate-600 active:scale-90 transition-all focus:outline-none uppercase tracking-tighter">
+          快進 10 筆 <i class="fa-solid fa-angles-right ml-1"></i>
         </button>
       </div>
     </div>
@@ -110,7 +118,7 @@
         if (!response.ok) throw new Error();
         const text = await response.text();
         parseMasterData(text);
-        document.getElementById('counter').innerText = "城堡連線成功";
+        document.getElementById('counter').innerText = "城堡已連線";
       } catch (error) {
         document.getElementById('unit-menu').innerHTML = "<h2 class='text-red-500 font-black text-2xl text-center'>連線失敗，請先至 Excel 執行智慧同步！</h2>";
       }
@@ -124,16 +132,9 @@
         if (!line.startsWith('|')) continue;
         const cols = line.split('|').map(c => c.trim());
         if (cols.length < 8) continue;
-        
-        // 🚨 這裡保留原本的字串編號（例如 "ㄅ03"），不要強制轉純數字
         masterData.push({
-          id: cols[1], 
-          main: cols[2],
-          sub: cols[3],
-          zhuyin: cols[4],
-          example: cols[5],
-          vn: cols[6],
-          imgCode: cols[7]
+          id: cols[1], main: cols[2], sub: cols[3], zhuyin: cols[4],
+          example: cols[5], vn: cols[6], imgCode: cols[7]
         });
       }
     }
@@ -142,84 +143,15 @@
       document.getElementById('unit-menu').classList.remove('hidden');
       document.getElementById('card-viewer').classList.add('hidden');
       document.getElementById('card-footer').classList.add('hidden');
-      document.getElementById('counter').innerText = "城堡連線成功";
     }
 
-    // 💥 智慧分流核心修正：同時支援數字與注音字串判斷！
     function startUnit(unitType) {
       if (unitType === 'core') {
-        // 核心識字：編號不包含 'ㄅ'，且轉成數字後小於等於 100
         currentFilteredData = masterData.filter(d => {
           if (String(d.id).includes('ㄅ')) return false;
           const num = parseInt(d.id);
           return !isNaN(num) && num <= 100;
         });
       } else {
-        // 注音符號：編號包含 'ㄅ'，或者轉成數字後大於 100
         currentFilteredData = masterData.filter(d => {
           if (String(d.id).includes('ㄅ')) return true;
-          const num = parseInt(d.id);
-          return !isNaN(num) && num > 100;
-        });
-      }
-
-      if (currentFilteredData.length === 0) {
-        alert("此單元目前沒有資料，請先在文字庫填寫後同步！");
-        return;
-      }
-
-      document.getElementById('unit-menu').classList.add('hidden');
-      document.getElementById('card-viewer').classList.remove('hidden');
-      document.getElementById('card-footer').classList.remove('hidden');
-      renderCard(0);
-    }
-
-    function renderCard(index) {
-      currentIndex = index;
-      const card = currentFilteredData[index];
-      
-      document.getElementById('counter').innerText = `${currentIndex + 1} / ${currentFilteredData.length}`;
-      document.getElementById('card-id').innerText = `# ${card.id}`;
-      document.getElementById('sub-tip').innerText = (card.sub === "-" || !card.sub) ? "" : card.sub;
-      
-      const mainBox = document.getElementById('main-word-box');
-      mainBox.innerHTML = buildRubyString(card.main, card.zhuyin);
-      
-      const imgBox = document.getElementById('image-display');
-      imgBox.innerText = (card.imgCode && card.imgCode !== "-") ? card.imgCode : "🎒";
-      
-      const exampleBox = document.getElementById('example-sentence');
-      exampleBox.innerText = (card.example && card.example !== "-") ? card.example : "";
-      
-      document.getElementById('vietnamese-translation').innerText = (card.vn && card.vn !== "-") ? card.vn : "";
-    }
-
-    function buildRubyString(word, zhuyin) {
-      if (!zhuyin || zhuyin === "-") return word;
-      const charArray = word.split('');
-      const zhuyinArray = zhuyin.includes(' ') ? zhuyin.split(' ') : zhuyin.split(',');
-      if (charArray.length === zhuyinArray.length) {
-        return charArray.map((char, i) => `<ruby>${char}<rt>${zhuyinArray[i]}</rt></ruby>`).join('');
-      }
-      return `<ruby>${word}<rt>${zhuyin}</rt></ruby>`;
-    }
-
-    function playAudio(type) {
-      const card = currentFilteredData[currentIndex];
-      if (currentAudio) currentAudio.pause();
-      const filename = type === 'main' ? `school_${card.id}_main.mp3` : `school_${card.id}_sentence.mp3`;
-      currentAudio = new Audio(`audio/${filename}`);
-      currentAudio.play();
-    }
-
-    function navigateCard(step) {
-      let nextIndex = currentIndex + step;
-      if (nextIndex >= 0 && nextIndex < currentFilteredData.length) {
-        renderCard(nextIndex);
-      }
-    }
-
-    window.onload = initG_School;
-  </script>
-</body>
-</html>
