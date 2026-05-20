@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Lexend', 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .bouncing-avatar { animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        /* 讓嵌入的原廠 SVG 圖形能完美自適應容器大小 */
+        .svg-container svg { width: 100%; height: 100%; object-fit: contain; }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen flex flex-col antialiased select-none">
@@ -37,7 +37,7 @@
             <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition">🌟</div>
             <div class="flex-1">
                 <h3 class="text-lg font-bold text-slate-800">單元一：核心識字學堂</h3>
-                <p class="text-xs text-slate-400 mt-0.5">常用核心漢字、生活應用配對</p>
+                <p id="record-core" class="text-xs text-amber-600 mt-0.5 font-medium">尚未有學習紀錄</p>
             </div>
             <svg class="w-5 h-5 text-slate-300 group-hover:text-amber-500 transition" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
         </button>
@@ -45,7 +45,7 @@
             <div class="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition">ㄅ</div>
             <div class="flex-1">
                 <h3 class="text-lg font-bold text-slate-800">單元二：注音符號啟蒙</h3>
-                <p class="text-xs text-slate-400 mt-0.5">37個正統注音、看圖識音</p>
+                <p id="record-zhuyin" class="text-xs text-indigo-600 mt-0.5 font-medium">尚未有學習紀錄</p>
             </div>
             <svg class="w-5 h-5 text-slate-300 group-hover:text-indigo-500 transition" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
         </button>
@@ -74,9 +74,8 @@
                 <div class="w-full flex flex-row items-center justify-center space-x-4 md:space-x-6">
                     <h1 id="cardMain" class="text-6xl md:text-7xl font-black text-slate-800 tracking-tight transition-all">你好</h1>
                     
-                    <div id="imgContainer" class="w-28 h-28 flex items-center justify-center bg-slate-50 rounded-2xl p-2 border border-slate-100 shadow-sm overflow-hidden">
-                        <img id="cardImg" src="" class="w-full h-full object-contain" alt="學習提示圖">
-                    </div>
+                    <div id="imgContainer" class="svg-container w-28 h-28 flex items-center justify-center bg-slate-50 rounded-2xl p-2 border border-slate-100 shadow-sm overflow-hidden">
+                        </div>
                 </div>
             </div>
 
@@ -90,15 +89,28 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4 mt-4">
-            <button onclick="navigateCard(-1)" class="bg-white border border-slate-200 text-slate-600 font-bold py-4 rounded-2xl active:scale-95 transition flex items-center justify-center space-x-2">
-                <svg class="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
-                <span>上一個</span>
-            </button>
-            <button onclick="navigateCard(1)" class="bg-slate-900 text-white font-bold py-4 rounded-2xl active:scale-95 transition flex items-center justify-center space-x-2 shadow-sm">
-                <span>下一個</span>
-                <svg class="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-            </button>
+        <div class="flex flex-col space-y-3 mt-4">
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="navigateCard(-1)" class="bg-white border border-slate-200 text-slate-600 font-bold py-4 rounded-2xl active:scale-95 transition flex items-center justify-center space-x-2">
+                    <svg class="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+                    <span>上一個</span>
+                </button>
+                <button onclick="navigateCard(1)" class="bg-slate-900 text-white font-bold py-4 rounded-2xl active:scale-95 transition flex items-center justify-center space-x-2 shadow-sm">
+                    <span>下一個</span>
+                    <svg class="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="navigateCard(-10)" class="bg-slate-100 hover:bg-slate-200 text-slate-500 font-medium py-2.5 rounded-xl active:scale-95 transition text-xs flex items-center justify-center space-x-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"/></svg>
+                    <span>快退 10 筆</span>
+                </button>
+                <button onclick="navigateCard(10)" class="bg-slate-100 hover:bg-slate-200 text-slate-500 font-medium py-2.5 rounded-xl active:scale-95 transition text-xs flex items-center justify-center space-x-1">
+                    <span>快進 10 筆</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15L5.25 12l7.5-7.5"/></svg>
+                </button>
+            </div>
         </div>
     </main>
 
@@ -108,7 +120,19 @@
         let currentUnitType = ""; 
         const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/GDman83/g-school/main/";
 
-        // 📐 智慧型多格式 Markdown 自適應解析引擎
+        // 📝 初始化檢查：在大廳載入時，讀取先前的歷史紀錄狀態
+        function updateHubRecordLabels() {
+            ['core', 'zhuyin'].forEach(type => {
+                const savedIndex = localStorage.getItem(`gs_record_${type}`);
+                const label = document.getElementById(`record-${type}`);
+                if (savedIndex !== null) {
+                    label.innerText = `上次讀到第 ${parseInt(savedIndex) + 1} 頁 (自動續讀開啟)`;
+                    label.classList.remove('text-slate-400');
+                }
+            });
+        }
+
+        // 📐 智慧型多格式 Markdown 解析引擎（直接精準定位原廠數據）
         function parseMarkdownTable(md) {
             const lines = md.split('\n');
             const data = [];
@@ -117,25 +141,24 @@
                 const line = lines[i].trim();
                 if (!line.startsWith('|') || line.includes(':---') || line.includes('主要展示') || line.includes('編號')) continue;
                 
-                // 使用欄位切分，過濾掉前後的空元素
                 const cells = line.split('|').map(c => c.trim()).filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
                 if (cells.length < 5) continue; 
                 
-                // 根據實際切出來的欄位長度，動態適配表格結構
+                // 核心修復：直接將第 7 欄（索引6）的原始字串存入 imgCode，不論是網址還是原始 <svg> 代碼通通保留
                 data.push({
                     id: cells[0] || "",
                     main: cells[1] || "",
-                    sub: cells[2] || "",       // 核心識字區的輔助提示 (拼音)
-                    pinyin: cells[3] || "",    // 注音區的獨立拼音
+                    sub: cells[2] || "",       
+                    pinyin: cells[3] || "",    
                     example: cells[4] || "",
                     vn: cells[5] || "",
-                    imgCode: cells[6] || ""     // 圖形提示欄位
+                    imgCode: cells[6] || ""     
                 });
             }
             return data;
         }
 
-        // 🎴 渲染卡片 (包含智慧注音提取、動態防呆圖片生成)
+        // 🎴 渲染卡片：完美支援原始 SVG 注入與字體自適應
         function renderCard() {
             if (currentDatabase.length === 0) return;
             const item = currentDatabase[currentIndex];
@@ -150,41 +173,32 @@
             const cardMainElement = document.getElementById('cardMain');
 
             if (currentUnitType === "core") {
-                // 🌟 核心識字模式：顯示拼音欄位
                 cardSub.innerText = item.sub || "🌟";
                 cardMainElement.className = "text-5xl md:text-6xl font-black text-slate-800 tracking-tight transition-all";
             } else {
-                // ㄅ 注音模式：將展示字體放到最大 (text-7xl 到 8xl)
                 cardSub.innerText = item.pinyin || item.sub || "ㄅ";
                 cardMainElement.className = "text-7xl md:text-8xl font-black text-slate-800 transition-all";
             }
 
-            // 🖼️ 終極圖片防呆與動態生成機制
-            const cardImg = document.getElementById('cardImg');
-            let finalImgSrc = "";
-
-            // 判斷欄位內是否包含有效的圖片副檔名
-            if (item.imgCode && item.imgCode.match(/\.(jpeg|jpg|gif|png|webp)/i)) {
-                if (item.imgCode.startsWith('http')) {
-                    finalImgSrc = item.imgCode;
-                } else {
-                    finalImgSrc = GITHUB_RAW_BASE + item.imgCode;
-                }
+            // 🎯 修正：直接渲染資料庫原廠對應圖形，擺脫快取死圖問題
+            const imgContainer = document.getElementById('imgContainer');
+            if (item.imgCode && item.imgCode.toLowerCase().includes('<svg')) {
+                // 如果字庫欄位內是原汁原味的 SVG 代碼，直接注入容器，100% 跟著資料變化！
+                imgContainer.innerHTML = item.imgCode;
+            } else if (item.imgCode && item.imgCode.match(/\.(jpeg|jpg|gif|png|webp)/i)) {
+                // 如果是圖片路徑
+                const src = item.imgCode.startsWith('http') ? item.imgCode : GITHUB_RAW_BASE + item.imgCode;
+                imgContainer.innerHTML = `<img src="${src}" class="w-full h-full object-contain" alt="提示圖">`;
             } else {
-                // 🔥 核心防呆：如果目前 Markdown 沒有圖片網址，利用 Unsplash 圖庫，根據「例句的第一個詞」動態抓取一張精美的卡通插圖，確保測試時絕對有圖！
-                const fallbackKeyword = encodeURIComponent(item.example.substring(0, 2));
-                finalImgSrc = `https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=150&auto=format&fit=crop&q=60`;
-                
-                // 針對常見字進行精準預設圖匹配
-                if(item.example.includes("貓")) finalImgSrc = "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=150&auto=format&fit=crop";
-                if(item.example.includes("葡萄")) finalImgSrc = "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=150&auto=format&fit=crop";
-                if(item.main.includes("你好")) finalImgSrc = "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=150&auto=format&fit=crop";
+                // 防呆預設圖形
+                imgContainer.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-12 h-12 text-slate-300" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>`;
             }
 
-            cardImg.src = finalImgSrc;
+            // 💾 紀錄功能：每滑動到新的一頁，就即時儲存當前位置到手機本地瀏覽器
+            localStorage.setItem(`gs_record_${currentUnitType}`, currentIndex);
         }
 
-        // 🚪 開啟智慧分流入口
+        // 🚪 開啟智慧分流入口 (自動讀取歷史進度)
         function launchUniverse(fileName, unitTitleText) {
             currentUnitType = fileName.split('.')[0]; 
             document.getElementById('hubUniverse').classList.add('hidden');
@@ -193,36 +207,49 @@
             document.getElementById('hubTitle').querySelector('h1').innerText = unitTitleText;
             document.getElementById('txtUnitTag').innerText = currentUnitType.toUpperCase();
             
-            fetch(GITHUB_RAW_BASE + fileName + "?t=" + new Date().getTime()) // 加上時間戳，防止手機瀏覽器快取舊資料
+            fetch(GITHUB_RAW_BASE + fileName + "?t=" + new Date().getTime()) 
                 .then(res => res.text())
                 .then(md => {
                     currentDatabase = parseMarkdownTable(md);
-                    currentIndex = 0;
+                    
+                    // 💾 紀錄還原：檢查這台手機有沒有這個單元的歷史進度
+                    const savedIndex = localStorage.getItem(`gs_record_${currentUnitType}`);
+                    if (savedIndex !== null && parseInt(savedIndex) < currentDatabase.length) {
+                        currentIndex = parseInt(savedIndex);
+                    } else {
+                        currentIndex = 0;
+                    }
+                    
                     renderCard();
                 })
                 .catch(err => {
-                    alert("讀取失敗，請確認 GitHub 檔案是否存在：" + err);
+                    alert("讀取失敗：" + err);
                     document.getElementById('btnBackToHub').click();
                 });
         }
 
-        // 🔙 返回大廳
+        // 🔙 返回大廳 (順便重整首頁進度標籤)
         document.getElementById('btnBackToHub').addEventListener('click', () => {
             document.getElementById('hubUniverse').classList.remove('hidden');
             document.getElementById('appUniverse').classList.add('hidden');
             document.getElementById('btnBackToHub').classList.add('hidden');
             document.getElementById('hubTitle').querySelector('h1').innerText = "啟盟學堂";
+            updateHubRecordLabels();
         });
 
-        // 🎮 前後切換
+        // 🎮 前後切換與快進邏輯
         function navigateCard(direction) {
+            if (currentDatabase.length === 0) return;
             currentIndex += direction;
+            
+            // 循環邊界防呆
             if (currentIndex < 0) currentIndex = currentDatabase.length - 1;
             if (currentIndex >= currentDatabase.length) currentIndex = 0;
+            
             renderCard();
         }
 
-        // 🗣️ 系統原廠標準語音引擎
+        // 🗣️ 系統語音引擎
         function speakSystemTTS(type) {
             if (currentDatabase.length === 0) return;
             const item = currentDatabase[currentIndex];
@@ -244,10 +271,8 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.getVoices();
-            window.onvoiceschanged = () => window.speechSynthesis.getVoices();
-        }
+        // 首頁啟動時，自動初始化紀錄狀態顯示
+        updateHubRecordLabels();
     </script>
 </body>
 </html>
