@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎒 啟蒙學堂智慧字卡 HUB</title>
+  <title>🎒 啟盟學堂智慧字卡 HUB</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -19,7 +19,7 @@
     <div class="max-w-md mx-auto flex justify-between items-center">
       <div class="flex items-center cursor-pointer" onclick="showMenu()">
         <i class="fa-solid fa-house-chimney mr-3 text-xl"></i>
-        <h1 class="text-xl font-black tracking-wider">啟蒙學堂</h1>
+        <h1 class="text-xl font-black tracking-wider">啟盟學堂</h1>
       </div>
       <span id="counter" class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full border border-white/30">
         連線中...
@@ -155,3 +155,59 @@
       } else {
         currentFilteredData = masterData.filter(d => {
           if (String(d.id).includes('ㄅ')) return true;
+          const num = parseInt(d.id);
+          return !isNaN(num) && num > 100;
+        });
+      }
+
+      if (currentFilteredData.length === 0) {
+        alert("此單元目前沒有資料！");
+        return;
+      }
+      document.getElementById('unit-menu').classList.add('hidden');
+      document.getElementById('card-viewer').classList.remove('hidden');
+      document.getElementById('card-footer').classList.remove('hidden');
+      renderCard(0);
+    }
+
+    function renderCard(index) {
+      currentIndex = index;
+      const card = currentFilteredData[index];
+      document.getElementById('counter').innerText = `${currentIndex + 1} / ${currentFilteredData.length}`;
+      document.getElementById('card-id').innerText = `# ${card.id}`;
+      document.getElementById('sub-tip').innerText = (card.sub === "-" || !card.sub) ? "" : card.sub;
+      document.getElementById('main-word-box').innerHTML = buildRubyString(card.main, card.zhuyin);
+      document.getElementById('image-display').innerText = (card.imgCode && card.imgCode !== "-") ? card.imgCode : "🎒";
+      document.getElementById('example-sentence').innerText = (card.example && card.example !== "-") ? card.example : "";
+      document.getElementById('vietnamese-translation').innerText = (card.vn && card.vn !== "-") ? card.vn : "";
+    }
+
+    function buildRubyString(word, zhuyin) {
+      if (!zhuyin || zhuyin === "-") return word;
+      const charArray = word.split('');
+      const zhuyinArray = zhuyin.includes(' ') ? zhuyin.split(' ') : zhuyin.split(',');
+      if (charArray.length === zhuyinArray.length) {
+        return charArray.map((char, i) => `<ruby>${char}<rt>${zhuyinArray[i]}</rt></ruby>`).join('');
+      }
+      return `<ruby>${word}<rt>${zhuyin}</rt></ruby>`;
+    }
+
+    function playAudio(type) {
+      const card = currentFilteredData[currentIndex];
+      if (currentAudio) currentAudio.pause();
+      const filename = type === 'main' ? `school_${card.id}_main.mp3` : `school_${card.id}_sentence.mp3`;
+      currentAudio = new Audio(`audio/${filename}`);
+      currentAudio.play();
+    }
+
+    function navigateCard(step) {
+      let nextIndex = currentIndex + step;
+      if (nextIndex < 0) nextIndex = 0;
+      if (nextIndex >= currentFilteredData.length) nextIndex = currentFilteredData.length - 1;
+      renderCard(nextIndex);
+    }
+
+    window.onload = initG_School;
+  </script>
+</body>
+</html>
