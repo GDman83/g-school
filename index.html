@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Lexend', 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; }
-        /* 讓嵌入的原廠 SVG 圖形能完美自適應容器大小 */
+        /* 確保注入的 SVG 能完美撐滿並保持置中比例 */
         .svg-container svg { width: 100%; height: 100%; object-fit: contain; }
     </style>
 </head>
@@ -51,45 +51,45 @@
         </button>
     </main>
 
-    <main id="appUniverse" class="hidden flex-1 max-w-md w-full mx-auto px-4 py-4 flex flex-col justify-between">
+    <main id="appUniverse" class="hidden flex-1 max-w-md w-full mx-auto px-4 py-3 flex flex-col justify-between">
         
-        <div class="flex justify-between items-center px-2 mb-2">
+        <div class="flex justify-between items-center px-2 mb-1">
             <span id="txtUnitTag" class="text-xs font-bold bg-slate-100 text-slate-500 px-3 py-1 rounded-full">UNIT</span>
             <span id="txtCounter" class="text-sm font-bold text-slate-400">0 / 0</span>
         </div>
 
-        <div class="bg-white rounded-[32px] shadow-sm border border-slate-100 p-6 flex flex-col justify-between flex-1 min-h-[460px] relative">
+        <div class="bg-white rounded-[32px] shadow-sm border border-slate-100 p-6 flex flex-col justify-between flex-1 min-h-[480px] relative">
             
             <div class="flex justify-between items-start z-10">
                 <div class="text-left space-y-0.5">
                     <span id="cardId" class="text-xs font-black text-slate-300 block">#01</span>
-                    <span id="cardSub" class="text-xl font-black text-amber-500 tracking-wide block">nǐ hǎo</span>
+                    <span id="cardSub" class="text-2xl font-black text-amber-500 tracking-wide block">注音符號位置</span>
                 </div>
                 <button onclick="speakSystemTTS('main')" class="w-12 h-12 bg-slate-50 hover:bg-amber-100 text-slate-600 hover:text-amber-600 rounded-2xl flex items-center justify-center transition active:scale-90 shadow-inner">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/></svg>
                 </button>
             </div>
 
-            <div class="flex-1 flex items-center justify-center px-1 my-4">
-                <div class="w-full flex flex-row items-center justify-center space-x-4 md:space-x-6">
-                    <h1 id="cardMain" class="text-6xl md:text-7xl font-black text-slate-800 tracking-tight transition-all">你好</h1>
+            <div class="flex-1 flex items-center justify-center px-1 my-2">
+                <div class="w-full flex flex-row items-center justify-center space-x-6">
+                    <h1 id="cardMain" class="font-black text-slate-800 tracking-tight transition-all">字</h1>
                     
-                    <div id="imgContainer" class="svg-container w-28 h-28 flex items-center justify-center bg-slate-50 rounded-2xl p-2 border border-slate-100 shadow-sm overflow-hidden">
+                    <div id="imgContainer" class="svg-container w-32 h-32 flex items-center justify-center bg-slate-50 rounded-2xl p-2 border border-slate-100 shadow-sm overflow-hidden">
                         </div>
                 </div>
             </div>
 
-            <div id="sentenceBox" class="bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2 relative">
-                <button onclick="speakSystemTTS('sentence')" class="absolute top-3 right-3 w-8 h-8 bg-white text-slate-400 hover:text-amber-500 rounded-xl flex items-center justify-center shadow-sm active:scale-90 transition">
+            <div id="sentenceBox" class="bg-slate-50 rounded-2xl p-5 border border-slate-100 space-y-3 relative">
+                <button onclick="speakSystemTTS('sentence')" class="absolute top-4 right-4 w-9 h-9 bg-white text-slate-400 hover:text-amber-500 rounded-xl flex items-center justify-center shadow-sm active:scale-90 transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/></svg>
                 </button>
-                <p id="cardExample" class="text-2xl md:text-3xl font-black text-slate-800 pr-8 leading-snug">你好！很高興見到你。</p>
-                <div class="border-t border-slate-200/60 my-1"></div>
-                <p id="cardVN" class="text-base font-bold text-slate-400 leading-normal">Xin chào! Rất vui được gặp bạn.</p>
+                <p id="cardExample" class="text-3xl md:text-4xl font-black text-slate-800 pr-10 leading-snug">例句載入中...</p>
+                <div class="border-t border-slate-200 my-1"></div>
+                <p id="cardVN" class="text-lg font-bold text-slate-500 leading-normal">Dịch nghĩa...</p>
             </div>
         </div>
 
-        <div class="flex flex-col space-y-3 mt-4">
+        <div class="flex flex-col space-y-2.5 mt-3">
             <div class="grid grid-cols-2 gap-4">
                 <button onclick="navigateCard(-1)" class="bg-white border border-slate-200 text-slate-600 font-bold py-4 rounded-2xl active:scale-95 transition flex items-center justify-center space-x-2">
                     <svg class="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
@@ -102,11 +102,11 @@
             </div>
             
             <div class="grid grid-cols-2 gap-4">
-                <button onclick="navigateCard(-10)" class="bg-slate-100 hover:bg-slate-200 text-slate-500 font-medium py-2.5 rounded-xl active:scale-95 transition text-xs flex items-center justify-center space-x-1">
+                <button onclick="navigateCard(-10)" class="bg-slate-100 hover:bg-slate-200 text-slate-500 font-medium py-2 rounded-xl active:scale-95 transition text-xs flex items-center justify-center space-x-1">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"/></svg>
                     <span>快退 10 筆</span>
                 </button>
-                <button onclick="navigateCard(10)" class="bg-slate-100 hover:bg-slate-200 text-slate-500 font-medium py-2.5 rounded-xl active:scale-95 transition text-xs flex items-center justify-center space-x-1">
+                <button onclick="navigateCard(10)" class="bg-slate-100 hover:bg-slate-200 text-slate-500 font-medium py-2 rounded-xl active:scale-95 transition text-xs flex items-center justify-center space-x-1">
                     <span>快進 10 筆</span>
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15L5.25 12l7.5-7.5"/></svg>
                 </button>
@@ -120,7 +120,7 @@
         let currentUnitType = ""; 
         const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/GDman83/g-school/main/";
 
-        // 📝 初始化檢查：在大廳載入時，讀取先前的歷史紀錄狀態
+        // 初始化檢查大廳歷史進度標籤
         function updateHubRecordLabels() {
             ['core', 'zhuyin'].forEach(type => {
                 const savedIndex = localStorage.getItem(`gs_record_${type}`);
@@ -132,33 +132,39 @@
             });
         }
 
-        // 📐 智慧型多格式 Markdown 解析引擎（直接精準定位原廠數據）
+        // 📐 強力修復：智慧型多相容 Markdown 表格拆解引擎
         function parseMarkdownTable(md) {
             const lines = md.split('\n');
             const data = [];
             
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i].trim();
+                // 過濾標頭檔與空行
                 if (!line.startsWith('|') || line.includes(':---') || line.includes('主要展示') || line.includes('編號')) continue;
                 
-                const cells = line.split('|').map(c => c.trim()).filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
-                if (cells.length < 5) continue; 
+                // 精確使用 | 進行切分，並剔除首尾空白
+                const cells = line.split('|').map(c => c.trim());
+                // 移除前後因 | 產生的虛無欄位
+                if (cells[0] === '') cells.shift();
+                if (cells[cells.length - 1] === '') cells.pop();
                 
-                // 核心修復：直接將第 7 欄（索引6）的原始字串存入 imgCode，不論是網址還是原始 <svg> 代碼通通保留
+                if (cells.length < 6) continue; 
+                
+                // 修正：確實抓取所有欄位，並將圖形字串前後的空白清乾淨
                 data.push({
                     id: cells[0] || "",
                     main: cells[1] || "",
-                    sub: cells[2] || "",       
-                    pinyin: cells[3] || "",    
+                    sub: cells[2] || "",       // 輔助提示 (注音符號裡如 "爸爸 ㄅ")
+                    pinyin: cells[3] || "",    // 獨立拼音/注音 (核心識字裡放注音，注音符號裡放拼音)
                     example: cells[4] || "",
                     vn: cells[5] || "",
-                    imgCode: cells[6] || ""     
+                    imgCode: cells[6] ? cells[6].trim() : "" // 圖形代碼 (可能是 <svg... 或者是 圖片.png)
                 });
             }
             return data;
         }
 
-        // 🎴 渲染卡片：完美支援原始 SVG 注入與字體自適應
+        // 🎴 智慧分流渲染器：完美放大字體並打通所有圖形格式
         function renderCard() {
             if (currentDatabase.length === 0) return;
             const item = currentDatabase[currentIndex];
@@ -172,33 +178,52 @@
             const cardSub = document.getElementById('cardSub');
             const cardMainElement = document.getElementById('cardMain');
 
+            // 🌟 根據不同單元，進行字體極限放大與拼音/注音位置互換調整
             if (currentUnitType === "core") {
-                cardSub.innerText = item.sub || "🌟";
-                cardMainElement.className = "text-5xl md:text-6xl font-black text-slate-800 tracking-tight transition-all";
+                // 核心識字單元：上方要大字顯示您寫在字庫裡的【注音符號】(第4欄 pinyin)
+                cardSub.innerText = item.pinyin || item.sub || "🌟";
+                // 漢字主體放大
+                cardMainElement.className = "text-6xl md:text-7xl font-black text-slate-800 tracking-tight transition-all";
             } else {
-                cardSub.innerText = item.pinyin || item.sub || "ㄅ";
-                cardMainElement.className = "text-7xl md:text-8xl font-black text-slate-800 transition-all";
+                // 注音啟盟單元：上方顯示組合拼音 (第4欄 pinyin)
+                cardSub.innerText = item.pinyin || "ㄅㄆㄇ";
+                // 注音符號（主字）頂天立地放大！解決太小的問題
+                cardMainElement.className = "text-8xl md:text-9xl font-black text-slate-800 transition-all";
             }
 
-            // 🎯 修正：直接渲染資料庫原廠對應圖形，擺脫快取死圖問題
+            // 🎯 核心圖形相容性引擎修正：支援 SVG 與 所有圖片檔名
             const imgContainer = document.getElementById('imgContainer');
-            if (item.imgCode && item.imgCode.toLowerCase().includes('<svg')) {
-                // 如果字庫欄位內是原汁原味的 SVG 代碼，直接注入容器，100% 跟著資料變化！
-                imgContainer.innerHTML = item.imgCode;
-            } else if (item.imgCode && item.imgCode.match(/\.(jpeg|jpg|gif|png|webp)/i)) {
-                // 如果是圖片路徑
-                const src = item.imgCode.startsWith('http') ? item.imgCode : GITHUB_RAW_BASE + item.imgCode;
-                imgContainer.innerHTML = `<img src="${src}" class="w-full h-full object-contain" alt="提示圖">`;
+            const rawImgStr = item.imgCode;
+
+            if (rawImgStr && rawImgStr.toLowerCase().includes('<svg')) {
+                // 格式 A: 如果是原汁原味的 SVG 向量代碼，直接注入容器
+                imgContainer.innerHTML = rawImgStr;
+            } else if (rawImgStr && rawImgStr !== "" && rawImgStr !== "-") {
+                // 格式 B: 如果是圖片路徑或純檔名（如: apple.png / image.jpg）
+                // 防呆判斷：如果是完整網址就直接用，如果是純檔名就去補齊 GitHub 倉庫路徑
+                const imgSrc = rawImgStr.startsWith('http') ? rawImgStr : GITHUB_RAW_BASE + rawImgStr;
+                imgContainer.innerHTML = `<img src="${imgSrc}" class="w-full h-full object-contain" onerror="showFallbackFallback(this)" alt="提示圖">`;
             } else {
-                // 防呆預設圖形
-                imgContainer.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-12 h-12 text-slate-300" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>`;
+                // 格式 C: 欄位空白時的預設精美小圖形
+                setFallbackIcon();
             }
 
-            // 💾 紀錄功能：每滑動到新的一頁，就即時儲存當前位置到手機本地瀏覽器
+            // 💾 隨時儲存進度
             localStorage.setItem(`gs_record_${currentUnitType}`, currentIndex);
         }
 
-        // 🚪 開啟智慧分流入口 (自動讀取歷史進度)
+        // 圖片讀取失敗時的自動補救機制
+        function showFallbackFallback(imgElement) {
+            console.log("圖片加載失敗，切換至預設圖標");
+            setFallbackIcon();
+        }
+
+        // 設定防呆預設 SVG 圖卡
+        function setFallbackIcon() {
+            document.getElementById('imgContainer').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-12 h-12 text-slate-300" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>`;
+        }
+
+        // 🚪 宇宙分流進入點
         function launchUniverse(fileName, unitTitleText) {
             currentUnitType = fileName.split('.')[0]; 
             document.getElementById('hubUniverse').classList.add('hidden');
@@ -212,7 +237,7 @@
                 .then(md => {
                     currentDatabase = parseMarkdownTable(md);
                     
-                    // 💾 紀錄還原：檢查這台手機有沒有這個單元的歷史進度
+                    // 💾 進度恢復機制
                     const savedIndex = localStorage.getItem(`gs_record_${currentUnitType}`);
                     if (savedIndex !== null && parseInt(savedIndex) < currentDatabase.length) {
                         currentIndex = parseInt(savedIndex);
@@ -228,7 +253,7 @@
                 });
         }
 
-        // 🔙 返回大廳 (順便重整首頁進度標籤)
+        // 🔙 返回大廳
         document.getElementById('btnBackToHub').addEventListener('click', () => {
             document.getElementById('hubUniverse').classList.remove('hidden');
             document.getElementById('appUniverse').classList.add('hidden');
@@ -237,19 +262,18 @@
             updateHubRecordLabels();
         });
 
-        // 🎮 前後切換與快進邏輯
+        // 前後切換與快進控制
         function navigateCard(direction) {
             if (currentDatabase.length === 0) return;
             currentIndex += direction;
             
-            // 循環邊界防呆
             if (currentIndex < 0) currentIndex = currentDatabase.length - 1;
             if (currentIndex >= currentDatabase.length) currentIndex = 0;
             
             renderCard();
         }
 
-        // 🗣️ 系統語音引擎
+        // 🗣️ 系統發音引擎
         function speakSystemTTS(type) {
             if (currentDatabase.length === 0) return;
             const item = currentDatabase[currentIndex];
@@ -258,6 +282,7 @@
             if (type === 'main') {
                 textToSpeak = item.main;
             } else {
+                // 剔除英文或括號
                 textToSpeak = item.example.split('\n')[0].split('(')[0].replace(/[a-zA-Z]/g, "").trim();
             }
 
@@ -265,13 +290,13 @@
 
             const utterance = new SpeechSynthesisUtterance(textToSpeak);
             utterance.lang = "zh-TW"; 
-            utterance.rate = 0.75; 
+            utterance.rate = 0.7; 
 
             window.speechSynthesis.cancel();
             window.speechSynthesis.speak(utterance);
         }
 
-        // 首頁啟動時，自動初始化紀錄狀態顯示
+        // 啟動首頁
         updateHubRecordLabels();
     </script>
 </body>
