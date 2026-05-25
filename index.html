@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎒 啟盟學堂智慧字卡 HUB V12</title>
+  <title>🎒 啟盟學堂智慧字卡 HUB V13</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -22,7 +22,7 @@
         <h1 class="text-xl font-black tracking-wider">啟盟學堂</h1>
       </div>
       <span id="counter" class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full border border-white/30">
-        正在讀取數據...
+        正在連線數據總庫...
       </span>
     </div>
   </header>
@@ -65,7 +65,7 @@
       </div>
 
       <div class="bg-indigo-50 rounded-3xl p-5 relative border border-indigo-100">
-        <button onclick="playAudio('sentence')" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white text-indigo-600 flex items-center justify-center shadow-md active:scale-90 focus:outline-none">
+        <button onclick="absolutePlaySentence()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white text-indigo-600 flex items-center justify-center shadow-md active:scale-90 focus:outline-none">
           <i class="fa-solid fa-volume-high"></i>
         </button>
         <div class="space-y-4 pr-8">
@@ -122,37 +122,38 @@
       if (globalAllData && globalAllData.length > 0) {
         counter.innerText = `總庫：共 ${globalAllData.length} 筆`;
       } else {
-        counter.innerText = "點擊分區加載數據";
+        counter.innerText = "等待同步數據...";
       }
     }
 
-    // 🚀 後台默默載入總庫檔案 (加上隨機參數強力避開快取)
+    // 🚀 背景默默強制加載
     async function loadGlobalDatabase() {
       try {
         const response = await fetch(`school_total.md?t=${Date.now()}`);
-        if (!response.ok) throw new Error("尚未生成大總表");
+        if (!response.ok) throw new Error("檔案不存在");
         const textData = await response.text();
         globalAllData = JSON.parse(textData);
         updateCounterText();
       } catch (error) {
-        console.log("背景預載入提示:", error.message);
+        console.log("背景讀取中:", error.message);
         document.getElementById('counter').innerText = "等待同步數據";
       }
     }
 
-    // 💡 直覺字母篩選引擎 (點擊時若資料未到，會發起二次強制撈取)
+    // 💡 超強健篩選引擎：點擊時如果沒資料，現場暴力重抓，絕不彈窗阻擋
     async function filterAndLoad(key) {
-      // 🌟 防禦補救機制：如果點擊時發現資料還沒載入，現場再撈一次
       if (!globalAllData || globalAllData.length === 0) {
-        document.getElementById('counter').innerText = "正在現場調貨中...";
+        document.getElementById('counter').innerText = "正在調貨中...";
         try {
           const response = await fetch(`school_total.md?t=${Date.now()}`);
           if (!response.ok) throw new Error();
           const textData = await response.text();
           globalAllData = JSON.parse(textData);
-        } catch (e) {
-          alert("🚨 無法讀取到您的 school_total.md 總表檔案！\n請確認您有在試算表點擊過『智慧總庫同步』，且 GitHub 上已有該檔案。");
           updateCounterText();
+        } catch (e) {
+          // 如果真的沒有檔案，溫柔提示，不卡死網頁
+          document.getElementById('counter').innerText = "請先至試算表點擊同步";
+          alert("🎒 提示：尚未偵測到您的 school_total.md 總庫檔案！\n\n請確認您已在 Google 試算表成功執行完『智慧總庫同步』且無中途取消唷！");
           return;
         }
       }
@@ -172,8 +173,7 @@
       }
 
       if (currentFilteredData.length === 0) {
-        alert(`提示：區域【${key === 'other' ? '其他' : key}】目前沒有找到任何教材唷！`);
-        updateCounterText();
+        alert(`提示：區域【${key === 'other' ? '其他' : key}】目前沒有符合的教材唷！`);
         return;
       }
 
@@ -195,15 +195,15 @@
 
       document.getElementById('counter').innerText = `${currentIndex + 1} / ${currentFilteredData.length}`;
       document.getElementById('card-id').innerText = `# ${id}`;
-      document.getElementById('sub-tip').innerText = pinyin === "-" ? "" : pinyin;
+      document.getElementById('sub-tip').innerText = (pinyin === "-" || pinyin === "undefined") ? "" : pinyin;
       document.getElementById('main-word-box').innerHTML = buildRubyString(word, zhuyin);
       document.getElementById('image-display').innerText = (img && img !== "-") ? img : "🎒";
-      document.getElementById('example-sentence').innerHTML = buildRubyString(example === "-" ? "" : example, "");
-      document.getElementById('vietnamese-translation').innerText = vn === "-" ? "" : vn;
+      document.getElementById('example-sentence').innerHTML = buildRubyString((example === "-" || example === "undefined") ? "" : example, "");
+      document.getElementById('vietnamese-translation').innerText = (vn === "-" || vn === "undefined") ? "" : vn;
     }
 
     function buildRubyString(word, zhuyin) {
-      if (!zhuyin || zhuyin === "-") return word;
+      if (!zhuyin || zhuyin === "-" || zhuyin === "undefined") return word;
       const charArray = word.split('');
       const zhuyinArray = zhuyin.includes(' ') ? zhuyin.split(' ') : zhuyin.split(',');
       if (charArray.length === zhuyinArray.length) {
@@ -220,7 +220,13 @@
       const filename = type === 'main' ? `school_${id}_main.mp3` : `school_${id}_sentence.mp3`;
       
       currentAudio = new Audio(`audio/${filename}`);
-      currentAudio.play().catch(e => alert("語音檔案尚未生成，或正在上傳中！"));
+      currentAudio.play().catch(e => {
+        console.log("語音播放失敗，可能尚未轉換完成");
+      });
+    }
+
+    function absolutePlaySentence() {
+      playAudio('sentence');
     }
 
     function navigateCard(step) {
