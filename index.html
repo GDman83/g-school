@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎒 啟盟學堂智慧字卡 HUB V9</title>
+  <title>🎒 啟盟學堂智慧字卡 HUB V9.1</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -22,7 +22,7 @@
         <h1 class="text-xl font-black tracking-wider">啟盟學堂</h1>
       </div>
       <span id="counter" class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full border border-white/30">
-        正在載入總庫...
+        正在連線總庫...
       </span>
     </div>
   </header>
@@ -121,58 +121,19 @@
   </footer>
 
   <script>
-    let globalAllData = [];       // 儲存從 school_total.md 解析出來的完整總庫
-    let currentFilteredData = []; // 目前篩選出來的區域字卡
+    let globalAllData = [];       
+    let currentFilteredData = []; 
     let currentIndex = 0;
     let currentAudio = null;
     let currentActiveSelector = 'core-selector';
 
-    const zhuyins = ["ㄅ","ㄆ","ㄇ","ㄈ","ㄉ","ㄊ","ㄋ","ㄌ","ㄍ","ㄎ","ㄏ","ㄐ","ㄑ","ㄒ","ㄓ","ㄔ","盤","ㄖ","ㄗ","ㄘ","ㄙ","ㄚ","ㄛ","ㄜ","ㄝ","AI","ㄟ","ㄠ","ㄡ","ㄢ","ㄣ","ㄤ","ㄥ","ㄦ","ㄧ","ㄨ","ㄩ"];
+    const zhuyins = ["ㄅ","ㄆ","ㄇ","ㄈ","ㄉ","ㄊ","ㄋ","ㄌ","ㄍ","ㄎ","ㄏ","ㄐ","ㄑ","ㄒ","ㄓ","ㄔ","ㄕ","ㄖ","ㄗ","ㄘ","ㄙ","ㄚ","ㄛ","ㄜ","ㄝ","ㄞ","ㄟ","ㄠ","ㄡ","ㄢ","ㄣ","ㄤ","ㄥ","ㄦ","ㄧ","ㄨ","ㄩ"];
 
     function initZhuyinGrid() {
       const grid = document.getElementById('zhuyin-grid');
       grid.innerHTML = zhuyins.map(z => 
         `<button onclick="filterAndLoad('zhuyin', '${z}')" class="py-3 bg-amber-50 hover:bg-amber-100 text-slate-700 text-xl font-black rounded-xl transition-all border border-amber-200/60 active:scale-90">${z}</button>`
       ).join('');
-    }
-
-    // 🚀 初始化核心：直接去抓取主線上的 school_total.md 總庫
-    async function loadGlobalDatabase() {
-      try {
-        const response = await fetch(`school_total.md?t=${Date.now()}`);
-        if (!response.ok) throw new Error("找不到 school_total.md 總表庫檔案！");
-        const textData = await response.text();
-        
-        // 解析 JSON 內容
-        globalAllData = JSON.parse(textData);
-        
-        document.getElementById('counter').innerText = "總庫載入成功！";
-        switchView('unit-menu');
-      } catch (error) {
-        alert(`🚨 載入核心總庫失敗: ${error.message}\n請確認根目錄是否有 school_total.md 且格式正確。`);
-        document.getElementById('counter').innerText = "載入失敗";
-      }
-    }
-
-    // 💡 智慧分流引擎：直接在前端對總名單進行即時篩選
-    function filterAndLoad(type, key) {
-      if (type === 'letter') {
-        if (key === 'other') {
-          currentFilteredData = globalAllData.filter(item => !/^[AFKT]/i.test(item.id));
-        } else {
-          currentFilteredData = globalAllData.filter(item => item.id.toUpperCase().startsWith(key));
-        }
-      } else if (type === 'zhuyin') {
-        currentFilteredData = globalAllData.filter(item => item.zhuyin && item.zhuyin.trim().startsWith(key));
-      }
-
-      if (currentFilteredData.length === 0) {
-        alert(`明細提示：目前在【${key}】區域中找不到對應的教材資料唷！`);
-        return;
-      }
-
-      switchView('card-viewer');
-      renderCard(0);
     }
 
     function switchView(targetId) {
@@ -198,17 +159,77 @@
       switchView(currentActiveSelector);
     }
 
+    // 🚀 連線加載總表
+    async function loadGlobalDatabase() {
+      try {
+        const response = await fetch(`school_total.md?t=${Date.now()}`);
+        if (!response.ok) throw new Error("找不到 school_total.md 檔案！");
+        const textData = await response.text();
+        globalAllData = JSON.parse(textData);
+        
+        document.getElementById('counter').innerText = `總庫：共 ${globalAllData.length} 筆`;
+        switchView('unit-menu');
+      } catch (error) {
+        alert(`🚨 總庫連線失敗: ${error.message}`);
+        document.getElementById('counter').innerText = "連線失敗";
+      }
+    }
+
+    // 💡 萬能相容篩選引擎：兼容新舊欄位名 (id, word, zhuyin, pinyin, vn/vietnamese)
+    function filterAndLoad(type, key) {
+      if (!globalAllData || globalAllData.length === 0) {
+        alert("資料庫尚未就緒，請重新整理網頁！");
+        return;
+      }
+
+      if (type === 'letter') {
+        if (key === 'other') {
+          currentFilteredData = globalAllData.filter(item => {
+            const idStr = String(item.id || item.ID || "");
+            return idStr && !/^[AFKT]/i.test(idStr);
+          });
+        } else {
+          currentFilteredData = globalAllData.filter(item => {
+            const idStr = String(item.id || item.ID || "");
+            return idStr && idStr.toUpperCase().startsWith(key.toUpperCase());
+          });
+        }
+      } else if (type === 'zhuyin') {
+        currentFilteredData = globalAllData.filter(item => {
+          const zStr = String(item.zhuyin || item.Zhuyin || "");
+          return zStr && zStr.trim().startsWith(key);
+        });
+      }
+
+      if (currentFilteredData.length === 0) {
+        alert(`提示：區域【${key}】目前沒有符合的資料唷！`);
+        return;
+      }
+
+      switchView('card-viewer');
+      renderCard(0);
+    }
+
     function renderCard(index) {
       currentIndex = index;
       const card = currentFilteredData[index];
       
+      // 🌟 核心相容轉換：確保新舊欄位名都能咬到資料
+      const id = card.id || card.ID || "00";
+      const word = card.word || card.Word || "";
+      const pinyin = card.pinyin || card.Pinyin || "";
+      const zhuyin = card.zhuyin || card.Zhuyin || "";
+      const example = card.example || card.Example || "";
+      const vn = card.vietnamese || card.vn || card.VN || "";
+      const img = card.imgCode || card.ImgCode || "🎒";
+
       document.getElementById('counter').innerText = `${currentIndex + 1} / ${currentFilteredData.length}`;
-      document.getElementById('card-id').innerText = `# ${card.id}`;
-      document.getElementById('sub-tip').innerText = card.pinyin || "";
-      document.getElementById('main-word-box').innerHTML = buildRubyString(card.word, card.zhuyin);
-      document.getElementById('image-display').innerText = (card.imgCode && card.imgCode !== "-") ? card.imgCode : "🎒";
-      document.getElementById('example-sentence').innerHTML = buildRubyString(card.example || "", "");
-      document.getElementById('vietnamese-translation').innerText = card.vietnamese || card.vn || "";
+      document.getElementById('card-id').innerText = `# ${id}`;
+      document.getElementById('sub-tip').innerText = pinyin === "-" ? "" : pinyin;
+      document.getElementById('main-word-box').innerHTML = buildRubyString(word, zhuyin);
+      document.getElementById('image-display').innerText = (img && img !== "-") ? img : "🎒";
+      document.getElementById('example-sentence').innerHTML = buildRubyString(example === "-" ? "" : example, "");
+      document.getElementById('vietnamese-translation').innerText = vn === "-" ? "" : vn;
     }
 
     function buildRubyString(word, zhuyin) {
@@ -225,8 +246,8 @@
       const card = currentFilteredData[currentIndex];
       if (currentAudio) currentAudio.pause();
       
-      // 直接指向 audio 資料夾下的音軌
-      const filename = type === 'main' ? `school_${card.id}_main.mp3` : `school_${card.id}_sentence.mp3`;
+      const id = card.id || card.ID;
+      const filename = type === 'main' ? `school_${id}_main.mp3` : `school_${id}_sentence.mp3`;
       
       currentAudio = new Audio(`audio/${filename}`);
       currentAudio.play().catch(e => alert("語音檔案尚未生成，或正在上傳中！"));
@@ -241,7 +262,7 @@
 
     window.onload = () => {
       initZhuyinGrid();
-      loadGlobalDatabase(); // 網頁開啟時，自動連線加載大總表
+      loadGlobalDatabase(); 
     };
   </script>
 </body>
