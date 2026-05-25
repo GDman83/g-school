@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎒 啟盟學堂智慧字卡 HUB V11</title>
+  <title>🎒 啟盟學堂智慧字卡 HUB V12</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -22,12 +22,12 @@
         <h1 class="text-xl font-black tracking-wider">啟盟學堂</h1>
       </div>
       <span id="counter" class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full border border-white/30">
-        正在連線數據總庫...
+        正在讀取數據...
       </span>
     </div>
   </header>
 
-  <div id="unit-menu" class="hidden flex-grow flex flex-col items-center justify-center p-6 space-y-8">
+  <div id="unit-menu" class="flex-grow flex flex-col items-center justify-center p-6 space-y-8">
     <div class="text-center space-y-2">
       <h2 class="text-3xl font-black text-slate-800">今天要學什麼呢？</h2>
       <p class="text-slate-500 font-medium tracking-widest">請選擇一個常規貨櫃區</p>
@@ -49,7 +49,7 @@
       
       <div class="flex justify-between items-center">
         <button onclick="backToMenu()" class="text-slate-300 hover:text-slate-500 transition-colors"><i class="fa-solid fa-circle-arrow-left text-2xl"></i></button>
-        <span id="card-id" class="text-slate-400 font-black text-lg tracking-widest italic">#00</span>
+        <span id="card-id" class="text-slate-4400 font-black text-lg tracking-widest italic">#00</span>
         <button onclick="playAudio('main')" class="w-14 h-14 rounded-full bg-amber-400 text-white flex items-center justify-center shadow-lg active:scale-90 transition-all focus:outline-none">
           <i class="fa-solid fa-volume-high text-2xl"></i>
         </button>
@@ -97,52 +97,73 @@
 
     function switchView(targetId) {
       const views = ['unit-menu', 'card-viewer', 'card-footer'];
-      views.forEach(id => document.getElementById(id).classList.add('hidden'));
+      views.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      });
       
-      document.getElementById(targetId).classList.remove('hidden');
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) targetEl.classList.remove('hidden');
+      
       if (targetId === 'card-viewer') {
-        document.getElementById('card-footer').classList.remove('hidden');
+        const footer = document.getElementById('card-footer');
+        if (footer) footer.classList.remove('hidden');
       }
     }
 
     function backToMenu() {
       if (currentAudio) currentAudio.pause();
       switchView('unit-menu');
-      document.getElementById('counter').innerText = `總庫：共 ${globalAllData.length} 筆`;
+      updateCounterText();
     }
 
-    // 🚀 直連讀取 GitHub 城堡根目錄的 school_total.md 
+    function updateCounterText() {
+      const counter = document.getElementById('counter');
+      if (globalAllData && globalAllData.length > 0) {
+        counter.innerText = `總庫：共 ${globalAllData.length} 筆`;
+      } else {
+        counter.innerText = "點擊分區加載數據";
+      }
+    }
+
+    // 🚀 後台默默載入總庫檔案 (加上隨機參數強力避開快取)
     async function loadGlobalDatabase() {
       try {
         const response = await fetch(`school_total.md?t=${Date.now()}`);
-        if (!response.ok) throw new Error("城堡根目錄找不到 school_total.md 總庫檔案！");
+        if (!response.ok) throw new Error("尚未生成大總表");
         const textData = await response.text();
         globalAllData = JSON.parse(textData);
-        
-        document.getElementById('counter').innerText = `總庫：共 ${globalAllData.length} 筆`;
-        switchView('unit-menu');
+        updateCounterText();
       } catch (error) {
-        alert(`🚨 數據載入失敗: ${error.message}\n請確認試算表已成功執行過同步且長出 school_total.md！`);
-        document.getElementById('counter').innerText = "連線失敗";
+        console.log("背景預載入提示:", error.message);
+        document.getElementById('counter').innerText = "等待同步數據";
       }
     }
 
-    // 💡 直覺字母篩選引擎 (A, F, K, T 與其他)
-    function filterAndLoad(key) {
+    // 💡 直覺字母篩選引擎 (點擊時若資料未到，會發起二次強制撈取)
+    async function filterAndLoad(key) {
+      // 🌟 防禦補救機制：如果點擊時發現資料還沒載入，現場再撈一次
       if (!globalAllData || globalAllData.length === 0) {
-        alert("資料庫尚未就緒，請重新整理網頁！");
-        return;
+        document.getElementById('counter').innerText = "正在現場調貨中...";
+        try {
+          const response = await fetch(`school_total.md?t=${Date.now()}`);
+          if (!response.ok) throw new Error();
+          const textData = await response.text();
+          globalAllData = JSON.parse(textData);
+        } catch (e) {
+          alert("🚨 無法讀取到您的 school_total.md 總表檔案！\n請確認您有在試算表點擊過『智慧總庫同步』，且 GitHub 上已有該檔案。");
+          updateCounterText();
+          return;
+        }
       }
 
       if (key === 'other') {
-        // 抓出「非」A, F, K, T 開頭的所有資料
         currentFilteredData = globalAllData.filter(item => {
           const rawId = item.id || item.ID || "";
           const idStr = String(rawId).trim();
           return idStr && !/^[AFKT]/i.test(idStr);
         });
       } else {
-        // 抓出指定字母 A, F, K, T 開頭的編號資料
         currentFilteredData = globalAllData.filter(item => {
           const rawId = item.id || item.ID || "";
           const idStr = String(rawId).trim();
@@ -152,6 +173,7 @@
 
       if (currentFilteredData.length === 0) {
         alert(`提示：區域【${key === 'other' ? '其他' : key}】目前沒有找到任何教材唷！`);
+        updateCounterText();
         return;
       }
 
@@ -163,7 +185,6 @@
       currentIndex = index;
       const card = currentFilteredData[index];
       
-      // 超級寬鬆相容：不管 GAS 吐出來大寫小寫欄位通通都吃
       const id = card.id || card.ID || "00";
       const word = card.word || card.Word || "";
       const pinyin = card.pinyin || card.Pinyin || "";
